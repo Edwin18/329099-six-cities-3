@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Bodik Malomuzh](https://up.htmlacademy.ru/react/3/user/329099).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Рубец](https://up.htmlacademy.ru/react/3/user/41580).
 
 ---
 
