@@ -6,7 +6,7 @@ const AVAILABLE = 459;
 
 ReactDOM.render(
     <App
-      available = {AVAILABLE}
+      available={AVAILABLE}
     />,
     document.querySelector(`#root`)
 );

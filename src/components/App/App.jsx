@@ -1,10 +1,11 @@
 import React from 'react';
 import Main from '../Main/Main.jsx';
 
-const App = (props) => {
+// eslint-disable-next-line react/prop-types
+const App = ({available}) => {
   return <Main
   // eslint-disable-next-line react/prop-types
-    available = {props.available}
+    available={available}
   />;
 };
 
