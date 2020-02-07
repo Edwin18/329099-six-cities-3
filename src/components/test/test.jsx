@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Main from '../Main/Main.jsx';
+import Main from '../main/main.jsx';
 
 const App = ({available, places}) => (
   <Main
