@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Main = ({available, places}) => (
+const Main = ({available, places, onHeadingLinkClick}) => (
   <React.Fragment>
     <div className="page page--gray page--main">
       <header className="header">
@@ -123,7 +123,10 @@ const Main = ({available, places}) => (
                         </div>
                       </div>
                       <h2 className="place-card__name">
-                        <a href="#">{place}</a>
+                        <a
+                          href="#"
+                          onClick={onHeadingLinkClick}
+                        >{place}</a>
                       </h2>
                       <p className="place-card__type">Apartment</p>
                     </div>
@@ -146,5 +149,6 @@ export default Main;
 
 Main.propTypes = {
   available: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.string).isRequired
+  places: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onHeadingLinkClick: PropTypes.func.isRequired
 };
