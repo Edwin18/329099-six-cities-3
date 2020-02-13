@@ -4,17 +4,25 @@ import Main from '../main/main.jsx';
 
 const headingLinkHandler = () => {};
 
-const App = ({available, places}) => (
+const App = ({available, offers}) => (
   <Main
     available={available}
-    places={places}
+    offers={offers}
     onHeadingLinkClick={headingLinkHandler}
   />
 );
 
-export default App;
-
 App.propTypes = {
   available: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.string).isRequired
+  offers: PropTypes.arrayOf(PropTypes.exact({
+    name: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    period: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired
+  })).isRequired
 };
+
+export default App;
