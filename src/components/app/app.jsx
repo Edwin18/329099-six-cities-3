@@ -4,14 +4,17 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
 
-const headingLinkHandler = () => {};
-
 class App extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = null;
+
+    this.headingLinkHandler = this.headingLinkHandler.bind(this);
   }
 
   render() {
+    const {offers} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -19,36 +22,62 @@ class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-property">
-            <Property />
+            <Property
+              offer={offers[0]}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
     );
   }
 
+  headingLinkHandler(offer) {
+    this.setState(offer);
+  }
+
   _renderApp() {
     const {available, offers} = this.props;
 
-    return (
-      <Main
-        available={available}
-        offers={offers}
-        onHeadingLinkClick={headingLinkHandler}
-      />
-    );
+    if (this.state) {
+      return (
+        <Property
+          offer={this.state}
+        />
+      );
+    }
+
+    if (!this.state) {
+      return (
+        <Main
+          available={available}
+          offers={offers}
+          onHeadingLinkClick={this.headingLinkHandler}
+        />
+      );
+    }
+
+    return null;
   }
 }
 
 App.propTypes = {
   available: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.exact({
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
+    img: PropTypes.arrayOf(PropTypes.string).isRequired,
+    premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.arrayOf(PropTypes.string).isRequired,
     type: PropTypes.string.isRequired,
-    period: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired
+    rating: PropTypes.number.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.exact({
+      img: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool.isRequired,
+    }).isRequired,
   })).isRequired
 };
 

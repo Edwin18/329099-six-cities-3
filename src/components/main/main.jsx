@@ -110,13 +110,21 @@ const Main = ({available, offers, onHeadingLinkClick}) => (
 Main.propTypes = {
   available: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.exact({
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
+    img: PropTypes.arrayOf(PropTypes.string).isRequired,
+    premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.arrayOf(PropTypes.string).isRequired,
     type: PropTypes.string.isRequired,
-    period: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired
+    rating: PropTypes.number.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.exact({
+      img: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool.isRequired,
+    }).isRequired,
   })).isRequired,
   onHeadingLinkClick: PropTypes.func.isRequired
 };
