@@ -14,14 +14,14 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover}) => (
         </div> : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={offer.img} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offer.img[0]} width="260" height="200" alt="Place image" />
         </a>
-      </div>``
+      </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
-            <span className="place-card__price-text">&#47;&nbsp;{offer.period}</span>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -39,7 +39,7 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover}) => (
         <h2 className="place-card__name">
           <a
             href="#"
-            onClick={onHeadingLinkClick}
+            onClick={() => (onHeadingLinkClick(offer))}
           >{offer.name}</a>
         </h2>
         <p className="place-card__type">{offer.type}</p>
@@ -50,13 +50,21 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover}) => (
 
 PlaceCard.propTypes = {
   offer: PropTypes.exact({
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
+    img: PropTypes.arrayOf(PropTypes.string).isRequired,
+    premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.arrayOf(PropTypes.string).isRequired,
     type: PropTypes.string.isRequired,
-    period: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired
+    rating: PropTypes.number.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    guests: PropTypes.number.isRequired,
+    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.exact({
+      img: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      super: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
   onHeadingLinkClick: PropTypes.func.isRequired,
   onPlaceCardHover: PropTypes.func.isRequired
