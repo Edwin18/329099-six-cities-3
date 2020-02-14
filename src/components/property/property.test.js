@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PlaceCard from './place-card.jsx';
+import Property from './property.jsx';
 
 const offer = {
   img: [
@@ -44,10 +44,8 @@ const offer = {
 
 it(`Render PlaceCard`, () => {
   const tree = renderer
-    .create(<PlaceCard
+    .create(<Property
       offer={offer}
-      onHeadingLinkClick={() => {}}
-      onPlaceCardHover={() => {}}
     />)
     .toJSON();
 

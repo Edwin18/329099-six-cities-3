@@ -4,13 +4,43 @@ import Adapter from 'enzyme-adapter-react-16';
 import PlaceCard from './place-card.jsx';
 
 const offer = {
-  name: `Place A`,
-  img: `img/apartment-01.jpg`,
-  price: 500,
-  rating: 50,
+  img: [
+    `img/apartment-01.jpg`,
+    `img/apartment-02.jpg`,
+    `img/apartment-03.jpg`,
+    `img/room.jpg`,
+    `img/studio-01.jpg`,
+    `img/apartment-03.jpg`,
+  ],
+  premium: true,
+  price: 120,
+  name: `Palce A`,
+  description: [
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+    `Vivamus aliquet eros nisi, nec semper eros tempus nec.`,
+    `Pellentesque efficitur lectus et quam dapibus, a ultrices neque auctor.`,
+  ],
   type: `Apartment`,
-  period: `All Day Long`,
-  premium: true
+  rating: 80,
+  bedrooms: 3,
+  guests: 4,
+  household: [
+    `Wi-Fi`,
+    `Washing machine`,
+    `Towels`,
+    `Heating`,
+    `Coffee machine`,
+    `Baby seat`,
+    `Kitchen`,
+    `Dishwasher`,
+    `Cabel TV`,
+    `Fridge`,
+  ],
+  host: {
+    img: `img/avatar-angelina.jpg`,
+    name: `Angelina`,
+    super: false,
+  },
 };
 
 Enzyme.configure({
@@ -55,11 +85,10 @@ it(`When user hover on card nust be card "object"`, () => {
   expect(onPlaceCardHover).toBeCalledWith(
       expect.objectContaining({
         name: expect.any(String),
-        img: expect.any(String),
+        img: expect.any(Array),
         price: expect.any(Number),
         rating: expect.any(Number),
         type: expect.any(String),
-        period: expect.any(String),
         premium: expect.any(Boolean)
       })
   );
