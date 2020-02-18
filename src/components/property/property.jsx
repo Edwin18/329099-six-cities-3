@@ -316,6 +316,7 @@ Property.propTypes = {
       name: PropTypes.string.isRequired,
       super: PropTypes.bool.isRequired,
     }).isRequired,
+    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
   }).isRequired,
 };
 

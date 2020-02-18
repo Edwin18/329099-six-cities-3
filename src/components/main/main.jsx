@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlacesList from '../places-list/places-list.jsx';
+import Map from '../map/map.jsx';
 
 const Main = ({available, offers, onHeadingLinkClick}) => (
   <React.Fragment>
@@ -98,7 +99,11 @@ const Main = ({available, offers, onHeadingLinkClick}) => (
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>
@@ -125,6 +130,7 @@ Main.propTypes = {
       name: PropTypes.string.isRequired,
       super: PropTypes.bool.isRequired,
     }).isRequired,
+    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
   onHeadingLinkClick: PropTypes.func.isRequired
 };

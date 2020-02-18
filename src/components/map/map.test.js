@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import Map from './map.jsx';
 
 const offers = [
   {
@@ -165,10 +165,9 @@ const offers = [
   },
 ];
 
-it(`Render App`, () => {
+it(`Render Map`, () => {
   const tree = renderer
-    .create(<App
-      available={50}
+    .create(<Map
       offers={offers}
     />)
     .toJSON();

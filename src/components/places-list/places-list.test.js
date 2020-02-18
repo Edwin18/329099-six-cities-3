@@ -13,7 +13,7 @@ const offers = [
       `img/apartment-03.jpg`,
     ],
     premium: true,
-    price: 789,
+    price: 500,
     name: `Palce A`,
     description: [
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -41,6 +41,7 @@ const offers = [
       name: `Angelina`,
       super: false,
     },
+    cords: [52.3709553943508, 4.89309666406198],
   },
   {
     img: [
@@ -52,7 +53,7 @@ const offers = [
       `img/apartment-03.jpg`,
     ],
     premium: true,
-    price: 456,
+    price: 300,
     name: `Palce B`,
     description: [
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -80,6 +81,7 @@ const offers = [
       name: `Angelina`,
       super: false,
     },
+    cords: [52.3709553943508, 4.89309666406198],
   },
   {
     img: [
@@ -91,7 +93,7 @@ const offers = [
       `img/apartment-03.jpg`,
     ],
     premium: true,
-    price: 130,
+    price: 456,
     name: `Palce C`,
     description: [
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -119,6 +121,7 @@ const offers = [
       name: `Angelina`,
       super: false,
     },
+    cords: [52.3709553943508, 4.89309666406198],
   },
   {
     img: [
@@ -130,7 +133,7 @@ const offers = [
       `img/apartment-03.jpg`,
     ],
     premium: true,
-    price: 159,
+    price: 789,
     name: `Palce D`,
     description: [
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
@@ -158,6 +161,7 @@ const offers = [
       name: `Angelina`,
       super: false,
     },
+    cords: [52.3709553943508, 4.89309666406198],
   },
 ];
 
