@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -39,6 +40,7 @@ export default [
     cords: [52.3909553943508, 4.85309666406198],
   },
   {
+    id: 2,
     img: [
       `img/room.jpg`,
       `img/apartment-02.jpg`,
@@ -78,6 +80,7 @@ export default [
     cords: [52.369553943508, 4.85309666406198],
   },
   {
+    id: 3,
     img: [
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -117,6 +120,7 @@ export default [
     cords: [52.3909553943508, 4.929309666406198],
   },
   {
+    id: 4,
     img: [
       `img/apartment-03.jpg`,
       `img/apartment-01.jpg`,

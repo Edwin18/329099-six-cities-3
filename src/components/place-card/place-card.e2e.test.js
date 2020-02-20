@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import PlaceCard from './place-card.jsx';
 
 const offer = {
+  id: 1,
   img: [
     `img/apartment-01.jpg`,
     `img/apartment-02.jpg`,

@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import Property from './property.jsx';
 
 const offer = {
+  id: 1,
   img: [
     `img/apartment-01.jpg`,
     `img/apartment-02.jpg`,
@@ -47,7 +48,10 @@ it(`Render PlaceCard`, () => {
   const tree = renderer
     .create(<Property
       offer={offer}
-    />)
+      onHeadingLinkClick={() => {}}
+    />, {
+      createNodeMock: () => document.createElement(`div`)
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

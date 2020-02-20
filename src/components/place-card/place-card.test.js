@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import PlaceCard from './place-card.jsx';
 
 const offer = {
+  id: 1,
   img: [
     `img/apartment-01.jpg`,
     `img/apartment-02.jpg`,

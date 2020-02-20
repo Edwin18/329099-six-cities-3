@@ -10,7 +10,7 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
+    const {coordinates} = this.props;
 
     const city = [52.38333, 4.9];
     const zoom = 12;
@@ -35,9 +35,9 @@ class Map extends React.PureComponent {
       })
       .addTo(map);
 
-    offers.map((offer) => (
+    coordinates.map((coordinate) => (
       leaflet
-        .marker(offer.cords, {icon})
+        .marker(coordinate, {icon})
         .addTo(map)
     ));
   }
@@ -48,24 +48,8 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.exact({
-    img: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    household: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.exact({
-      img: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    }).isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })).isRequired,
+  coordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  current: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default Map;
