@@ -264,7 +264,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      456
+                      500
                     </b>
                     <span
                       className="place-card__price-text"
@@ -369,7 +369,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      879
+                      300
                     </b>
                     <span
                       className="place-card__price-text"
@@ -474,7 +474,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      123
+                      456
                     </b>
                     <span
                       className="place-card__price-text"
@@ -579,7 +579,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      159
+                      789
                     </b>
                     <span
                       className="place-card__price-text"
@@ -651,7 +651,16 @@ exports[`Render Main 1`] = `
         >
           <section
             className="cities__map map"
-          />
+          >
+            <div
+              id="map"
+              style={
+                Object {
+                  "height": "100%",
+                }
+              }
+            />
+          </section>
         </div>
       </div>
     </div>

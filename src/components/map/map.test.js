@@ -170,9 +170,7 @@ it(`Render Map`, () => {
     .create(<Map
       offers={offers}
     />, {
-      createNodeMock: () => {
-        return document.createElement(`div`);
-      }
+      createNodeMock: () => document.createElement(`div`)
     })
     .toJSON();
 

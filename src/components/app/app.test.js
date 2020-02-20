@@ -170,7 +170,9 @@ it(`Render App`, () => {
     .create(<App
       available={50}
       offers={offers}
-    />)
+    />, {
+      createNodeMock: () => document.createElement(`div`)
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

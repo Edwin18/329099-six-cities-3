@@ -171,7 +171,9 @@ it(`Render Main`, () => {
       available={30}
       offers={offers}
       onHeadingLinkClick={() => {}}
-    />)
+    />, {
+      createNodeMock: () => document.createElement(`div`)
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();
