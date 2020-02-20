@@ -1,11 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
-
-const ParentNode = {
-  MAIN: `MAIN`,
-  PROPERTY: `PROPERTY`
-};
+import {ParentNode} from '../../const.js';
 
 class PlacesList extends PureComponent {
   constructor(props) {

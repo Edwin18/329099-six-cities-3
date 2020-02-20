@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 import {getCoordinates} from '../../utils.js';
-
-const ParentNode = {
-  MAIN: `MAIN`,
-  PROPERTY: `PROPERTY`
-};
+import {ParentNode} from '../../const.js';
 
 const Main = ({available, offers, onHeadingLinkClick}) => (
   <React.Fragment>

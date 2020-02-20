@@ -4,11 +4,7 @@ import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import {getReviewsList, getNeighbourhoodList, getCoordinates} from '../../utils.js';
-
-const ParentNode = {
-  MAIN: `MAIN`,
-  PROPERTY: `PROPERTY`
-};
+import {ParentNode} from '../../const.js';
 
 const Property = ({offer, onHeadingLinkClick}) => {
   const reviewsList = getReviewsList(offer.id);

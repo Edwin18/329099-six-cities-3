@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PlacesList from './places-list.jsx';
+import {ParentNode} from '../../const.js';
 
 const offers = [
   {
@@ -168,11 +169,6 @@ const offers = [
     cords: [52.3709553943508, 4.89309666406198],
   },
 ];
-
-const ParentNode = {
-  MAIN: `MAIN`,
-  PROPERTY: `PROPERTY`
-};
 
 it(`Render PlacesList MAIN`, () => {
   const tree = renderer
