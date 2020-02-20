@@ -44,7 +44,7 @@ exports[`Render PlacesList 1`] = `
             className="place-card__price-value"
           >
             €
-            789
+            500
           </b>
           <span
             className="place-card__price-text"
@@ -149,7 +149,7 @@ exports[`Render PlacesList 1`] = `
             className="place-card__price-value"
           >
             €
-            456
+            300
           </b>
           <span
             className="place-card__price-text"
@@ -254,7 +254,7 @@ exports[`Render PlacesList 1`] = `
             className="place-card__price-value"
           >
             €
-            130
+            456
           </b>
           <span
             className="place-card__price-text"
@@ -359,7 +359,7 @@ exports[`Render PlacesList 1`] = `
             className="place-card__price-value"
           >
             €
-            159
+            789
           </b>
           <span
             className="place-card__price-text"

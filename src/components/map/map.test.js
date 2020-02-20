@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main.jsx';
+import Map from './map.jsx';
 
 const offers = [
   {
@@ -165,12 +165,10 @@ const offers = [
   },
 ];
 
-it(`Render Main`, () => {
+it(`Render Map`, () => {
   const tree = renderer
-    .create(<Main
-      available={30}
+    .create(<Map
       offers={offers}
-      onHeadingLinkClick={() => {}}
     />, {
       createNodeMock: () => document.createElement(`div`)
     })
