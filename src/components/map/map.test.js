@@ -169,7 +169,11 @@ it(`Render Map`, () => {
   const tree = renderer
     .create(<Map
       offers={offers}
-    />)
+    />, {
+      createNodeMock: () => {
+        return document.createElement(`div`);
+      }
+    })
     .toJSON();
 
   expect(tree).toMatchSnapshot();
