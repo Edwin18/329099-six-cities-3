@@ -40,6 +40,7 @@ class PlacesList extends PureComponent {
               offer={offer}
               onHeadingLinkClick={onHeadingLinkClick}
               onPlaceCardHover={this.placeCardHoverHandler}
+              parentNode={parentNode}
               key={offer.price + offer.rating}
             />
           ))}

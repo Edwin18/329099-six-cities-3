@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import PlaceCard from './place-card.jsx';
+import {ParentNode} from '../../const.js';
 
 const offer = {
   id: 1,
@@ -58,6 +59,7 @@ it(`Should be pressed click on heading`, () => {
         offer={offer}
         onHeadingLinkClick={onHeadingLinkClick}
         onPlaceCardHover={onPlaceCardHover}
+        parentNode={ParentNode.MAIN}
       />
   );
 
@@ -68,7 +70,7 @@ it(`Should be pressed click on heading`, () => {
   expect(onHeadingLinkClick.mock.calls.length).toBe(1);
 });
 
-it(`When user hover on card nust be card "object"`, () => {
+it(`When user hover on card must be card "object"`, () => {
   const onHeadingLinkClick = jest.fn();
   const onPlaceCardHover = jest.fn();
 
@@ -77,6 +79,7 @@ it(`When user hover on card nust be card "object"`, () => {
         offer={offer}
         onHeadingLinkClick={onHeadingLinkClick}
         onPlaceCardHover={onPlaceCardHover}
+        parentNode={ParentNode.MAIN}
       />
   );
 
@@ -105,6 +108,7 @@ it(`When user hover out from card must be "null"`, () => {
         offer={offer}
         onHeadingLinkClick={onHeadingLinkClick}
         onPlaceCardHover={onPlaceCardHover}
+        parentNode={ParentNode.MAIN}
       />
   );
 

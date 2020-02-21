@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PlaceCard from './place-card.jsx';
+import {ParentNode} from '../../const.js';
 
 const offer = {
   id: 1,
@@ -44,12 +45,26 @@ const offer = {
   cords: [52.3709553943508, 4.89309666406198],
 };
 
-it(`Render PlaceCard`, () => {
+it(`Render PlaceCard MAIN`, () => {
   const tree = renderer
     .create(<PlaceCard
       offer={offer}
       onHeadingLinkClick={() => {}}
       onPlaceCardHover={() => {}}
+      parentNode={ParentNode.MAIN}
+    />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render PlaceCard PROPERTY`, () => {
+  const tree = renderer
+    .create(<PlaceCard
+      offer={offer}
+      onHeadingLinkClick={() => {}}
+      onPlaceCardHover={() => {}}
+      parentNode={ParentNode.PROPERTY}
     />)
     .toJSON();
 
