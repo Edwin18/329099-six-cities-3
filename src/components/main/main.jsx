@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
+import {getCoordinates} from '../../utils.js';
+import {ParentNode} from '../../const.js';
 
 const Main = ({available, offers, onHeadingLinkClick}) => (
   <React.Fragment>
@@ -96,12 +98,13 @@ const Main = ({available, offers, onHeadingLinkClick}) => (
               <PlacesList
                 offers={offers}
                 onHeadingLinkClick={onHeadingLinkClick}
+                parentNode={ParentNode.MAIN}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offers={offers}
+                  coordinates={getCoordinates(offers)}
                 />
               </section>
             </div>
@@ -115,6 +118,7 @@ const Main = ({available, offers, onHeadingLinkClick}) => (
 Main.propTypes = {
   available: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.exact({
+    id: PropTypes.number.isRequired,
     img: PropTypes.arrayOf(PropTypes.string).isRequired,
     premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,

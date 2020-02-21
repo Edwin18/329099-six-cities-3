@@ -50,6 +50,7 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover}) => (
 
 PlaceCard.propTypes = {
   offer: PropTypes.exact({
+    id: PropTypes.number.isRequired,
     img: PropTypes.arrayOf(PropTypes.string).isRequired,
     premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,

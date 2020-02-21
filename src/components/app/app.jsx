@@ -42,6 +42,7 @@ class App extends PureComponent {
       return (
         <Property
           offer={this.state}
+          onHeadingLinkClick={this.headingLinkHandler}
         />
       );
     }
@@ -63,6 +64,7 @@ class App extends PureComponent {
 App.propTypes = {
   available: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.exact({
+    id: PropTypes.number.isRequired,
     img: PropTypes.arrayOf(PropTypes.string).isRequired,
     premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,

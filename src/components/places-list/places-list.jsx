@@ -1,12 +1,14 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
+import {ParentNode} from '../../const.js';
 
 class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = null;
+    this._parentNode = null;
 
     this.placeCardHoverHandler = this.placeCardHoverHandler.bind(this);
   }
@@ -15,12 +17,24 @@ class PlacesList extends PureComponent {
     this.setState(item);
   }
 
+  setParentNode(parentNode) {
+    switch (parentNode) {
+      case ParentNode.MAIN:
+        this._parentNode = `cities__places-list places__list tabs__content`;
+        break;
+      case ParentNode.PROPERTY:
+        this._parentNode = `near-places__list places__list`;
+        break;
+    }
+  }
+
   render() {
-    const {offers, onHeadingLinkClick} = this.props;
+    const {offers, onHeadingLinkClick, parentNode} = this.props;
+    this.setParentNode(parentNode);
 
     return (
       <React.Fragment>
-        <div className="cities__places-list places__list tabs__content">
+        <div className={this._parentNode}>
           {offers.map((offer) => (
             <PlaceCard
               offer={offer}
@@ -37,6 +51,7 @@ class PlacesList extends PureComponent {
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.exact({
+    id: PropTypes.number.isRequired,
     img: PropTypes.arrayOf(PropTypes.string).isRequired,
     premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
@@ -54,7 +69,8 @@ PlacesList.propTypes = {
     }).isRequired,
     cords: PropTypes.arrayOf(PropTypes.number).isRequired,
   })).isRequired,
-  onHeadingLinkClick: PropTypes.func.isRequired
+  onHeadingLinkClick: PropTypes.func.isRequired,
+  parentNode: PropTypes.string.isRequired,
 };
 
 export default PlacesList;

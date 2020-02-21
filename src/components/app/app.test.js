@@ -4,6 +4,7 @@ import App from './app.jsx';
 
 const offers = [
   {
+    id: 1,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -44,6 +45,7 @@ const offers = [
     cords: [52.3709553943508, 4.89309666406198],
   },
   {
+    id: 2,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -84,6 +86,7 @@ const offers = [
     cords: [52.3709553943508, 4.89309666406198],
   },
   {
+    id: 3,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -124,6 +127,7 @@ const offers = [
     cords: [52.3709553943508, 4.89309666406198],
   },
   {
+    id: 4,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,

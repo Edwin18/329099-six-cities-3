@@ -1,9 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PlacesList from './places-list.jsx';
+import {ParentNode} from '../../const.js';
 
 const offers = [
   {
+    id: 1,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -44,6 +46,7 @@ const offers = [
     cords: [52.3709553943508, 4.89309666406198],
   },
   {
+    id: 2,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -84,6 +87,7 @@ const offers = [
     cords: [52.3709553943508, 4.89309666406198],
   },
   {
+    id: 3,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -124,6 +128,7 @@ const offers = [
     cords: [52.3709553943508, 4.89309666406198],
   },
   {
+    id: 4,
     img: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -165,11 +170,24 @@ const offers = [
   },
 ];
 
-it(`Render PlacesList`, () => {
+it(`Render PlacesList MAIN`, () => {
   const tree = renderer
     .create(<PlacesList
       offers={offers}
       onHeadingLinkClick={() => {}}
+      parentNode={ParentNode.MAIN}
+    />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render PlacesList PROPERTY`, () => {
+  const tree = renderer
+    .create(<PlacesList
+      offers={offers}
+      onHeadingLinkClick={() => {}}
+      parentNode={ParentNode.PROPERTY}
     />)
     .toJSON();
 
