@@ -1,4 +1,5 @@
 import React, {createRef} from 'react';
+// import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
@@ -7,31 +8,37 @@ class Map extends React.PureComponent {
     super(props);
 
     this._map = null;
+    this._markers = [];
     this._mapContainer = createRef();
   }
 
   componentDidMount() {
-    const {coordinates} = this.props;
+    const {city, coordinates, current = null} = this.props;
 
-    const city = [52.38333, 4.9];
-    const zoom = 12;
-
-    this._initMap(city, zoom, coordinates);
+    this._initMap([city.latitude, city.longitude], city.zoom, coordinates, current);
   }
 
   componentWillUnmount() {
     this._map = null;
   }
 
+  componentDidUpdate() {
+    const {city, coordinates} = this.props;
+
+    this._removeMarkers();
+    this._setView([city.latitude, city.longitude], city.zoom);
+    this._renderMarkers(coordinates);
+  }
+
   render() {
     return <div id="map" style={{height: `100%`}} ref={this._mapContainer}></div>;
   }
 
-  _initMap(city, zoom, coordinates) {
+  _initMap(city, zoom, coordinates, current) {
     this._createMap(city, zoom);
     this._setView(city, zoom);
     this._setLayer();
-    this._renderIcons(coordinates);
+    this._renderMarkers(coordinates, current);
   }
 
   _createMap(city, zoom) {
@@ -55,12 +62,27 @@ class Map extends React.PureComponent {
     .addTo(this._map);
   }
 
-  _renderIcons(coordinates) {
+  _removeMarkers() {
+    if (this._map !== null) {
+      this._markers.forEach((marker) => {
+        this._map.removeLayer(marker);
+      });
+    }
+    this._markers = [];
+  }
+
+  _renderMarkers(coordinates, current) {
     coordinates.map((coordinate) => (
-      leaflet
+      this._markers.push(leaflet
         .marker(coordinate, {icon: this._getDefaultIcon()})
-        .addTo(this._map)
+        .addTo(this._map))
     ));
+
+    if (current) {
+      this._markers.push(leaflet
+        .marker(current, {icon: this._getActiveIcon()})
+        .addTo(this._map));
+    }
   }
 
   _getDefaultIcon() {
@@ -79,8 +101,21 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
+  city: PropTypes.exact({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number,
+  }).isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   current: PropTypes.arrayOf(PropTypes.number),
+  hoveredOffer: PropTypes.exact(),
 };
+
+// const mapStateToProps = (state) => ({
+//   hoveredOffer: state.hoveredOffer,
+// });
+
+// export {Map};
+// export default connect(mapStateToProps)(Map);
 
 export default Map;

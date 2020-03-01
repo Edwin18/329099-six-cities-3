@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {ParentNode} from '../../const.js';
+import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
 
-const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover, parentNode}) => {
+const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}) => {
   let _parentNode = null;
 
   switch (parentNode) {
@@ -21,13 +22,13 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover, parentNode}) =>
         key={offer.price + offer.rating}
         onMouseEnter={() => (onPlaceCardHover(offer))}
         onMouseLeave={() => (onPlaceCardHover(null))}>
-        {offer.premium ?
+        {offer.isPremium ?
           <div className="place-card__mark">
             <span>Premium</span>
           </div> : ``}
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
-            <img className="place-card__image" src={offer.img[0]} width="260" height="200" alt="Place image" />
+            <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
           </a>
         </div>
         <div className="place-card__info">
@@ -36,7 +37,12 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover, parentNode}) =>
               <b className="place-card__price-value">&euro;{offer.price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className="place-card__bookmark-button button" type="button">
+            <button
+              className={offer.isFavorite ?
+                `place-card__bookmark-button button place-card__bookmark-button--active` :
+                `place-card__bookmark-button button`}
+              type="button"
+            >
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
@@ -45,17 +51,17 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover, parentNode}) =>
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: `${offer.rating}%`}}></span>
+              <span style={{width: `${getCorrectRatingNumber(offer.rating)}%`}}></span>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
           <h2 className="place-card__name">
             <a
               href="#"
-              onClick={() => (onHeadingLinkClick(offer))}
-            >{offer.name}</a>
+              onClick={() => (onCardHeadingLinkClick(offer))}
+            >{offer.title}</a>
           </h2>
-          <p className="place-card__type">{offer.type}</p>
+          <p className="place-card__type">{getCorrectTypeOfApartments(offer.type)}</p>
         </div>
       </article>
     </React.Fragment>);
@@ -63,25 +69,40 @@ const PlaceCard = ({offer, onHeadingLinkClick, onPlaceCardHover, parentNode}) =>
 
 PlaceCard.propTypes = {
   offer: PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+    city: PropTypes.exact({
+      name: PropTypes.string,
+      location: PropTypes.exact({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number,
+      }),
+    }),
+    previewImage: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+    bedrooms: PropTypes.number,
+    maxAdults: PropTypes.number,
+    price: PropTypes.number,
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
-      img: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    }).isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPro: PropTypes.bool,
+      avatarUrl: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    location: PropTypes.exact({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
+    id: PropTypes.number,
   }).isRequired,
-  onHeadingLinkClick: PropTypes.func.isRequired,
+  onCardHeadingLinkClick: PropTypes.func.isRequired,
   onPlaceCardHover: PropTypes.func.isRequired,
   parentNode: PropTypes.string.isRequired,
 };

@@ -48,7 +48,7 @@ it(`Render PlaceCard`, () => {
   const tree = renderer
     .create(<Property
       offer={offer}
-      onHeadingLinkClick={() => {}}
+      onCardHeadingLinkClick={() => {}}
     />, {
       createNodeMock: () => document.createElement(`div`)
     })

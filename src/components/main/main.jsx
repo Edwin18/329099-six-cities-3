@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LocationsList from '../locations-list/locations-list.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 import {getCoordinates} from '../../utils.js';
 import {ParentNode} from '../../const.js';
 
-const Main = ({available, offers, onHeadingLinkClick}) => (
+const Main = ({activeCity, available, offers}) => (
   <React.Fragment>
     <div className="page page--gray page--main">
       <header className="header">
@@ -35,45 +36,14 @@ const Main = ({available, offers, onHeadingLinkClick}) => (
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <LocationsList />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{available} places to stay in Amsterdam</b>
+              <b className="places__found">{available} places to stay in {activeCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -97,13 +67,13 @@ const Main = ({available, offers, onHeadingLinkClick}) => (
               </form>
               <PlacesList
                 offers={offers}
-                onHeadingLinkClick={onHeadingLinkClick}
                 parentNode={ParentNode.MAIN}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
+                  city={offers[0].city.location}
                   coordinates={getCoordinates(offers)}
                 />
               </section>
@@ -116,27 +86,42 @@ const Main = ({available, offers, onHeadingLinkClick}) => (
 );
 
 Main.propTypes = {
+  activeCity: PropTypes.string.isRequired,
   available: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+    city: PropTypes.exact({
+      name: PropTypes.string,
+      location: PropTypes.exact({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number,
+      }),
+    }),
+    previewImage: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+    bedrooms: PropTypes.number,
+    maxAdults: PropTypes.number,
+    price: PropTypes.number,
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
-      img: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    }).isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPro: PropTypes.bool,
+      avatarUrl: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    location: PropTypes.exact({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
+    id: PropTypes.number,
   })).isRequired,
-  onHeadingLinkClick: PropTypes.func.isRequired
 };
 
 export default Main;

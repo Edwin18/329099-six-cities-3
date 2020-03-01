@@ -174,7 +174,7 @@ it(`Render PlacesList MAIN`, () => {
   const tree = renderer
     .create(<PlacesList
       offers={offers}
-      onHeadingLinkClick={() => {}}
+      onCardHeadingLinkClick={() => {}}
       parentNode={ParentNode.MAIN}
     />)
     .toJSON();
@@ -186,7 +186,7 @@ it(`Render PlacesList PROPERTY`, () => {
   const tree = renderer
     .create(<PlacesList
       offers={offers}
-      onHeadingLinkClick={() => {}}
+      onCardHeadingLinkClick={() => {}}
       parentNode={ParentNode.PROPERTY}
     />)
     .toJSON();

@@ -174,7 +174,7 @@ it(`Render Main`, () => {
     .create(<Main
       available={30}
       offers={offers}
-      onHeadingLinkClick={() => {}}
+      onCardHeadingLinkClick={() => {}}
     />, {
       createNodeMock: () => document.createElement(`div`)
     })

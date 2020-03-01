@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
 import PlacesList from '../places-list/places-list.jsx';
-import {getReviewsList, getNeighbourhoodList, getCoordinates} from '../../utils.js';
+import {getReviewsList, getCoordinates, getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
 import {ParentNode} from '../../const.js';
+import neighbourhood from '../../mocks/neighbourhood.js';
 
-const Property = ({offer, onHeadingLinkClick}) => {
-  const reviewsList = getReviewsList(offer.id);
-  const neighbourhoodList = getNeighbourhoodList(offer.id);
-  const neighbourhoodCoordinates = getCoordinates(neighbourhoodList);
+const Property = ({offer, onCardHeadingLinkClick}) => {
+  const reviewsList = getReviewsList();
+  const neighbourhoodCoordinates = getCoordinates(neighbourhood);
+  const currentCoordinates = [offer.location.latitude, offer.location.longitude];
 
   return (
     <React.Fragment>
@@ -42,7 +43,7 @@ const Property = ({offer, onHeadingLinkClick}) => {
             <div className="property__gallery-container container">
               <div className="property__gallery">
 
-                {offer.img.map((elem, i) => (
+                {offer.images.map((elem, i) => (
                   <div className="property__image-wrapper" key={elem + i}>
                     <img className="property__image" src={elem} alt="Photo studio" />
                   </div>
@@ -53,16 +54,21 @@ const Property = ({offer, onHeadingLinkClick}) => {
             <div className="property__container container">
               <div className="property__wrapper">
 
-                {offer.premium ?
+                {offer.isPremium ?
                   <div className="property__mark">
                     <span>Premium</span>
-                  </div> : ``}
+                  </div> : null}
 
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    {offer.name}
+                    {offer.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button
+                    className={offer.isFavorite ?
+                      `property__bookmark-button button property__bookmark-button--active` :
+                      `property__bookmark-button button`}
+                    type="button"
+                  >
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -71,20 +77,20 @@ const Property = ({offer, onHeadingLinkClick}) => {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `${offer.rating}%`}}></span>
+                    <span style={{width: `${getCorrectRatingNumber(offer.rating)}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">{offer.rating / 20}</span>
+                  <span className="property__rating-value rating__value">{Math.round(offer.rating)}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    Apartment
+                    {getCorrectTypeOfApartments(offer.type)}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
                     {offer.bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max {offer.guests} adults
+                    Max {offer.maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
@@ -95,7 +101,7 @@ const Property = ({offer, onHeadingLinkClick}) => {
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
 
-                    {offer.household.map((elem, i) => (
+                    {offer.goods.map((elem, i) => (
                       <li className="property__inside-item" key={elem + i}>
                         {elem}
                       </li>
@@ -106,23 +112,19 @@ const Property = ({offer, onHeadingLinkClick}) => {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={offer.host.super ?
+                    <div className={offer.host.isPro ?
                       `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` :
                       `property__avatar-wrapper property__avatar-wrapper user__avatar-wrapper`}>
-                      <img className="property__avatar user__avatar" src={offer.host.img} width="74" height="74" alt="Host avatar" />
+                      <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
                       {offer.host.name}
                     </span>
                   </div>
                   <div className="property__description">
-
-                    {offer.description.map((elem, i) => (
-                      <p className="property__text" key={elem + i}>
-                        {elem}
-                      </p>
-                    ))}
-
+                    <p className="property__text">
+                      {offer.description}
+                    </p>
                   </div>
                 </div>
                 <section className="property__reviews reviews">
@@ -181,7 +183,9 @@ const Property = ({offer, onHeadingLinkClick}) => {
             </div>
             <section className="property__map map">
               <Map
+                city={offer.city.location}
                 coordinates={neighbourhoodCoordinates}
+                current={currentCoordinates}
               />
             </section>
           </section>
@@ -189,8 +193,8 @@ const Property = ({offer, onHeadingLinkClick}) => {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlacesList
-                offers={neighbourhoodList}
-                onHeadingLinkClick={onHeadingLinkClick}
+                offers={neighbourhood}
+                onCardHeadingLinkClick={onCardHeadingLinkClick}
                 parentNode={ParentNode.PROPERTY}
               />
             </section>
@@ -202,25 +206,40 @@ const Property = ({offer, onHeadingLinkClick}) => {
 
 Property.propTypes = {
   offer: PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+    city: PropTypes.exact({
+      name: PropTypes.string,
+      location: PropTypes.exact({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number,
+      }),
+    }),
+    previewImage: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+    bedrooms: PropTypes.number,
+    maxAdults: PropTypes.number,
+    price: PropTypes.number,
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
-      img: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    }).isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPro: PropTypes.bool,
+      avatarUrl: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    location: PropTypes.exact({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
+    id: PropTypes.number,
   }).isRequired,
-  onHeadingLinkClick: PropTypes.func,
+  onCardHeadingLinkClick: PropTypes.func,
 };
 
 export default Property;

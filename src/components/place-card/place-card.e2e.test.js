@@ -51,13 +51,13 @@ Enzyme.configure({
 });
 
 it(`Should be pressed click on heading`, () => {
-  const onHeadingLinkClick = jest.fn();
+  const onCardHeadingLinkClick = jest.fn();
   const onPlaceCardHover = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
         offer={offer}
-        onHeadingLinkClick={onHeadingLinkClick}
+        onCardHeadingLinkClick={onCardHeadingLinkClick}
         onPlaceCardHover={onPlaceCardHover}
         parentNode={ParentNode.MAIN}
       />
@@ -67,17 +67,17 @@ it(`Should be pressed click on heading`, () => {
 
   headingLink.simulate(`click`);
 
-  expect(onHeadingLinkClick.mock.calls.length).toBe(1);
+  expect(onCardHeadingLinkClick.mock.calls.length).toBe(1);
 });
 
 it(`When user hover on card must be card "object"`, () => {
-  const onHeadingLinkClick = jest.fn();
+  const onCardHeadingLinkClick = jest.fn();
   const onPlaceCardHover = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
         offer={offer}
-        onHeadingLinkClick={onHeadingLinkClick}
+        onCardHeadingLinkClick={onCardHeadingLinkClick}
         onPlaceCardHover={onPlaceCardHover}
         parentNode={ParentNode.MAIN}
       />
@@ -100,13 +100,13 @@ it(`When user hover on card must be card "object"`, () => {
 });
 
 it(`When user hover out from card must be "null"`, () => {
-  const onHeadingLinkClick = jest.fn();
+  const onCardHeadingLinkClick = jest.fn();
   const onPlaceCardHover = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
         offer={offer}
-        onHeadingLinkClick={onHeadingLinkClick}
+        onCardHeadingLinkClick={onCardHeadingLinkClick}
         onPlaceCardHover={onPlaceCardHover}
         parentNode={ParentNode.MAIN}
       />

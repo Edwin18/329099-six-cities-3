@@ -49,7 +49,7 @@ it(`Render PlaceCard MAIN`, () => {
   const tree = renderer
     .create(<PlaceCard
       offer={offer}
-      onHeadingLinkClick={() => {}}
+      onCardHeadingLinkClick={() => {}}
       onPlaceCardHover={() => {}}
       parentNode={ParentNode.MAIN}
     />)
@@ -62,7 +62,7 @@ it(`Render PlaceCard PROPERTY`, () => {
   const tree = renderer
     .create(<PlaceCard
       offer={offer}
-      onHeadingLinkClick={() => {}}
+      onCardHeadingLinkClick={() => {}}
       onPlaceCardHover={() => {}}
       parentNode={ParentNode.PROPERTY}
     />)
