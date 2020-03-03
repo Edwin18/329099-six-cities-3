@@ -18,3 +18,5 @@ export const CITIES = [
   `Hamburg`,
   `Dusseldorf`
 ];
+
+export const DELETE_MARKER = `DELETE_MARKER`;

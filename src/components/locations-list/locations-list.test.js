@@ -1,14 +1,21 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import LocationsList from './locations-list.jsx';
+import {LocationsList} from './locations-list.jsx';
 
-
+const CITIES = [
+  `Paris`,
+  `Cologne`,
+  `Brussels`,
+  `Amsterdam`,
+  `Hamburg`,
+  `Dusseldorf`
+];
 
 it(`Render LocationsList`, () => {
   const tree = renderer
     .create(<LocationsList
-      city={city}
-      isActive={city === activeCity}
+      cities={CITIES}
+      activeCity={CITIES[0]}
       onCityLinkClick={() => {}}
     />)
     .toJSON();

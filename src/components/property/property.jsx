@@ -7,7 +7,7 @@ import {getReviewsList, getCoordinates, getCorrectRatingNumber, getCorrectTypeOf
 import {ParentNode} from '../../const.js';
 import neighbourhood from '../../mocks/neighbourhood.js';
 
-const Property = ({offer, onCardHeadingLinkClick}) => {
+const Property = ({offer, onCardHeadingLinkClick, onPlaceCardHover}) => {
   const reviewsList = getReviewsList();
   const neighbourhoodCoordinates = getCoordinates(neighbourhood);
   const currentCoordinates = [offer.location.latitude, offer.location.longitude];
@@ -195,6 +195,7 @@ const Property = ({offer, onCardHeadingLinkClick}) => {
               <PlacesList
                 offers={neighbourhood}
                 onCardHeadingLinkClick={onCardHeadingLinkClick}
+                onPlaceCardHover={onPlaceCardHover}
                 parentNode={ParentNode.PROPERTY}
               />
             </section>
@@ -240,6 +241,7 @@ Property.propTypes = {
     id: PropTypes.number,
   }).isRequired,
   onCardHeadingLinkClick: PropTypes.func,
+  onPlaceCardHover: PropTypes.func.isRequired,
 };
 
 export default Property;

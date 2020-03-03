@@ -4,13 +4,49 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
+import {getOffersList} from '../../utils.js';
 
-const App = ({activeCity, currentOffer, currentOffers}) => {
-  const _renderApp = () => {
+class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hoveredOffer: null,
+    };
+
+    this.handlePalceCardHover = this.handlePalceCardHover.bind(this);
+  }
+
+  render() {
+    const {currentOffers} = this.props;
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp()}
+          </Route>
+          <Route exact path="/dev-property">
+            <Property
+              offer={currentOffers[0]}
+              onPlaceCardHover={this.handlePalceCardHover}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+
+  handlePalceCardHover(offer) {
+    this.setState({hoveredOffer: offer});
+  }
+
+  _renderApp() {
+    const {currentOffer, activeCity, currentOffers} = this.props;
     if (currentOffer) {
       return (
         <Property
           offer={currentOffer}
+          onPlaceCardHover={this.handlePalceCardHover}
         />
       );
     }
@@ -21,28 +57,15 @@ const App = ({activeCity, currentOffer, currentOffers}) => {
           activeCity={activeCity}
           available={currentOffers.length}
           offers={currentOffers}
+          onPlaceCardHover={this.handlePalceCardHover}
+          hoveredOffer={this.state.hoveredOffer}
         />
       );
     }
 
     return null;
-  };
-
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          {_renderApp()}
-        </Route>
-        <Route exact path="/dev-property">
-          <Property
-            offer={currentOffers[0]}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
-};
+  }
+}
 
 App.propTypes = {
   activeCity: PropTypes.string.isRequired,
@@ -118,7 +141,7 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
-  currentOffers: state.currentOffers,
+  currentOffers: getOffersList(state.activeCity),
   currentOffer: state.currentOffer,
 });
 

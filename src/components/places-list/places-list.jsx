@@ -81,9 +81,6 @@ const mapDispatchToProps = (dispatch) => ({
   onCardHeadingLinkClick(offer) {
     dispatch(ActionCreator.changeOffer(offer));
   },
-  onPlaceCardHover(offer) {
-    dispatch(ActionCreator.hoveredOffer(offer));
-  },
 });
 
 export {PlacesList};

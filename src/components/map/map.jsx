@@ -1,7 +1,7 @@
 import React, {createRef} from 'react';
-// import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import {DELETE_MARKER} from '../../const.js';
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -9,6 +9,7 @@ class Map extends React.PureComponent {
 
     this._map = null;
     this._markers = [];
+    this._hoveredMarker = null;
     this._mapContainer = createRef();
   }
 
@@ -23,11 +24,17 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const {city, coordinates} = this.props;
+    const {city, coordinates, current, hoveredOffer} = this.props;
 
     this._removeMarkers();
     this._setView([city.latitude, city.longitude], city.zoom);
-    this._renderMarkers(coordinates);
+    this._renderMarkers(coordinates, current);
+
+    if (hoveredOffer === DELETE_MARKER || hoveredOffer === null) {
+      return;
+    }
+
+    this._renderHoveredMarker();
   }
 
   render() {
@@ -65,24 +72,35 @@ class Map extends React.PureComponent {
   _removeMarkers() {
     if (this._map !== null) {
       this._markers.forEach((marker) => {
-        this._map.removeLayer(marker);
+        this._removeMarker(marker);
       });
     }
     this._markers = [];
   }
 
+  _removeMarker(marker) {
+    this._map.removeLayer(marker);
+  }
+
   _renderMarkers(coordinates, current) {
-    coordinates.map((coordinate) => (
-      this._markers.push(leaflet
-        .marker(coordinate, {icon: this._getDefaultIcon()})
-        .addTo(this._map))
-    ));
+    coordinates.forEach((coordinate) => {
+      this._renderMarker(coordinate);
+    });
 
     if (current) {
-      this._markers.push(leaflet
-        .marker(current, {icon: this._getActiveIcon()})
-        .addTo(this._map));
+      this._renderMarker(current, this._getActiveIcon());
     }
+  }
+
+  _renderMarker(coordinate, icon = this._getDefaultIcon()) {
+    this._markers.push(leaflet
+        .marker(coordinate, {icon})
+        .addTo(this._map));
+  }
+
+  _renderHoveredMarker() {
+    const {hoveredOffer} = this.props;
+    this._renderMarker([hoveredOffer.location.latitude, hoveredOffer.location.longitude], this._getActiveIcon());
   }
 
   _getDefaultIcon() {
@@ -108,14 +126,7 @@ Map.propTypes = {
   }).isRequired,
   coordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   current: PropTypes.arrayOf(PropTypes.number),
-  hoveredOffer: PropTypes.exact(),
+  hoveredOffer: PropTypes.any,
 };
-
-// const mapStateToProps = (state) => ({
-//   hoveredOffer: state.hoveredOffer,
-// });
-
-// export {Map};
-// export default connect(mapStateToProps)(Map);
 
 export default Map;

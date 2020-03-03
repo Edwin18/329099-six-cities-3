@@ -6,7 +6,7 @@ import Map from '../map/map.jsx';
 import {getCoordinates} from '../../utils.js';
 import {ParentNode} from '../../const.js';
 
-const Main = ({activeCity, available, offers}) => (
+const Main = ({activeCity, available, offers, onPlaceCardHover, hoveredOffer}) => (
   <React.Fragment>
     <div className="page page--gray page--main">
       <header className="header">
@@ -67,6 +67,7 @@ const Main = ({activeCity, available, offers}) => (
               </form>
               <PlacesList
                 offers={offers}
+                onPlaceCardHover={onPlaceCardHover}
                 parentNode={ParentNode.MAIN}
               />
             </section>
@@ -75,6 +76,7 @@ const Main = ({activeCity, available, offers}) => (
                 <Map
                   city={offers[0].city.location}
                   coordinates={getCoordinates(offers)}
+                  hoveredOffer={hoveredOffer}
                 />
               </section>
             </div>
@@ -122,6 +124,8 @@ Main.propTypes = {
     }),
     id: PropTypes.number,
   })).isRequired,
+  onPlaceCardHover: PropTypes.func.isRequired,
+  hoveredOffer: PropTypes.any,
 };
 
 export default Main;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ParentNode} from '../../const.js';
+import {ParentNode, DELETE_MARKER} from '../../const.js';
 import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
 
 const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}) => {
@@ -19,9 +19,8 @@ const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}
     <React.Fragment>
       <article
         className={_parentNode}
-        key={offer.price + offer.rating}
         onMouseEnter={() => (onPlaceCardHover(offer))}
-        onMouseLeave={() => (onPlaceCardHover(null))}>
+        onMouseLeave={() => (onPlaceCardHover(DELETE_MARKER))}>
         {offer.isPremium ?
           <div className="place-card__mark">
             <span>Premium</span>

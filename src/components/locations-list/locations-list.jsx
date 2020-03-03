@@ -21,7 +21,7 @@ const LocationsList = ({cities, activeCity, onCityLinkClick}) => {
 
 LocationsList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.string,
   onCityLinkClick: PropTypes.func.isRequired,
 };
 
@@ -33,7 +33,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityLinkClick(city) {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.changeOffers(city));
   },
 });
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {getCorrectRatingNumber, setDateTime, setDate} from '../../utils.js';
 
 const ReviewsItem = ({review}) => (
-  <li className="reviews__item" key={review.comment + review.rating}>
+  <li className="reviews__item">
     <div className="reviews__user user">
       <div className="reviews__avatar-wrapper user__avatar-wrapper">
         <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />

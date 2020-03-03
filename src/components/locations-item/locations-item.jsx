@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const LocationsItem = ({city, isActive, onCityLinkClick}) => (
-  <li className="locations__item" key={city}>
+  <li className="locations__item">
     <a
       className={isActive ?
         `locations__item-link tabs__item tabs__item--active` :

@@ -6,13 +6,7 @@ exports[`Render PlaceCard MAIN 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
+  
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
@@ -23,7 +17,7 @@ exports[`Render PlaceCard MAIN 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
         width="260"
       />
     </a>
@@ -41,7 +35,7 @@ exports[`Render PlaceCard MAIN 1`] = `
           className="place-card__price-value"
         >
           €
-          120
+          290
         </b>
         <span
           className="place-card__price-text"
@@ -50,7 +44,7 @@ exports[`Render PlaceCard MAIN 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button button place-card__bookmark-button--active"
         type="button"
       >
         <svg
@@ -78,7 +72,7 @@ exports[`Render PlaceCard MAIN 1`] = `
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "40%",
             }
           }
         />
@@ -96,7 +90,7 @@ exports[`Render PlaceCard MAIN 1`] = `
         href="#"
         onClick={[Function]}
       >
-        Palce A
+        The Joshua Tree House
       </a>
     </h2>
     <p
@@ -114,13 +108,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
+  
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
@@ -131,7 +119,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
         width="260"
       />
     </a>
@@ -149,7 +137,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
           className="place-card__price-value"
         >
           €
-          120
+          290
         </b>
         <span
           className="place-card__price-text"
@@ -158,7 +146,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button button place-card__bookmark-button--active"
         type="button"
       >
         <svg
@@ -186,7 +174,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "40%",
             }
           }
         />
@@ -204,7 +192,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
         href="#"
         onClick={[Function]}
       >
-        Palce A
+        The Joshua Tree House
       </a>
     </h2>
     <p
