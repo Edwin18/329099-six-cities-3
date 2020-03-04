@@ -187,6 +187,7 @@ exports[`Render App Render Main 1`] = `
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -201,28 +202,32 @@ exports[`Render App Render Main 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom"
             >
               <li
                 className="places__option places__option--active"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Top rated first
@@ -2138,6 +2143,7 @@ exports[`Render App Render Property 1`] = `
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -2152,28 +2158,32 @@ exports[`Render App Render Property 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom"
             >
               <li
                 className="places__option places__option--active"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
                 className="places__option"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Top rated first
