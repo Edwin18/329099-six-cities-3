@@ -9,12 +9,14 @@ const CITIES = [
   `Dusseldorf`
 ];
 
+const initialState = {
+  cities: CITIES,
+  activeCity: CITIES[0],
+  currentOffer: null,
+};
+
 it(`Reducer without additional parameters should return initial state`, () => {
-  expect(reducer(void 0, {})).toEqual({
-    cities: CITIES,
-    activeCity: CITIES[0],
-    currentOffer: null,
-  });
+  expect(reducer(initialState, {})).toEqual(initialState);
 });
 
 it(`Reducer should change city`, () => {
