@@ -7,7 +7,7 @@ const ReviewsList = ({reviews}) => (
     {reviews.map((review) => (
       <ReviewsItem
         review={review}
-        key={review.text + review.rating}
+        key={review.comment + review.rating}
       />
     ))}
   </ul>
@@ -16,14 +16,15 @@ const ReviewsList = ({reviews}) => (
 ReviewsList.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.exact({
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.exact({
-      dateTime: PropTypes.string.isRequired,
-      dateM: PropTypes.string.isRequired,
-    }).isRequired,
+    user: PropTypes.exact({
+      id: PropTypes.number,
+      isPro: PropTypes.bool,
+      name: PropTypes.string,
+      avatarUrl: PropTypes.string,
+    }),
+    rating: PropTypes.number,
+    comment: PropTypes.string,
+    date: PropTypes.string,
   })).isRequired,
 };
 

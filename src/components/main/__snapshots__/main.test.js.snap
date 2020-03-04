@@ -77,8 +77,9 @@ exports[`Render Main 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
+              className="locations__item-link tabs__item tabs__item--active"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Paris
@@ -91,6 +92,7 @@ exports[`Render Main 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Cologne
@@ -103,6 +105,7 @@ exports[`Render Main 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Brussels
@@ -113,7 +116,9 @@ exports[`Render Main 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item tabs__item--active"
+              className="locations__item-link tabs__item"
+              href="#"
+              onClick={[Function]}
             >
               <span>
                 Amsterdam
@@ -126,6 +131,7 @@ exports[`Render Main 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Hamburg
@@ -138,6 +144,7 @@ exports[`Render Main 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Dusseldorf
@@ -164,8 +171,9 @@ exports[`Render Main 1`] = `
           <b
             className="places__found"
           >
-            30
-             places to stay in Amsterdam
+            3
+             places to stay in 
+            Paris
           </b>
           <form
             action="#"
@@ -229,13 +237,7 @@ exports[`Render Main 1`] = `
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
+              
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -246,7 +248,7 @@ exports[`Render Main 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
                     width="260"
                   />
                 </a>
@@ -264,7 +266,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      500
+                      290
                     </b>
                     <span
                       className="place-card__price-text"
@@ -273,7 +275,7 @@ exports[`Render Main 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button place-card__bookmark-button--active"
                     type="button"
                   >
                     <svg
@@ -301,7 +303,7 @@ exports[`Render Main 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "40%",
                         }
                       }
                     />
@@ -319,7 +321,7 @@ exports[`Render Main 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Palce A
+                    The Joshua Tree House
                   </a>
                 </h2>
                 <p
@@ -334,13 +336,7 @@ exports[`Render Main 1`] = `
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
             >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
+              
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -351,7 +347,7 @@ exports[`Render Main 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg"
                     width="260"
                   />
                 </a>
@@ -369,7 +365,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      300
+                      106
                     </b>
                     <span
                       className="place-card__price-text"
@@ -424,13 +420,13 @@ exports[`Render Main 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Palce B
+                    The Pondhouse - A Magical Place
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  Private room
                 </p>
               </div>
             </article>
@@ -456,7 +452,7 @@ exports[`Render Main 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-01.jpg"
+                    src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg"
                     width="260"
                   />
                 </a>
@@ -474,7 +470,7 @@ exports[`Render Main 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      456
+                      274
                     </b>
                     <span
                       className="place-card__price-text"
@@ -511,7 +507,7 @@ exports[`Render Main 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "60%",
                         }
                       }
                     />
@@ -529,118 +525,13 @@ exports[`Render Main 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Palce C
+                    Loft Studio in the Central Area
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Apartment
-                </p>
-              </div>
-            </article>
-            <article
-              className="cities__place-card place-card"
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
-              <div
-                className="cities__image-wrapper place-card__image-wrapper"
-              >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/apartment-01.jpg"
-                    width="260"
-                  />
-                </a>
-              </div>
-              <div
-                className="place-card__info"
-              >
-                <div
-                  className="place-card__price-wrapper"
-                >
-                  <div
-                    className="place-card__price"
-                  >
-                    <b
-                      className="place-card__price-value"
-                    >
-                      €
-                      789
-                    </b>
-                    <span
-                      className="place-card__price-text"
-                    >
-                      / night
-                    </span>
-                  </div>
-                  <button
-                    className="place-card__bookmark-button button"
-                    type="button"
-                  >
-                    <svg
-                      className="place-card__bookmark-icon"
-                      height="19"
-                      width="18"
-                    >
-                      <use
-                        xlinkHref="#icon-bookmark"
-                      />
-                    </svg>
-                    <span
-                      className="visually-hidden"
-                    >
-                      To bookmarks
-                    </span>
-                  </button>
-                </div>
-                <div
-                  className="place-card__rating rating"
-                >
-                  <div
-                    className="place-card__stars rating__stars"
-                  >
-                    <span
-                      style={
-                        Object {
-                          "width": "80%",
-                        }
-                      }
-                    />
-                    <span
-                      className="visually-hidden"
-                    >
-                      Rating
-                    </span>
-                  </div>
-                </div>
-                <h2
-                  className="place-card__name"
-                >
-                  <a
-                    href="#"
-                    onClick={[Function]}
-                  >
-                    Palce D
-                  </a>
-                </h2>
-                <p
-                  className="place-card__type"
-                >
-                  Apartment
+                  Private room
                 </p>
               </div>
             </article>

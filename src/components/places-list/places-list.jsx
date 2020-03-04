@@ -1,76 +1,87 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
 import PlaceCard from '../place-card/place-card.jsx';
 import {ParentNode} from '../../const.js';
 
-class PlacesList extends PureComponent {
-  constructor(props) {
-    super(props);
+const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode}) => {
 
-    this.state = null;
-    this._parentNode = null;
+  const setParentNode = () => {
+    let _parentNode = null;
 
-    this.placeCardHoverHandler = this.placeCardHoverHandler.bind(this);
-  }
-
-  placeCardHoverHandler(item) {
-    this.setState(item);
-  }
-
-  setParentNode(parentNode) {
     switch (parentNode) {
       case ParentNode.MAIN:
-        this._parentNode = `cities__places-list places__list tabs__content`;
+        _parentNode = `cities__places-list places__list tabs__content`;
         break;
       case ParentNode.PROPERTY:
-        this._parentNode = `near-places__list places__list`;
+        _parentNode = `near-places__list places__list`;
         break;
     }
-  }
 
-  render() {
-    const {offers, onHeadingLinkClick, parentNode} = this.props;
-    this.setParentNode(parentNode);
+    return _parentNode;
+  };
 
-    return (
-      <React.Fragment>
-        <div className={this._parentNode}>
-          {offers.map((offer) => (
-            <PlaceCard
-              offer={offer}
-              onHeadingLinkClick={onHeadingLinkClick}
-              onPlaceCardHover={this.placeCardHoverHandler}
-              key={offer.price + offer.rating}
-            />
-          ))}
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <div className={setParentNode()}>
+      {offers.map((offer) => (
+        <PlaceCard
+          offer={offer}
+          onCardHeadingLinkClick={onCardHeadingLinkClick}
+          onPlaceCardHover={onPlaceCardHover}
+          parentNode={parentNode}
+          key={offer.price + offer.rating}
+        />
+      ))}
+    </div>
+  );
+};
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+    city: PropTypes.exact({
+      name: PropTypes.string,
+      location: PropTypes.exact({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number,
+      }),
+    }),
+    previewImage: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+    bedrooms: PropTypes.number,
+    maxAdults: PropTypes.number,
+    price: PropTypes.number,
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
-      img: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    }).isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPro: PropTypes.bool,
+      avatarUrl: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    location: PropTypes.exact({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
+    id: PropTypes.number,
   })).isRequired,
-  onHeadingLinkClick: PropTypes.func.isRequired,
+  onCardHeadingLinkClick: PropTypes.func.isRequired,
+  onPlaceCardHover: PropTypes.func.isRequired,
   parentNode: PropTypes.string.isRequired,
 };
 
-export default PlacesList;
+const mapDispatchToProps = (dispatch) => ({
+  onCardHeadingLinkClick(offer) {
+    dispatch(ActionCreator.changeOffer(offer));
+  },
+});
+
+export {PlacesList};
+export default connect(() => ({}), mapDispatchToProps)(PlacesList);

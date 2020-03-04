@@ -4,14 +4,15 @@ import ReviewsItem from './reviews-item.jsx';
 
 const review = {
   id: 1,
-  name: `Max`,
-  rating: 80,
-  img: `img/avatar-max.jpg`,
-  text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-  date: {
-    dateTime: `2019-04-24`,
-    dateM: `April 2019`,
+  user: {
+    id: 4,
+    isPro: false,
+    name: `Max`,
+    avatarUrl: `img/avatar-max.jpg`
   },
+  rating: 4,
+  comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+  date: `2019-05-08T14:13:56.569Z`,
 };
 
 it(`Render PlaceCard`, () => {

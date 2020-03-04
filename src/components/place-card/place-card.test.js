@@ -1,55 +1,63 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PlaceCard from './place-card.jsx';
+import {ParentNode} from '../../const.js';
 
 const offer = {
-  id: 1,
-  img: [
-    `img/apartment-01.jpg`,
-    `img/apartment-02.jpg`,
-    `img/apartment-03.jpg`,
-    `img/room.jpg`,
-    `img/studio-01.jpg`,
-    `img/apartment-03.jpg`,
-  ],
-  premium: true,
-  price: 120,
-  name: `Palce A`,
-  description: [
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-    `Vivamus aliquet eros nisi, nec semper eros tempus nec.`,
-    `Pellentesque efficitur lectus et quam dapibus, a ultrices neque auctor.`,
-  ],
-  type: `Apartment`,
-  rating: 80,
-  bedrooms: 3,
-  guests: 4,
-  household: [
-    `Wi-Fi`,
-    `Washing machine`,
-    `Towels`,
-    `Heating`,
-    `Coffee machine`,
-    `Baby seat`,
-    `Kitchen`,
-    `Dishwasher`,
-    `Cabel TV`,
-    `Fridge`,
-  ],
-  host: {
-    img: `img/avatar-angelina.jpg`,
-    name: `Angelina`,
-    super: false,
+  city: {
+    name: `Hamburg`,
+    location: {
+      latitude: 53.550341,
+      longitude: 10.000654,
+      zoom: 13
+    }
   },
-  cords: [52.3709553943508, 4.89309666406198],
+  previewImage: `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`,
+  images: [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/18.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/15.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/17.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`],
+  title: `The Joshua Tree House`,
+  isFavorite: true,
+  isPremium: false,
+  rating: 2.2,
+  type: `apartment`,
+  bedrooms: 3,
+  maxAdults: 9,
+  price: 290,
+  goods: [`Laptop friendly workspace`, `Dishwasher`, `Towels`, `Washing machine`, `Fridge`, `Breakfast`, `Air conditioning`, `Coffee machine`, `Washer`, `Cable TV`, `Baby seat`],
+  host: {
+    id: 25,
+    name: `Angelina`,
+    isPro: true,
+    avatarUrl: `img/avatar-angelina.jpg`
+  },
+  description: `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
+  location: {
+    latitude: 53.573341000000006,
+    longitude: 9.994654,
+    zoom: 16
+  },
+  id: 1,
 };
 
-it(`Render PlaceCard`, () => {
+it(`Render PlaceCard MAIN`, () => {
   const tree = renderer
     .create(<PlaceCard
       offer={offer}
-      onHeadingLinkClick={() => {}}
+      onCardHeadingLinkClick={() => {}}
       onPlaceCardHover={() => {}}
+      parentNode={ParentNode.MAIN}
+    />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render PlaceCard PROPERTY`, () => {
+  const tree = renderer
+    .create(<PlaceCard
+      offer={offer}
+      onCardHeadingLinkClick={() => {}}
+      onPlaceCardHover={() => {}}
+      parentNode={ParentNode.PROPERTY}
     />)
     .toJSON();
 

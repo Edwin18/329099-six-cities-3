@@ -1,20 +1,24 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
+import {getOffersList} from '../../utils.js';
 
-class App extends PureComponent {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = null;
+    this.state = {
+      hoveredOffer: null,
+    };
 
-    this.headingLinkHandler = this.headingLinkHandler.bind(this);
+    this.handlePalceCardHover = this.handlePalceCardHover.bind(this);
   }
 
   render() {
-    const {offers} = this.props;
+    const {currentOffers} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -23,7 +27,8 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-property">
             <Property
-              offer={offers[0]}
+              offer={currentOffers[0]}
+              onPlaceCardHover={this.handlePalceCardHover}
             />
           </Route>
         </Switch>
@@ -31,28 +36,29 @@ class App extends PureComponent {
     );
   }
 
-  headingLinkHandler(offer) {
-    this.setState(offer);
+  handlePalceCardHover(offer) {
+    this.setState({hoveredOffer: offer});
   }
 
   _renderApp() {
-    const {available, offers} = this.props;
-
-    if (this.state) {
+    const {currentOffer, activeCity, currentOffers} = this.props;
+    if (currentOffer) {
       return (
         <Property
-          offer={this.state}
-          onHeadingLinkClick={this.headingLinkHandler}
+          offer={currentOffer}
+          onPlaceCardHover={this.handlePalceCardHover}
         />
       );
     }
 
-    if (!this.state) {
+    if (!currentOffer) {
       return (
         <Main
-          available={available}
-          offers={offers}
-          onHeadingLinkClick={this.headingLinkHandler}
+          activeCity={activeCity}
+          available={currentOffers.length}
+          offers={currentOffers}
+          onPlaceCardHover={this.handlePalceCardHover}
+          hoveredOffer={this.state.hoveredOffer}
         />
       );
     }
@@ -62,26 +68,82 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  available: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    img: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    household: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeCity: PropTypes.string.isRequired,
+  currentOffer: PropTypes.exact({
+    city: PropTypes.exact({
+      name: PropTypes.string,
+      location: PropTypes.exact({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number,
+      }),
+    }),
+    previewImage: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+    bedrooms: PropTypes.number,
+    maxAdults: PropTypes.number,
+    price: PropTypes.number,
+    goods: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
-      img: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired,
-    }).isRequired,
-    cords: PropTypes.arrayOf(PropTypes.number).isRequired,
-  })).isRequired
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPro: PropTypes.bool,
+      avatarUrl: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    location: PropTypes.exact({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
+    id: PropTypes.number,
+  }),
+  currentOffers: PropTypes.arrayOf(PropTypes.exact({
+    city: PropTypes.exact({
+      name: PropTypes.string,
+      location: PropTypes.exact({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number,
+      }),
+    }),
+    previewImage: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string,
+    bedrooms: PropTypes.number,
+    maxAdults: PropTypes.number,
+    price: PropTypes.number,
+    goods: PropTypes.arrayOf(PropTypes.string),
+    host: PropTypes.exact({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      isPro: PropTypes.bool,
+      avatarUrl: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    location: PropTypes.exact({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
+    id: PropTypes.number,
+  })).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  activeCity: state.activeCity,
+  currentOffers: getOffersList(state.activeCity),
+  currentOffer: state.currentOffer,
+});
+
+export {App};
+export default connect(mapStateToProps)(App);
