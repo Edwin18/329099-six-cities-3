@@ -10,6 +10,32 @@ export const ApartamentType = {
   'house': `House`,
 };
 
+export const SortType = {
+  DEFAULT: `popular`,
+  TO_HIGH: `to-high`,
+  TO_LOW: `to-low`,
+  TOP_RATED: `top-rated`,
+};
+
+export const SORTS = [
+  {
+    type: SortType.DEFAULT,
+    text: `Popular`,
+  },
+  {
+    type: SortType.TO_HIGH,
+    text: `Price: low to high`,
+  },
+  {
+    type: SortType.TO_LOW,
+    text: `Price: high to low`,
+  },
+  {
+    type: SortType.TOP_RATED,
+    text: `Top rated first`,
+  },
+];
+
 export const CITIES = [
   `Paris`,
   `Cologne`,
@@ -18,5 +44,6 @@ export const CITIES = [
   `Hamburg`,
   `Dusseldorf`
 ];
+
 
 export const DELETE_MARKER = `DELETE_MARKER`;

@@ -4,6 +4,8 @@ import configureStore from "redux-mock-store";
 import renderer from 'react-test-renderer';
 import Main from './main.jsx';
 
+const activeSort = `popular`;
+
 const CITIES = [
   `Paris`,
   `Cologne`,
@@ -131,6 +133,8 @@ it(`Render Main`, () => {
         offers={offers}
         onPlaceCardHover={() => {}}
         hoveredOffer={offers[0]}
+        activeSort={activeSort}
+        onSortItemClick={() => {}}
       />
     </Provider>, {
       createNodeMock: () => document.createElement(`div`)

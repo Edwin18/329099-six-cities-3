@@ -4,7 +4,8 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
-import {getOffersList} from '../../utils.js';
+import {getOffersList, extend} from '../../utils.js';
+import {SortType} from '../../const.js';
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -12,9 +13,11 @@ class App extends React.PureComponent {
 
     this.state = {
       hoveredOffer: null,
+      activeSort: SortType.DEFAULT,
     };
 
     this.handlePalceCardHover = this.handlePalceCardHover.bind(this);
+    this.handleSortTypeClick = this.handleSortTypeClick.bind(this);
   }
 
   render() {
@@ -37,7 +40,15 @@ class App extends React.PureComponent {
   }
 
   handlePalceCardHover(offer) {
-    this.setState({hoveredOffer: offer});
+    this.setState({
+      hoveredOffer: offer
+    });
+  }
+
+  handleSortTypeClick(sortType) {
+    this.setState({
+      activeSort: sortType,
+    });
   }
 
   _renderApp() {
@@ -59,6 +70,8 @@ class App extends React.PureComponent {
           offers={currentOffers}
           onPlaceCardHover={this.handlePalceCardHover}
           hoveredOffer={this.state.hoveredOffer}
+          activeSort={this.state.activeSort}
+          onSortItemClick={this.handleSortTypeClick}
         />
       );
     }
