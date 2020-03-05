@@ -40,15 +40,15 @@ class App extends React.PureComponent {
   }
 
   handlePalceCardHover(offer) {
-    this.setState(extend(this.state, {
-      hoveredOffer: offer,
-    }));
+    this.setState({
+      hoveredOffer: offer
+    });
   }
 
   handleSortTypeClick(sortType) {
-    this.setState(extend(this.state, {
+    this.setState({
       activeSort: sortType,
-    }));
+    });
   }
 
   _renderApp() {

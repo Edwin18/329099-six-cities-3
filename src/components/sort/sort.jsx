@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {extend} from '../../utils.js';
 import {SORTS} from '../../const.js';
 
 class Sort extends PureComponent {
@@ -14,9 +13,9 @@ class Sort extends PureComponent {
     this.handleSortClick = this.handleSortClick.bind(this);
   }
   handleSortClick() {
-    this.setState(extend(this.state, {
-      isOpened: !this.state.isOpened,
-    }));
+    this.setState((state) => (
+      {isOpened: !state.isOpened}
+    ));
   }
 
   getSortItemElement(activeSort, onSortItemClick, elem) {
