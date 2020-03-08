@@ -4,20 +4,18 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer.js';
 import LocationsItem from '../locations-item/locations-item.jsx';
 
-const LocationsList = ({cities, activeCity, onCityLinkClick}) => {
-  return (
-    <ul className="locations__list tabs__list">
-      {cities.map((city) => (
-        <LocationsItem
-          city={city}
-          isActive={city === activeCity}
-          onCityLinkClick={onCityLinkClick}
-          key={city}
-        />
-      ))}
-    </ul>
-  );
-};
+const LocationsList = ({cities, activeCity, onCityLinkClick}) => (
+  <ul className="locations__list tabs__list">
+    {cities.map((city) => (
+      <LocationsItem
+        city={city}
+        isActive={city === activeCity}
+        onCityLinkClick={onCityLinkClick}
+        key={city}
+      />
+    ))}
+  </ul>
+);
 
 LocationsList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,

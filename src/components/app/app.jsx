@@ -4,60 +4,15 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
-import {getOffersList, extend} from '../../utils.js';
-import {SortType} from '../../const.js';
+import {getOffersList} from '../../utils.js';
 
-class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hoveredOffer: null,
-      activeSort: SortType.DEFAULT,
-    };
-
-    this.handlePalceCardHover = this.handlePalceCardHover.bind(this);
-    this.handleSortTypeClick = this.handleSortTypeClick.bind(this);
-  }
-
-  render() {
-    const {currentOffers} = this.props;
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/dev-property">
-            <Property
-              offer={currentOffers[0]}
-              onPlaceCardHover={this.handlePalceCardHover}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-
-  handlePalceCardHover(offer) {
-    this.setState({
-      hoveredOffer: offer
-    });
-  }
-
-  handleSortTypeClick(sortType) {
-    this.setState({
-      activeSort: sortType,
-    });
-  }
-
-  _renderApp() {
-    const {currentOffer, activeCity, currentOffers} = this.props;
+const App = ({currentOffer, activeCity, currentOffers, onPlaceCardHover, onSortItemClick, hoveredOffer, activeSort}) => {
+  const _renderApp = () => {
     if (currentOffer) {
       return (
         <Property
           offer={currentOffer}
-          onPlaceCardHover={this.handlePalceCardHover}
+          onPlaceCardHover={onPlaceCardHover}
         />
       );
     }
@@ -68,17 +23,33 @@ class App extends React.PureComponent {
           activeCity={activeCity}
           available={currentOffers.length}
           offers={currentOffers}
-          onPlaceCardHover={this.handlePalceCardHover}
-          hoveredOffer={this.state.hoveredOffer}
-          activeSort={this.state.activeSort}
-          onSortItemClick={this.handleSortTypeClick}
+          onPlaceCardHover={onPlaceCardHover}
+          hoveredOffer={hoveredOffer}
+          activeSort={activeSort}
+          onSortItemClick={onSortItemClick}
         />
       );
     }
 
     return null;
-  }
-}
+  };
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          {_renderApp()}
+        </Route>
+        <Route exact path="/dev-property">
+          <Property
+            offer={currentOffers[0]}
+            onPlaceCardHover={onPlaceCardHover}
+          />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 App.propTypes = {
   activeCity: PropTypes.string.isRequired,
@@ -150,6 +121,10 @@ App.propTypes = {
     }),
     id: PropTypes.number,
   })).isRequired,
+  onPlaceCardHover: PropTypes.func.isRequired,
+  onSortItemClick: PropTypes.func.isRequired,
+  hoveredOffer: PropTypes.any,
+  activeSort: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

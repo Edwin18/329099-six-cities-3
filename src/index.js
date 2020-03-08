@@ -4,6 +4,9 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import App from './components/app/app.jsx';
 import {reducer} from './reducer.js';
+import withHover from './hocs/with-hover/with-hover.js';
+
+const AppWrapped = withHover(App);
 
 const store = createStore(
     reducer,
@@ -12,7 +15,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <AppWrapped />
     </Provider>,
     document.querySelector(`#root`)
 );

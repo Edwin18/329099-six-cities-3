@@ -105,8 +105,8 @@ exports[`Render PlaceCard MAIN 1`] = `
 exports[`Render PlaceCard PROPERTY 1`] = `
 <article
   className="near-places__card place-card"
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
+  onMouseEnter={null}
+  onMouseLeave={null}
 >
   
   <div

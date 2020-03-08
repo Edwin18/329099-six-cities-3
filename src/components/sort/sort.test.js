@@ -9,6 +9,8 @@ it(`Render Sort`, () => {
     .create(<Sort
       activeSort={activeSort}
       onSortItemClick={() => {}}
+      onSortClick={() => {}}
+      isOpened={true}
     />)
     .toJSON();
 
