@@ -316,8 +316,8 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
 >
   <article
     className="near-places__card place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    onMouseEnter={null}
+    onMouseLeave={null}
   >
     
     <div
@@ -415,8 +415,8 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
   </article>
   <article
     className="near-places__card place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    onMouseEnter={null}
+    onMouseLeave={null}
   >
     
     <div
@@ -514,8 +514,8 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
   </article>
   <article
     className="near-places__card place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    onMouseEnter={null}
+    onMouseLeave={null}
   >
     <div
       className="place-card__mark"

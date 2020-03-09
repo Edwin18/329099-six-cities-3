@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer';
 import App from './app.jsx';
 
 const city = `Amsterdam`;
+const activeSort = `popular`;
 const CITIES = [
   `Paris`,
   `Cologne`,
@@ -133,6 +134,9 @@ describe(`Render App`, () => {
           activeCity={city}
           currentOffers={offers}
           currentOffer={null}
+          onPlaceCardHover={() => {}}
+          onSortItemClick={() => {}}
+          activeSort={activeSort}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)
@@ -149,6 +153,9 @@ describe(`Render App`, () => {
           activeCity={city}
           currentOffers={offers}
           currentOffer={offers[0]}
+          onPlaceCardHover={() => {}}
+          onSortItemClick={() => {}}
+          activeSort={activeSort}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)

@@ -6,24 +6,19 @@ import PlaceCard from '../place-card/place-card.jsx';
 import {ParentNode} from '../../const.js';
 
 const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode}) => {
+  let _parentNode;
 
-  const setParentNode = () => {
-    let _parentNode = null;
-
-    switch (parentNode) {
-      case ParentNode.MAIN:
-        _parentNode = `cities__places-list places__list tabs__content`;
-        break;
-      case ParentNode.PROPERTY:
-        _parentNode = `near-places__list places__list`;
-        break;
-    }
-
-    return _parentNode;
-  };
+  switch (parentNode) {
+    case ParentNode.MAIN:
+      _parentNode = `cities__places-list places__list tabs__content`;
+      break;
+    case ParentNode.PROPERTY:
+      _parentNode = `near-places__list places__list`;
+      break;
+  }
 
   return (
-    <div className={setParentNode()}>
+    <div className={_parentNode}>
       {offers.map((offer) => (
         <PlaceCard
           offer={offer}
