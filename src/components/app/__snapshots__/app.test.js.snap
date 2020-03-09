@@ -57,7 +57,7 @@ exports[`Render App Render Main 1`] = `
     </div>
   </header>
   <main
-    className="page__main page__main--index"
+    className="page page--gray page--main"
   >
     <h1
       className="visually-hidden"
@@ -2013,7 +2013,7 @@ exports[`Render App Render Property 1`] = `
     </div>
   </header>
   <main
-    className="page__main page__main--index"
+    className="page page--gray page--main"
   >
     <h1
       className="visually-hidden"
