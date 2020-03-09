@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LocationsList from '../locations-list/locations-list.jsx';
-import PlacesList from '../places-list/places-list.jsx';
-import Map from '../map/map.jsx';
-import Sort from '../sort/sort.jsx';
-import {getCoordinates, getSortedOffers} from '../../utils.js';
-import {ParentNode} from '../../const.js';
-import withStatus from '../../hocs/with-status/with-status.js';
-
-const SortWrapped = withStatus(Sort);
+import Cities from '../cities/cities.jsx';
+import CitiesEmpty from '../cities-empty/cities-empty.jsx';
 
 const Main = ({activeCity, available, offers, onPlaceCardHover, hoveredOffer, activeSort, onSortItemClick}) => (
-  <div className="page page--gray page--main">
+  <div
+    className="page page--gray page--main">
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
@@ -35,7 +30,10 @@ const Main = ({activeCity, available, offers, onPlaceCardHover, hoveredOffer, ac
       </div>
     </header>
 
-    <main className="page__main page__main--index">
+    <main
+      className={offers.length ?
+        `page page--gray page--main` :
+        `page__main page__main--index page__main--index-empty`}>
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
@@ -43,30 +41,19 @@ const Main = ({activeCity, available, offers, onPlaceCardHover, hoveredOffer, ac
         </section>
       </div>
       <div className="cities">
-        <div className="cities__places-container container">
-          <section className="cities__places places">
-            <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{available} places to stay in {activeCity}</b>
-            <SortWrapped
-              activeSort={activeSort}
-              onSortItemClick={onSortItemClick}
-            />
-            <PlacesList
-              offers={getSortedOffers(offers, activeSort)}
-              onPlaceCardHover={onPlaceCardHover}
-              parentNode={ParentNode.MAIN}
-            />
-          </section>
-          <div className="cities__right-section">
-            <section className="cities__map map">
-              <Map
-                city={offers[0].city.location}
-                coordinates={getCoordinates(offers)}
-                hoveredOffer={hoveredOffer}
-              />
-            </section>
-          </div>
-        </div>
+        {offers.length ?
+          <Cities
+            activeCity={activeCity}
+            available={available}
+            offers={offers}
+            onPlaceCardHover={onPlaceCardHover}
+            hoveredOffer={hoveredOffer}
+            activeSort={activeSort}
+            onSortItemClick={onSortItemClick}
+          /> :
+          <CitiesEmpty
+            activeCity={activeCity}
+          />}
       </div>
     </main>
   </div>
@@ -108,7 +95,7 @@ Main.propTypes = {
       zoom: PropTypes.number,
     }),
     id: PropTypes.number,
-  })).isRequired,
+  })),
   onPlaceCardHover: PropTypes.func.isRequired,
   hoveredOffer: PropTypes.any,
   activeSort: PropTypes.string.isRequired,
