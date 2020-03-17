@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/cities/cities.js';
 import PlaceCard from '../place-card/place-card.jsx';
 import {ParentNode} from '../../const.js';
 
@@ -34,38 +34,38 @@ const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNod
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.exact({
-    city: PropTypes.exact({
-      name: PropTypes.string,
-      location: PropTypes.exact({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
+    'city': PropTypes.exact({
+      'name': PropTypes.string,
+      'location': PropTypes.exact({
+        'latitude': PropTypes.number,
+        'longitude': PropTypes.number,
+        'zoom': PropTypes.number,
       }),
     }),
-    previewImage: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    isPremium: PropTypes.bool,
-    rating: PropTypes.number,
-    type: PropTypes.string,
-    bedrooms: PropTypes.number,
-    maxAdults: PropTypes.number,
-    price: PropTypes.number,
-    goods: PropTypes.arrayOf(PropTypes.string),
-    host: PropTypes.exact({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      isPro: PropTypes.bool,
-      avatarUrl: PropTypes.string,
+    'preview_image': PropTypes.string,
+    'images': PropTypes.arrayOf(PropTypes.string),
+    'title': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'is_premium': PropTypes.bool,
+    'rating': PropTypes.number,
+    'type': PropTypes.string,
+    'bedrooms': PropTypes.number,
+    'max_adults': PropTypes.number,
+    'price': PropTypes.number,
+    'goods': PropTypes.arrayOf(PropTypes.string),
+    'host': PropTypes.exact({
+      'id': PropTypes.number,
+      'name': PropTypes.string,
+      'is_pro': PropTypes.bool,
+      'avatar_url': PropTypes.string,
     }),
-    description: PropTypes.string,
-    location: PropTypes.exact({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number,
+    'description': PropTypes.string,
+    'location': PropTypes.exact({
+      'latitude': PropTypes.number,
+      'longitude': PropTypes.number,
+      'zoom': PropTypes.number,
     }),
-    id: PropTypes.number,
+    'id': PropTypes.number,
   })).isRequired,
   onCardHeadingLinkClick: PropTypes.func.isRequired,
   onPlaceCardHover: PropTypes.func.isRequired,

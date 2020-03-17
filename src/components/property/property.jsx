@@ -111,10 +111,10 @@ const Property = ({offer, onCardHeadingLinkClick, onPlaceCardHover}) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={offer.host.isPro ?
+                  <div className={offer.host.is_pro ?
                     `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` :
                     `property__avatar-wrapper property__avatar-wrapper user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={offer.host.avatar_url} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {offer.host.name}
@@ -206,39 +206,39 @@ const Property = ({offer, onCardHeadingLinkClick, onPlaceCardHover}) => {
 
 Property.propTypes = {
   offer: PropTypes.exact({
-    city: PropTypes.exact({
-      name: PropTypes.string,
-      location: PropTypes.exact({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
+    'city': PropTypes.exact({
+      'name': PropTypes.string,
+      'location': PropTypes.exact({
+        'latitude': PropTypes.number,
+        'longitude': PropTypes.number,
+        'zoom': PropTypes.number,
       }),
     }),
-    previewImage: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    isPremium: PropTypes.bool,
-    rating: PropTypes.number,
-    type: PropTypes.string,
-    bedrooms: PropTypes.number,
-    maxAdults: PropTypes.number,
-    price: PropTypes.number,
-    goods: PropTypes.arrayOf(PropTypes.string),
-    host: PropTypes.exact({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      isPro: PropTypes.bool,
-      avatarUrl: PropTypes.string,
+    'preview_image': PropTypes.string,
+    'images': PropTypes.arrayOf(PropTypes.string),
+    'title': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'is_premium': PropTypes.bool,
+    'rating': PropTypes.number,
+    'type': PropTypes.string,
+    'bedrooms': PropTypes.number,
+    'max_adults': PropTypes.number,
+    'price': PropTypes.number,
+    'goods': PropTypes.arrayOf(PropTypes.string),
+    'host': PropTypes.exact({
+      'id': PropTypes.number,
+      'name': PropTypes.string,
+      'is_pro': PropTypes.bool,
+      'avatar_url': PropTypes.string,
     }),
-    description: PropTypes.string,
-    location: PropTypes.exact({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number,
+    'description': PropTypes.string,
+    'location': PropTypes.exact({
+      'latitude': PropTypes.number,
+      'longitude': PropTypes.number,
+      'zoom': PropTypes.number,
     }),
-    id: PropTypes.number,
-  }).isRequired,
+    'id': PropTypes.number,
+  }),
   onCardHeadingLinkClick: PropTypes.func,
   onPlaceCardHover: PropTypes.func.isRequired,
 };

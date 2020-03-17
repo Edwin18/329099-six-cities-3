@@ -4,15 +4,19 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
-import {getOffersList} from '../../utils.js';
+import withHover from '../../hocs/with-hover/with-hover.js';
+import {getCurrentOffer} from '../../reducer/cities/selector.js';
+import {getActiveCity} from '../../reducer/cities/selector.js';
+import {getCurrentOffers} from '../../reducer/data/selector.js';
 
-const App = ({currentOffer, activeCity, currentOffers, onPlaceCardHover, onSortItemClick, hoveredOffer, activeSort}) => {
+const PropertyWrapped = withHover(Property);
+
+const App = ({currentOffer, currentOffers, activeCity}) => {
   const _renderApp = () => {
     if (currentOffer) {
       return (
-        <Property
+        <PropertyWrapped
           offer={currentOffer}
-          onPlaceCardHover={onPlaceCardHover}
         />
       );
     }
@@ -20,13 +24,8 @@ const App = ({currentOffer, activeCity, currentOffers, onPlaceCardHover, onSortI
     if (!currentOffer) {
       return (
         <Main
-          activeCity={activeCity}
-          available={currentOffers.length}
           offers={currentOffers}
-          onPlaceCardHover={onPlaceCardHover}
-          hoveredOffer={hoveredOffer}
-          activeSort={activeSort}
-          onSortItemClick={onSortItemClick}
+          activeCity={activeCity}
         />
       );
     }
@@ -41,9 +40,8 @@ const App = ({currentOffer, activeCity, currentOffers, onPlaceCardHover, onSortI
           {_renderApp()}
         </Route>
         <Route exact path="/dev-property">
-          <Property
-            offer={currentOffers[0]}
-            onPlaceCardHover={onPlaceCardHover}
+          <PropertyWrapped
+            offer={currentOffer}
           />
         </Route>
       </Switch>
@@ -54,83 +52,79 @@ const App = ({currentOffer, activeCity, currentOffers, onPlaceCardHover, onSortI
 App.propTypes = {
   activeCity: PropTypes.string.isRequired,
   currentOffer: PropTypes.exact({
-    city: PropTypes.exact({
-      name: PropTypes.string,
-      location: PropTypes.exact({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
+    'city': PropTypes.exact({
+      'name': PropTypes.string,
+      'location': PropTypes.exact({
+        'latitude': PropTypes.number,
+        'longitude': PropTypes.number,
+        'zoom': PropTypes.number,
       }),
     }),
-    previewImage: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    isPremium: PropTypes.bool,
-    rating: PropTypes.number,
-    type: PropTypes.string,
-    bedrooms: PropTypes.number,
-    maxAdults: PropTypes.number,
-    price: PropTypes.number,
-    goods: PropTypes.arrayOf(PropTypes.string),
-    host: PropTypes.exact({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      isPro: PropTypes.bool,
-      avatarUrl: PropTypes.string,
+    'preview_image': PropTypes.string,
+    'images': PropTypes.arrayOf(PropTypes.string),
+    'title': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'is_premium': PropTypes.bool,
+    'rating': PropTypes.number,
+    'type': PropTypes.string,
+    'bedrooms': PropTypes.number,
+    'max_adults': PropTypes.number,
+    'price': PropTypes.number,
+    'goods': PropTypes.arrayOf(PropTypes.string),
+    'host': PropTypes.exact({
+      'id': PropTypes.number,
+      'name': PropTypes.string,
+      'is_pro': PropTypes.bool,
+      'avatar_url': PropTypes.string,
     }),
-    description: PropTypes.string,
-    location: PropTypes.exact({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number,
+    'description': PropTypes.string,
+    'location': PropTypes.exact({
+      'latitude': PropTypes.number,
+      'longitude': PropTypes.number,
+      'zoom': PropTypes.number,
     }),
-    id: PropTypes.number,
+    'id': PropTypes.number,
   }),
   currentOffers: PropTypes.arrayOf(PropTypes.exact({
-    city: PropTypes.exact({
-      name: PropTypes.string,
-      location: PropTypes.exact({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
+    'city': PropTypes.exact({
+      'name': PropTypes.string,
+      'location': PropTypes.exact({
+        'latitude': PropTypes.number,
+        'longitude': PropTypes.number,
+        'zoom': PropTypes.number,
       }),
     }),
-    previewImage: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    isPremium: PropTypes.bool,
-    rating: PropTypes.number,
-    type: PropTypes.string,
-    bedrooms: PropTypes.number,
-    maxAdults: PropTypes.number,
-    price: PropTypes.number,
-    goods: PropTypes.arrayOf(PropTypes.string),
-    host: PropTypes.exact({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      isPro: PropTypes.bool,
-      avatarUrl: PropTypes.string,
+    'preview_image': PropTypes.string,
+    'images': PropTypes.arrayOf(PropTypes.string),
+    'title': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'is_premium': PropTypes.bool,
+    'rating': PropTypes.number,
+    'type': PropTypes.string,
+    'bedrooms': PropTypes.number,
+    'max_adults': PropTypes.number,
+    'price': PropTypes.number,
+    'goods': PropTypes.arrayOf(PropTypes.string),
+    'host': PropTypes.exact({
+      'id': PropTypes.number,
+      'name': PropTypes.string,
+      'is_pro': PropTypes.bool,
+      'avatar_url': PropTypes.string,
     }),
-    description: PropTypes.string,
-    location: PropTypes.exact({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number,
+    'description': PropTypes.string,
+    'location': PropTypes.exact({
+      'latitude': PropTypes.number,
+      'longitude': PropTypes.number,
+      'zoom': PropTypes.number,
     }),
-    id: PropTypes.number,
+    'id': PropTypes.number,
   })).isRequired,
-  onPlaceCardHover: PropTypes.func.isRequired,
-  onSortItemClick: PropTypes.func.isRequired,
-  hoveredOffer: PropTypes.any,
-  activeSort: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  currentOffers: getOffersList(state.activeCity),
-  currentOffer: state.currentOffer,
+  activeCity: getActiveCity(state),
+  currentOffers: getCurrentOffers(state),
+  currentOffer: getCurrentOffer(state),
 });
 
 export {App};

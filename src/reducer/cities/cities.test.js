@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
+import {reducer, ActionCreator, ActionType} from "./cities.js";
 
 const CITIES = [
   `Paris`,

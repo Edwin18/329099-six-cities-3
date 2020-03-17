@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import LocationsList from '../locations-list/locations-list.jsx';
 import Cities from '../cities/cities.jsx';
 import CitiesEmpty from '../cities-empty/cities-empty.jsx';
+import withHover from '../../hocs/with-hover/with-hover.js';
 
-const Main = ({activeCity, available, offers, onPlaceCardHover, hoveredOffer, activeSort, onSortItemClick}) => (
+const CitiesWrapped = withHover(Cities);
+
+const Main = ({activeCity, offers}) => (
   <div
     className="page page--gray page--main">
     <header className="header">
@@ -42,14 +45,9 @@ const Main = ({activeCity, available, offers, onPlaceCardHover, hoveredOffer, ac
       </div>
       <div className="cities">
         {offers.length ?
-          <Cities
-            activeCity={activeCity}
-            available={available}
+          <CitiesWrapped
             offers={offers}
-            onPlaceCardHover={onPlaceCardHover}
-            hoveredOffer={hoveredOffer}
-            activeSort={activeSort}
-            onSortItemClick={onSortItemClick}
+            activeCity={activeCity}
           /> :
           <CitiesEmpty
             activeCity={activeCity}
@@ -61,45 +59,40 @@ const Main = ({activeCity, available, offers, onPlaceCardHover, hoveredOffer, ac
 
 Main.propTypes = {
   activeCity: PropTypes.string.isRequired,
-  available: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.exact({
-    city: PropTypes.exact({
-      name: PropTypes.string,
-      location: PropTypes.exact({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
+    'city': PropTypes.exact({
+      'name': PropTypes.string,
+      'location': PropTypes.exact({
+        'latitude': PropTypes.number,
+        'longitude': PropTypes.number,
+        'zoom': PropTypes.number,
       }),
     }),
-    previewImage: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    isPremium: PropTypes.bool,
-    rating: PropTypes.number,
-    type: PropTypes.string,
-    bedrooms: PropTypes.number,
-    maxAdults: PropTypes.number,
-    price: PropTypes.number,
-    goods: PropTypes.arrayOf(PropTypes.string),
-    host: PropTypes.exact({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      isPro: PropTypes.bool,
-      avatarUrl: PropTypes.string,
+    'preview_image': PropTypes.string,
+    'images': PropTypes.arrayOf(PropTypes.string),
+    'title': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'is_premium': PropTypes.bool,
+    'rating': PropTypes.number,
+    'type': PropTypes.string,
+    'bedrooms': PropTypes.number,
+    'max_adults': PropTypes.number,
+    'price': PropTypes.number,
+    'goods': PropTypes.arrayOf(PropTypes.string),
+    'host': PropTypes.exact({
+      'id': PropTypes.number,
+      'name': PropTypes.string,
+      'is_pro': PropTypes.bool,
+      'avatar_url': PropTypes.string,
     }),
-    description: PropTypes.string,
-    location: PropTypes.exact({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number,
+    'description': PropTypes.string,
+    'location': PropTypes.exact({
+      'latitude': PropTypes.number,
+      'longitude': PropTypes.number,
+      'zoom': PropTypes.number,
     }),
-    id: PropTypes.number,
-  })),
-  onPlaceCardHover: PropTypes.func.isRequired,
-  hoveredOffer: PropTypes.any,
-  activeSort: PropTypes.string.isRequired,
-  onSortItemClick: PropTypes.func.isRequired,
+    'id': PropTypes.number,
+  })).isRequired,
 };
 
 export default Main;

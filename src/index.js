@@ -1,21 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from "redux-thunk";
+import {composeWithDevTools} from "redux-devtools-extension";
 import App from './components/app/app.jsx';
-import {reducer} from './reducer.js';
-import withHover from './hocs/with-hover/with-hover.js';
+import reducer from './reducer/reducer.js';
+import {Operation} from './reducer/data/data.js';
+import {createAPI} from './api.js';
 
-const AppWrapped = withHover(App);
+const onUnauthorized = () => {
+  // store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
 
+const api = createAPI(onUnauthorized);
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
+
+store.dispatch(Operation.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>
-      <AppWrapped />
+      <App />
     </Provider>,
     document.querySelector(`#root`)
 );
