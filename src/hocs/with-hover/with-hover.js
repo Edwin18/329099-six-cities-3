@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import {SortType} from '../../const.js';
 
 const withHover = (Component) => {
   class WithHover extends PureComponent {
@@ -8,11 +7,9 @@ const withHover = (Component) => {
 
       this.state = {
         hoveredOffer: null,
-        activeSort: SortType.DEFAULT,
       };
 
       this.handlePalceCardHover = this.handlePalceCardHover.bind(this);
-      this.handleSortTypeClick = this.handleSortTypeClick.bind(this);
     }
 
     handlePalceCardHover(offer) {
@@ -21,20 +18,12 @@ const withHover = (Component) => {
       });
     }
 
-    handleSortTypeClick(sortType) {
-      this.setState({
-        activeSort: sortType,
-      });
-    }
-
     render() {
       return (
         <Component
           {...this.props}
           hoveredOffer={this.state.hoveredOffer}
-          activeSort={this.state.activeSort}
           onPlaceCardHover={this.handlePalceCardHover}
-          onSortItemClick={this.handleSortTypeClick}
         >
         </Component>
       );

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {SORTS} from '../../const.js';
+import {ActionCreator} from '../../reducer/cities/cities.js';
+import {getActiveSort} from '../../reducer/cities/selector.js';
 
 const Sort = ({activeSort, onSortItemClick, onSortClick, isOpened}) => {
 
@@ -47,4 +50,15 @@ Sort.propTypes = {
   isOpened: PropTypes.bool.isRequired,
 };
 
-export default Sort;
+const mapStateToProps = (state) => ({
+  activeSort: getActiveSort(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSortItemClick(sort) {
+    dispatch(ActionCreator.changeSort(sort));
+  },
+});
+
+export {Sort};
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

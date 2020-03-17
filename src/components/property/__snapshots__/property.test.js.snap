@@ -212,7 +212,7 @@ exports[`Render Property 1`] = `
               The Joshua Tree House
             </h1>
             <button
-              className="property__bookmark-button button property__bookmark-button--active"
+              className="property__bookmark-button button"
               type="button"
             >
               <svg
@@ -274,7 +274,6 @@ exports[`Render Property 1`] = `
               className="property__feature property__feature--adults"
             >
               Max 
-              9
                adults
             </li>
           </ul>
@@ -708,7 +707,7 @@ exports[`Render Property 1`] = `
                   </span>
                 </div>
                 <button
-                  className="place-card__bookmark-button button"
+                  className="place-card__bookmark-button button place-card__bookmark-button--active"
                   type="button"
                 >
                   <svg

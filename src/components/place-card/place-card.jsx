@@ -23,13 +23,13 @@ const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}
       className={_parentNode}
       onMouseEnter={_isMain ? () => (onPlaceCardHover(offer)) : null} // В ТЗ о ховере на соседей ничего не сказано, либо оставлю так либо сделаю ховер соседей
       onMouseLeave={_isMain ? () => (onPlaceCardHover(DELETE_MARKER)) : null}>
-      {offer.isPremium ?
+      {offer.is_premium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offer.preview_image} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -39,7 +39,7 @@ const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={offer.isFavorite ?
+            className={offer.is_favorite ?
               `place-card__bookmark-button button place-card__bookmark-button--active` :
               `place-card__bookmark-button button`}
             type="button"
@@ -70,38 +70,38 @@ const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}
 
 PlaceCard.propTypes = {
   offer: PropTypes.exact({
-    city: PropTypes.exact({
-      name: PropTypes.string,
-      location: PropTypes.exact({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
+    'city': PropTypes.exact({
+      'name': PropTypes.string,
+      'location': PropTypes.exact({
+        'latitude': PropTypes.number,
+        'longitude': PropTypes.number,
+        'zoom': PropTypes.number,
       }),
     }),
-    previewImage: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    isPremium: PropTypes.bool,
-    rating: PropTypes.number,
-    type: PropTypes.string,
-    bedrooms: PropTypes.number,
-    maxAdults: PropTypes.number,
-    price: PropTypes.number,
-    goods: PropTypes.arrayOf(PropTypes.string),
-    host: PropTypes.exact({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      isPro: PropTypes.bool,
-      avatarUrl: PropTypes.string,
+    'preview_image': PropTypes.string,
+    'images': PropTypes.arrayOf(PropTypes.string),
+    'title': PropTypes.string,
+    'is_favorite': PropTypes.bool,
+    'is_premium': PropTypes.bool,
+    'rating': PropTypes.number,
+    'type': PropTypes.string,
+    'bedrooms': PropTypes.number,
+    'max_adults': PropTypes.number,
+    'price': PropTypes.number,
+    'goods': PropTypes.arrayOf(PropTypes.string),
+    'host': PropTypes.exact({
+      'id': PropTypes.number,
+      'name': PropTypes.string,
+      'is_pro': PropTypes.bool,
+      'avatar_url': PropTypes.string,
     }),
-    description: PropTypes.string,
-    location: PropTypes.exact({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number,
+    'description': PropTypes.string,
+    'location': PropTypes.exact({
+      'latitude': PropTypes.number,
+      'longitude': PropTypes.number,
+      'zoom': PropTypes.number,
     }),
-    id: PropTypes.number,
+    'id': PropTypes.number,
   }).isRequired,
   onCardHeadingLinkClick: PropTypes.func.isRequired,
   onPlaceCardHover: PropTypes.func.isRequired,

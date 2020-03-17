@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator} from '../../reducer/cities/cities.js';
 import LocationsItem from '../locations-item/locations-item.jsx';
+import {getActiveCity, getCities} from '../../reducer/cities/selector.js';
 
 const LocationsList = ({cities, activeCity, onCityLinkClick}) => (
   <ul className="locations__list tabs__list">
@@ -24,8 +25,8 @@ LocationsList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  cities: state.cities,
-  activeCity: state.activeCity,
+  cities: getCities(state),
+  activeCity: getActiveCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
