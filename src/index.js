@@ -7,10 +7,12 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import App from './components/app/app.jsx';
 import reducer from './reducer/reducer.js';
 import {Operation} from './reducer/data/data.js';
+import {ActionCreator} from './reducer/user/user.js';
 import {createAPI} from './api.js';
+import {AuthorizationStatus} from './const.js';
 
 const onUnauthorized = () => {
-  // store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+  store.dispatch(ActionCreator.userAuth(AuthorizationStatus.NO_AUTH));
 };
 
 const api = createAPI(onUnauthorized);

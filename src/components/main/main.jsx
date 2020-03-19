@@ -4,10 +4,11 @@ import LocationsList from '../locations-list/locations-list.jsx';
 import Cities from '../cities/cities.jsx';
 import CitiesEmpty from '../cities-empty/cities-empty.jsx';
 import withHover from '../../hocs/with-hover/with-hover.js';
+import {AuthorizationStatus} from '../../const.js';
 
 const CitiesWrapped = withHover(Cities);
 
-const Main = ({activeCity, offers}) => (
+const Main = ({activeCity, offers, userAuth, userInfo}) => (
   <div
     className="page page--gray page--main">
     <header className="header">
@@ -24,7 +25,9 @@ const Main = ({activeCity, offers}) => (
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  {userAuth === AuthorizationStatus.AUTH ?
+                    <span className="header__user-name user__name">{userInfo.email}</span> :
+                    <span className="header__login">Sign in</span>}
                 </a>
               </li>
             </ul>
@@ -93,6 +96,8 @@ Main.propTypes = {
     }),
     'id': PropTypes.number,
   })).isRequired,
+  userAuth: PropTypes.any,
+  userInfo: PropTypes.any,
 };
 
 export default Main;
