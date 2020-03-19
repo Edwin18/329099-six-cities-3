@@ -4,10 +4,10 @@ import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
 import PlacesList from '../places-list/places-list.jsx';
 import {getReviewsList, getCoordinates, getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
-import {ParentNode} from '../../const.js';
+import {ParentNode, AuthorizationStatus} from '../../const.js';
 import neighbourhood from '../../mocks/neighbourhood.js';
 
-const Property = ({offer, onCardHeadingLinkClick, onPlaceCardHover}) => {
+const Property = ({offer, onCardHeadingLinkClick, onPlaceCardHover, userAuth, userInfo}) => {
   const reviewsList = getReviewsList();
   const neighbourhoodCoordinates = getCoordinates(neighbourhood);
   const currentCoordinates = [offer.location.latitude, offer.location.longitude];
@@ -28,7 +28,9 @@ const Property = ({offer, onCardHeadingLinkClick, onPlaceCardHover}) => {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    {userAuth === AuthorizationStatus.AUTH ?
+                      <span className="header__user-name user__name">{userInfo.email}</span> :
+                      <span className="header__login">Sign in</span>}
                   </a>
                 </li>
               </ul>
@@ -131,52 +133,53 @@ const Property = ({offer, onCardHeadingLinkClick, onPlaceCardHover}) => {
                 <ReviewsList
                   reviews={reviewsList}
                 />
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                  <div className="reviews__rating-form form__rating">
-                    <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-                    <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
+                {userAuth === AuthorizationStatus.AUTH ?
+                  <form className="reviews__form form" action="#" method="post">
+                    <label className="reviews__label form__label" htmlFor="review">Your review</label>
+                    <div className="reviews__rating-form form__rating">
+                      <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
+                      <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
+                        <svg className="form__star-image" width="37" height="33">
+                          <use xlinkHref="#icon-star"></use>
+                        </svg>
+                      </label>
 
-                    <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-                    <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
+                      <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
+                      <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
+                        <svg className="form__star-image" width="37" height="33">
+                          <use xlinkHref="#icon-star"></use>
+                        </svg>
+                      </label>
 
-                    <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-                    <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
+                      <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
+                      <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
+                        <svg className="form__star-image" width="37" height="33">
+                          <use xlinkHref="#icon-star"></use>
+                        </svg>
+                      </label>
 
-                    <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-                    <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
+                      <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
+                      <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
+                        <svg className="form__star-image" width="37" height="33">
+                          <use xlinkHref="#icon-star"></use>
+                        </svg>
+                      </label>
 
-                    <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-                    <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-                  </div>
-                </form>
+                      <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
+                      <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+                        <svg className="form__star-image" width="37" height="33">
+                          <use xlinkHref="#icon-star"></use>
+                        </svg>
+                      </label>
+                    </div>
+                    <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+                    <div className="reviews__button-wrapper">
+                      <p className="reviews__help">
+                        To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+                      </p>
+                      <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+                    </div>
+                  </form> : null}
               </section>
             </div>
           </div>
@@ -241,6 +244,8 @@ Property.propTypes = {
   }),
   onCardHeadingLinkClick: PropTypes.func,
   onPlaceCardHover: PropTypes.func.isRequired,
+  userAuth: PropTypes.any,
+  userInfo: PropTypes.any,
 };
 
 export default Property;

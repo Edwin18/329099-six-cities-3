@@ -15,6 +15,11 @@ const CITIES = [
   `Dusseldorf`
 ];
 
+export const AuthorizationStatus = {
+  NO_AUTH: `NO_AUTH`,
+  AUTH: `AUTH`,
+};
+
 const offers = [
   {
     'city': {
@@ -129,6 +134,10 @@ describe(`Render App`, () => {
     },
     DATA: {
       offers,
+    },
+    USER: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authInfo: null,
     },
   });
 

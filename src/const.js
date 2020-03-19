@@ -45,5 +45,9 @@ export const CITIES = [
   `Dusseldorf`
 ];
 
+export const AuthorizationStatus = {
+  NO_AUTH: `NO_AUTH`,
+  AUTH: `AUTH`,
+};
 
 export const DELETE_MARKER = `DELETE_MARKER`;
