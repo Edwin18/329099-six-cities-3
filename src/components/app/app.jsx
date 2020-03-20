@@ -26,11 +26,7 @@ const App = ({currentOffer, currentOffers, activeCity, userAuth, login, userInfo
     }
     if (currentOffer) {
       return (
-        <PropertyWrapped
-          offer={currentOffer}
-          userAuth={userAuth}
-          userInfo={userInfo}
-        />
+        <PropertyWrapped />
       );
     }
 

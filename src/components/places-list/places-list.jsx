@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/cities/cities.js';
 import PlaceCard from '../place-card/place-card.jsx';
 import {ParentNode} from '../../const.js';
+import {Operation as CommentsOperation} from '../../reducer/comments/comments.js';
+import {Operation as NearbyOperation} from '../../reducer/nearby/nearby.js';
 
 const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode}) => {
   let _parentNode;
@@ -75,6 +77,8 @@ PlacesList.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   onCardHeadingLinkClick(offer) {
     dispatch(ActionCreator.changeOffer(offer));
+    dispatch(CommentsOperation.loadComments(offer.id));
+    dispatch(NearbyOperation.loadNearby(offer.id));
   },
 });
 
