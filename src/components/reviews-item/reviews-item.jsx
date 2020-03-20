@@ -6,7 +6,7 @@ const ReviewsItem = ({review}) => (
   <li className="reviews__item">
     <div className="reviews__user user">
       <div className="reviews__avatar-wrapper user__avatar-wrapper">
-        <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
+        <img className="reviews__avatar user__avatar" src={review.user.avatar_url} width="54" height="54" alt="Reviews avatar" />
       </div>
       <span className="reviews__user-name">
         {review.user.name}
@@ -29,17 +29,17 @@ const ReviewsItem = ({review}) => (
 
 ReviewsItem.propTypes = {
   review: PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.exact({
-      id: PropTypes.number,
-      isPro: PropTypes.bool,
-      name: PropTypes.string,
-      avatarUrl: PropTypes.string,
+    'id': PropTypes.number.isRequired,
+    'user': PropTypes.exact({
+      'id': PropTypes.number,
+      'is_pro': PropTypes.bool,
+      'name': PropTypes.string,
+      'avatar_url': PropTypes.string,
     }),
-    rating: PropTypes.number,
-    comment: PropTypes.string,
-    date: PropTypes.string,
-  }).isRequired,
+    'rating': PropTypes.number,
+    'comment': PropTypes.string,
+    'date': PropTypes.string,
+  }),
 };
 
 export default ReviewsItem;

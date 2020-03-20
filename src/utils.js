@@ -1,11 +1,8 @@
 import moment from 'moment';
-import reviews from './mocks/reviews.js';
 import {ApartamentType} from './const.js';
 
 const RATING_MULTIPLIER = 20;
 
-// export const getReviewsList = (id) => (reviews.filter((elem) => (elem.id === id))); // Правильная функция
-export const getReviewsList = () => (reviews); // ТЕСТОВАЯ функция
 export const getCoordinates = (offersList) => (
   offersList.map((elem) => (
     [

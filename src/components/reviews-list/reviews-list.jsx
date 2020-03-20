@@ -2,30 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewsItem from '../reviews-item/reviews-item.jsx';
 
-const ReviewsList = ({reviews}) => (
+const ReviewsList = ({comments}) => (
   <ul className="reviews__list">
-    {reviews.map((review) => (
+    {comments.map((comment) => (
       <ReviewsItem
-        review={review}
-        key={review.comment + review.rating}
+        review={comment}
+        key={comment.id}
       />
     ))}
   </ul>
 );
 
 ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.exact({
-      id: PropTypes.number,
-      isPro: PropTypes.bool,
-      name: PropTypes.string,
-      avatarUrl: PropTypes.string,
+  comments: PropTypes.arrayOf(PropTypes.exact({
+    'id': PropTypes.number.isRequired,
+    'user': PropTypes.exact({
+      'id': PropTypes.number,
+      'is_pro': PropTypes.bool,
+      'name': PropTypes.string,
+      'avatar_url': PropTypes.string,
     }),
-    rating: PropTypes.number,
-    comment: PropTypes.string,
-    date: PropTypes.string,
-  })).isRequired,
+    'rating': PropTypes.number,
+    'comment': PropTypes.string,
+    'date': PropTypes.string,
+  })),
 };
 
 export default ReviewsList;
