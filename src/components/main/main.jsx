@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import LocationsList from '../locations-list/locations-list.jsx';
 import Cities from '../cities/cities.jsx';
 import CitiesEmpty from '../cities-empty/cities-empty.jsx';
@@ -26,8 +27,8 @@ const Main = ({activeCity, offers, userAuth, userInfo}) => (
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   {userAuth === AuthorizationStatus.AUTH ?
-                    <span className="header__user-name user__name">{userInfo.email}</span> :
-                    <span className="header__login">Sign in</span>}
+                    <span className="header__user-name user__name"><Link to="/favorites">{userInfo.email}</Link></span> :
+                    <span className="header__login"><Link to="/login">Sign in</Link></span>}
                 </a>
               </li>
             </ul>

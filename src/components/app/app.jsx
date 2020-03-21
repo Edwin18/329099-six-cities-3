@@ -27,6 +27,9 @@ const App = ({currentOffers, activeCity, userAuth, login, userInfo}) => {
             onSubmit={login}
           />
         </Route>
+        <Route exact path="/favorites">
+
+        </Route>
       </Switch>
     </Router>
   );
