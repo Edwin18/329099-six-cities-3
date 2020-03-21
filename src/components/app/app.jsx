@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import Property from '../property/property.jsx';
@@ -12,6 +12,7 @@ import {getCurrentOffers} from '../../reducer/data/selector.js';
 import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector.js';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {AuthorizationStatus} from '../../const.js';
+import history from '../../history.js';
 
 const PropertyWrapped = withHover(Property);
 
@@ -45,7 +46,7 @@ const App = ({currentOffer, currentOffers, activeCity, userAuth, login, userInfo
   };
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route exact path="/">
           {_renderApp()}
@@ -57,7 +58,7 @@ const App = ({currentOffer, currentOffers, activeCity, userAuth, login, userInfo
           />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
