@@ -51,12 +51,6 @@ const App = ({currentOffer, currentOffers, activeCity, userAuth, login, userInfo
         <Route exact path="/">
           {_renderApp()}
         </Route>
-        <Route exact path="/dev-property">
-          <PropertyWrapped
-            offer={currentOffer}
-            userAuth={userAuth}
-          />
-        </Route>
       </Switch>
     </Router>
   );
