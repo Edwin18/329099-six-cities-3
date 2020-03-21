@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route, Router} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
@@ -8,30 +8,27 @@ import {getActiveCity} from '../../reducer/cities/selector.js';
 import {getCurrentOffers} from '../../reducer/data/selector.js';
 import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector.js';
 import {Operation as UserOperation} from '../../reducer/user/user.js';
-import history from '../../history.js';
 
 const App = ({currentOffers, activeCity, userAuth, login, userInfo}) => {
   return (
-    <Router history={history}>
-      <Switch>
-        <Route exact path="/">
-          <Main
-            offers={currentOffers}
-            activeCity={activeCity}
-            userAuth={userAuth}
-            userInfo={userInfo}
-          />
-        </Route>
-        <Route exact path="/login">
-          <SignIn
-            onSubmit={login}
-          />
-        </Route>
-        <Route exact path="/favorites">
+    <Switch>
+      <Route exact path="/">
+        <Main
+          offers={currentOffers}
+          activeCity={activeCity}
+          userAuth={userAuth}
+          userInfo={userInfo}
+        />
+      </Route>
+      <Route exact path="/login">
+        <SignIn
+          onSubmit={login}
+        />
+      </Route>
+      <Route exact path="/favorites">
 
-        </Route>
-      </Switch>
-    </Router>
+      </Route>
+    </Switch>
   );
 };
 

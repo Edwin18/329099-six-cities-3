@@ -27,7 +27,7 @@ const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNod
           onCardHeadingLinkClick={onCardHeadingLinkClick}
           onPlaceCardHover={onPlaceCardHover}
           parentNode={parentNode}
-          key={offer.price + offer.rating}
+          key={offer.id}
         />
       ))}
     </div>
