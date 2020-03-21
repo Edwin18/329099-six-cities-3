@@ -49,7 +49,17 @@ const App = ({currentOffer, currentOffers, activeCity, userAuth, login, userInfo
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          {_renderApp()}
+          <Main
+            offers={currentOffers}
+            activeCity={activeCity}
+            userAuth={userAuth}
+            userInfo={userInfo}
+          />
+        </Route>
+        <Route exact path="/login">
+          <SignIn
+            onSubmit={login}
+          />
         </Route>
       </Switch>
     </Router>
