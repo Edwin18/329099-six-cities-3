@@ -6,16 +6,13 @@ import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import App from './components/app/app.jsx';
 import reducer from './reducer/reducer.js';
-import {Operation} from './reducer/data/data.js';
-import {ActionCreator} from './reducer/user/user.js';
+import {Operation as DataOperation} from './reducer/data/data.js';
+// import {Operation as UserOperation} from './reducer/user/user.js';
 import {createAPI} from './api.js';
-import {AuthorizationStatus} from './const.js';
+import {Router} from "react-router-dom";
+import history from "./history.js";
 
-const onUnauthorized = () => {
-  store.dispatch(ActionCreator.userAuth(AuthorizationStatus.NO_AUTH));
-};
-
-const api = createAPI(onUnauthorized);
+const api = createAPI(() => history.push(`/login`));
 const store = createStore(
     reducer,
     composeWithDevTools(
@@ -23,11 +20,16 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadOffers());
+// store.dispatch(UserOperation.checkAuth());
+store.dispatch(DataOperation.loadOffers())
+  .then(() => {
+    ReactDOM.render(
+        <Provider store={store}>
+          <Router history={history}>
+            <App />
+          </Router>
+        </Provider>,
+        document.querySelector(`#root`)
+    );
+  });
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.querySelector(`#root`)
-);

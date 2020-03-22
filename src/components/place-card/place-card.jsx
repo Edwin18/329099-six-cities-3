@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {ParentNode, DELETE_MARKER} from '../../const.js';
 import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
 
-const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}) => {
+const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, onFavoriteBtnClick, parentNode}) => {
   let _parentNode;
   let _isMain;
 
@@ -43,6 +43,7 @@ const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, parentNode}
               `place-card__bookmark-button button place-card__bookmark-button--active` :
               `place-card__bookmark-button button`}
             type="button"
+            onClick={() => (onFavoriteBtnClick(offer.id, offer.is_favorite))}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -102,10 +103,11 @@ PlaceCard.propTypes = {
       'zoom': PropTypes.number,
     }),
     'id': PropTypes.number,
-  }).isRequired,
-  onCardHeadingLinkClick: PropTypes.func.isRequired,
-  onPlaceCardHover: PropTypes.func.isRequired,
-  parentNode: PropTypes.string.isRequired,
+  }),
+  onCardHeadingLinkClick: PropTypes.func,
+  onPlaceCardHover: PropTypes.func,
+  onFavoriteBtnClick: PropTypes.func,
+  parentNode: PropTypes.string,
 };
 
 export default PlaceCard;

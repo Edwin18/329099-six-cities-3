@@ -25,7 +25,8 @@ const ActionCreator = {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((AuthInfo) => {
+        dispatch(ActionCreator.userLoginInfo(AuthInfo.data));
         dispatch(ActionCreator.userAuth(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
@@ -40,8 +41,6 @@ const Operation = {
     })
       .then((AuthInfo) => {
         dispatch(ActionCreator.userLoginInfo(AuthInfo.data));
-      })
-      .then(() => {
         dispatch(ActionCreator.userAuth(AuthorizationStatus.AUTH));
       });
   },
