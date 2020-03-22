@@ -6,8 +6,9 @@ import PlaceCard from '../place-card/place-card.jsx';
 import {ParentNode} from '../../const.js';
 import {Operation as CommentsOperation} from '../../reducer/comments/comments.js';
 import {Operation as NearbyOperation} from '../../reducer/nearby/nearby.js';
+import {Operation as DataOperation} from '../../reducer/data/data.js';
 
-const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode}) => {
+const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode, onFavoriteBtnClick}) => {
   let _parentNode;
 
   switch (parentNode) {
@@ -26,6 +27,7 @@ const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNod
           offer={offer}
           onCardHeadingLinkClick={onCardHeadingLinkClick}
           onPlaceCardHover={onPlaceCardHover}
+          onFavoriteBtnClick={onFavoriteBtnClick}
           parentNode={parentNode}
           key={offer.id}
         />
@@ -68,10 +70,11 @@ PlacesList.propTypes = {
       'zoom': PropTypes.number,
     }),
     'id': PropTypes.number,
-  })).isRequired,
-  onCardHeadingLinkClick: PropTypes.func.isRequired,
-  onPlaceCardHover: PropTypes.func.isRequired,
-  parentNode: PropTypes.string.isRequired,
+  })),
+  onCardHeadingLinkClick: PropTypes.func,
+  onPlaceCardHover: PropTypes.func,
+  parentNode: PropTypes.string,
+  onFavoriteBtnClick: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -79,6 +82,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeOffer(offer));
     dispatch(CommentsOperation.loadComments(offer.id));
     dispatch(NearbyOperation.loadNearby(offer.id));
+  },
+  onFavoriteBtnClick(id, isFavorite) {
+    dispatch(DataOperation.toggleFavorite(id, isFavorite));
   },
 });
 
