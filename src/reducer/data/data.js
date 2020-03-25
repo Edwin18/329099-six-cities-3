@@ -43,7 +43,7 @@ const Operation = {
     return api.post(`/favorite/${id}/${isFavorite ? 0 : 1}`)
       .then((response) => {
         dispatch(ActionCreator.toggleFavorite(response.data));
-        // dispatch(Operation.loadFavorite());
+        dispatch(Operation.loadFavorite());
       });
   },
 };
