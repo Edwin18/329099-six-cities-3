@@ -1,6 +1,8 @@
 import React, {PureComponent, createRef} from 'react';
 import PropType from 'prop-types';
 
+const CORRECT_COMMENT_LENGTH = 50;
+
 class Comments extends PureComponent {
   constructor(props) {
     super(props);
@@ -8,19 +10,22 @@ class Comments extends PureComponent {
     this.commentRef = createRef();
     this.form = createRef();
     this.ratingContainer = createRef();
+    this.submitBtn = createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this._checkBtnStatus = this._checkBtnStatus.bind(this);
   }
 
   handleSubmit(evt) {
     const {onSubmit, hotelId} = this.props;
 
     evt.preventDefault();
+    this.submitBtn.current.disabled = `disabled`;
 
     onSubmit(hotelId, {
       comment: this.commentRef.current.value,
       rating: this._getRating(),
-    }, this.form.current);
+    }, this.form.current, this.submitBtn.current);
   }
 
   render() {
@@ -29,6 +34,7 @@ class Comments extends PureComponent {
         className="reviews__form form"
         action=""
         onSubmit={this.handleSubmit}
+        onChange={this._checkBtnStatus}
         ref={this.form}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div
@@ -76,14 +82,20 @@ class Comments extends PureComponent {
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+          <button className="reviews__submit form__submit button" type="submit" disabled="disabled" ref={this.submitBtn}>Submit</button>
         </div>
       </form>
     );
   }
 
+  _checkBtnStatus() {
+    if (parseInt(this._getRating(), 10) && this.commentRef.current.value.length >= CORRECT_COMMENT_LENGTH) {
+      this.submitBtn.current.disabled = ``;
+    }
+  }
+
   _getRating() {
-    let rating;
+    let rating = 0;
     const allInputs = Array.from(this.ratingContainer.current.querySelectorAll(`.form__rating-input`));
 
     allInputs.forEach((elem) => {

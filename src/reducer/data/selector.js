@@ -5,6 +5,7 @@ import {SortType} from '../../const.js';
 const getOffers = (state) => (state[NameSpace.DATA].offers);
 const getCity = (state) => (state[NameSpace.CITIES].activeCity);
 const getSort = (state) => (state[NameSpace.CITIES].activeSort);
+export const getFavorite = (state) => (state[NameSpace.DATA].favorite);
 
 export const getCurrentOffers = createSelector(
     getCity,
@@ -15,11 +16,11 @@ export const getCurrentOffers = createSelector(
       switch (sort) {
         case SortType.DEFAULT:
           return result;
-        case SortType.TO_HIGH:
+        case SortType.TO_LOW:
           return (
             result.slice().sort((a, b) => (b.price - a.price))
           );
-        case SortType.TO_LOW:
+        case SortType.TO_HIGH:
           return (
             result.slice().sort((a, b) => (a.price - b.price))
           );

@@ -1,6 +1,7 @@
 export const ParentNode = {
   MAIN: `MAIN`,
-  PROPERTY: `PROPERTY`
+  PROPERTY: `PROPERTY`,
+  FAVORITE: `FAVORITE`,
 };
 
 export const ApartamentType = {

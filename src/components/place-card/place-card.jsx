@@ -1,35 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ParentNode, DELETE_MARKER} from '../../const.js';
+import {ParentNode, DELETE_MARKER, AuthorizationStatus} from '../../const.js';
 import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
+import history from "../../history.js";
 
-const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, onFavoriteBtnClick, parentNode}) => {
+const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, onFavoriteBtnClick, parentNode, userAuth, onNearbyFavoriteClickBtn}) => {
   let _parentNode;
   let _isMain;
 
   switch (parentNode) {
     case ParentNode.MAIN:
-      _parentNode = `cities__place-card place-card`;
+      _parentNode = {
+        article: `cities__place-card place-card`,
+        div: `cities__image-wrapper place-card__image-wrapper`,
+        image: {
+          width: 260,
+          height: 200,
+        },
+      };
       _isMain = true;
       break;
     case ParentNode.PROPERTY:
-      _parentNode = `near-places__card place-card`;
+      _parentNode = {
+        article: `near-places__card place-card`,
+        div: `near-places__image-wrapper place-card__image-wrapper`,
+        image: {
+          width: 260,
+          height: 200,
+        },
+      };
+      _isMain = false;
+      break;
+    case ParentNode.FAVORITE:
+      _parentNode = {
+        article: `favorites__card place-card`,
+        div: `favorites__image-wrapper place-card__image-wrapper`,
+        image: {
+          width: 150,
+          height: 110,
+        },
+      };
       _isMain = false;
       break;
   }
 
   return (
     <article
-      className={_parentNode}
-      onMouseEnter={_isMain ? () => (onPlaceCardHover(offer)) : null} // В ТЗ о ховере на соседей ничего не сказано, либо оставлю так либо сделаю ховер соседей
+      className={_parentNode.article}
+      onMouseEnter={_isMain ? () => (onPlaceCardHover(offer)) : null}
       onMouseLeave={_isMain ? () => (onPlaceCardHover(DELETE_MARKER)) : null}>
       {offer.is_premium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ``}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={_parentNode.div}>
         <a href="#">
-          <img className="place-card__image" src={offer.preview_image} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offer.preview_image} width={_parentNode.image.width} height={_parentNode.image.height} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -43,7 +69,13 @@ const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, onFavoriteB
               `place-card__bookmark-button button place-card__bookmark-button--active` :
               `place-card__bookmark-button button`}
             type="button"
-            onClick={() => (onFavoriteBtnClick(offer.id, offer.is_favorite))}
+            onClick={userAuth === AuthorizationStatus.AUTH ? () => {
+              onFavoriteBtnClick(offer.id, offer.is_favorite);
+
+              if (parentNode === ParentNode.PROPERTY) {
+                onNearbyFavoriteClickBtn();
+              }
+            } : () => (history.push(`/login`))}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
@@ -108,6 +140,8 @@ PlaceCard.propTypes = {
   onPlaceCardHover: PropTypes.func,
   onFavoriteBtnClick: PropTypes.func,
   parentNode: PropTypes.string,
+  userAuth: PropTypes.any,
+  onNearbyFavoriteClickBtn: PropTypes.any,
 };
 
 export default PlaceCard;

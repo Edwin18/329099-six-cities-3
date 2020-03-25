@@ -27,7 +27,7 @@ const Operation = {
         dispatch(ActionCreator.loadComments(response.data));
       });
   },
-  postComment: (hotelId, commentInfo, form) => (dispatch, getState, api) => {
+  postComment: (hotelId, commentInfo, form, btn) => (dispatch, getState, api) => {
     return api.post(`/comments/${hotelId}`, {
       comment: commentInfo.comment,
       rating: commentInfo.rating,
@@ -35,6 +35,14 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.postComment(response.data));
         form.reset();
+        btn.disabled = ``;
+      })
+      .catch(() => {
+        form.classList.add(`error`);
+        setTimeout(() => {
+          form.classList.remove(`error`);
+          btn.disabled = ``;
+        }, 3000);
       });
   },
 };

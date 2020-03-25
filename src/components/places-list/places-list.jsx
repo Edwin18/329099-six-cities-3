@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer/cities/cities.js';
 import PlaceCard from '../place-card/place-card.jsx';
 import {ParentNode} from '../../const.js';
-import {Operation as CommentsOperation} from '../../reducer/comments/comments.js';
-import {Operation as NearbyOperation} from '../../reducer/nearby/nearby.js';
 import {Operation as DataOperation} from '../../reducer/data/data.js';
+import {getAuthorizationStatus} from '../../reducer/user/selector.js';
+import history from "../../history.js";
 
-const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode, onFavoriteBtnClick}) => {
+const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode, onFavoriteBtnClick, userAuth, onNearbyFavoriteClickBtn}) => {
   let _parentNode;
 
   switch (parentNode) {
@@ -17,6 +16,9 @@ const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNod
       break;
     case ParentNode.PROPERTY:
       _parentNode = `near-places__list places__list`;
+      break;
+    case ParentNode.FAVORITE:
+      _parentNode = `favorites__places`;
       break;
   }
 
@@ -28,7 +30,9 @@ const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNod
           onCardHeadingLinkClick={onCardHeadingLinkClick}
           onPlaceCardHover={onPlaceCardHover}
           onFavoriteBtnClick={onFavoriteBtnClick}
+          onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
           parentNode={parentNode}
+          userAuth={userAuth}
           key={offer.id}
         />
       ))}
@@ -75,13 +79,17 @@ PlacesList.propTypes = {
   onPlaceCardHover: PropTypes.func,
   parentNode: PropTypes.string,
   onFavoriteBtnClick: PropTypes.func,
+  userAuth: PropTypes.any,
+  onNearbyFavoriteClickBtn: PropTypes.any,
 };
+
+const mapStateToProps = (state) => ({
+  userAuth: getAuthorizationStatus(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onCardHeadingLinkClick(offer) {
-    dispatch(ActionCreator.changeOffer(offer));
-    dispatch(CommentsOperation.loadComments(offer.id));
-    dispatch(NearbyOperation.loadNearby(offer.id));
+    history.push(`/offer/${offer.id}`);
   },
   onFavoriteBtnClick(id, isFavorite) {
     dispatch(DataOperation.toggleFavorite(id, isFavorite));
@@ -89,4 +97,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {PlacesList};
-export default connect(() => ({}), mapDispatchToProps)(PlacesList);
+export default connect(mapStateToProps, mapDispatchToProps)(PlacesList);

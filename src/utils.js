@@ -18,3 +18,24 @@ export const extend = (a, b) => (
 );
 export const setDateTime = (date) => (moment(date).format(`YYYY-MM-DD`));
 export const setDate = (date) => (moment(date).format(`MMMM YYYY`));
+export const getCorrectFavorites = (favorite) => {
+  const sortedFavoritesByFilter = [];
+  let preResult = [];
+
+  for (const point of favorite) {
+    const first = point;
+    const result = favorite.filter((elem) => (first.city.name === elem.city.name));
+
+    if (sortedFavoritesByFilter.length === 0) {
+      sortedFavoritesByFilter.push(result);
+      preResult = result;
+    } else {
+      if (preResult[0].city.name !== result[0].city.name) {
+        sortedFavoritesByFilter.push(result);
+        preResult = result;
+      }
+    }
+  }
+
+  return sortedFavoritesByFilter;
+};
