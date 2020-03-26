@@ -3,6 +3,8 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import renderer from 'react-test-renderer';
 import App from './app.jsx';
+import {Router} from "react-router-dom";
+import history from '../../history.js';
 
 const city = `Amsterdam`;
 const activeSort = `popular`;
@@ -14,12 +16,6 @@ const CITIES = [
   `Hamburg`,
   `Dusseldorf`
 ];
-
-export const AuthorizationStatus = {
-  NO_AUTH: `NO_AUTH`,
-  AUTH: `AUTH`,
-};
-
 const offers = [
   {
     'city': {
@@ -136,14 +132,14 @@ describe(`Render App`, () => {
       offers,
     },
     USER: {
-      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authorizationStatus: `NO_AUTH`,
       authInfo: null,
     },
   });
 
   it(`Render Main`, () => {
     const tree = renderer
-      .create(<Provider store={store}>
+      .create(<Router history={history}><Provider store={store}>
         <App
           activeCity={city}
           currentOffers={offers}
@@ -152,7 +148,7 @@ describe(`Render App`, () => {
           onSortItemClick={() => {}}
           activeSort={activeSort}
         />
-      </Provider>, {
+      </Provider></Router>, {
         createNodeMock: () => document.createElement(`div`)
       })
       .toJSON();
@@ -162,7 +158,7 @@ describe(`Render App`, () => {
 
   it(`Render Property`, () => {
     const tree = renderer
-      .create(<Provider store={store}>
+      .create(<Router history={history}><Provider store={store}>
         <App
           activeCity={city}
           currentOffers={offers}
@@ -171,7 +167,7 @@ describe(`Render App`, () => {
           onSortItemClick={() => {}}
           activeSort={activeSort}
         />
-      </Provider>, {
+      </Provider></Router>, {
         createNodeMock: () => document.createElement(`div`)
       })
       .toJSON();

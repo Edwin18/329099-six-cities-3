@@ -1,8 +1,10 @@
 import React from 'react';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import Main from './main.jsx';
+import {Router} from 'react-router-dom';
+import history from '../../history.js';
 
 const CITIES = [
   `Paris`,
@@ -12,7 +14,6 @@ const CITIES = [
   `Hamburg`,
   `Dusseldorf`
 ];
-
 const offers = [
   {
     'city': {
@@ -115,7 +116,15 @@ const offers = [
     'id': 3
   },
 ];
+const userInfo = {
+  'id': 1,
+  'email': `Edwin18@mail.ru`,
+  'name': `Edwin18`,
+  'avatar_url': `/static/avatar/6.jpg`,
+  'is_pro': false,
+};
 const activeSort = `popular`;
+const userAuth = `AUTH`;
 
 const mockStore = configureStore([]);
 const store = mockStore({
@@ -123,17 +132,22 @@ const store = mockStore({
     cities: CITIES,
     activeCity: CITIES[0],
     activeSort,
-  }
+  },
+  USER: {
+    authorizationStatus: userAuth,
+  },
 });
 
 it(`Render Main`, () => {
   const tree = renderer
-    .create(<Provider store={store}>
+    .create(<Router history={history}><Provider store={store}>
       <Main
         offers={offers}
         activeCity={CITIES[0]}
+        userAuth={userAuth}
+        userInfo={userInfo}
       />
-    </Provider>, {
+    </Provider></Router>, {
       createNodeMock: () => document.createElement(`div`)
     })
     .toJSON();

@@ -19,9 +19,9 @@ exports[`Render App Render PlacesList MAIN 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={200}
           src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -48,6 +48,7 @@ exports[`Render App Render PlacesList MAIN 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button place-card__bookmark-button--active"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -118,9 +119,9 @@ exports[`Render App Render PlacesList MAIN 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={200}
           src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -147,6 +148,7 @@ exports[`Render App Render PlacesList MAIN 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -223,9 +225,9 @@ exports[`Render App Render PlacesList MAIN 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={200}
           src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -252,6 +254,7 @@ exports[`Render App Render PlacesList MAIN 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -321,7 +324,7 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
   >
     
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
         href="#"
@@ -329,9 +332,9 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={200}
           src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -358,6 +361,7 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button place-card__bookmark-button--active"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -420,7 +424,7 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
   >
     
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
         href="#"
@@ -428,9 +432,9 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={200}
           src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -457,6 +461,7 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -525,7 +530,7 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
       </span>
     </div>
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="near-places__image-wrapper place-card__image-wrapper"
     >
       <a
         href="#"
@@ -533,9 +538,9 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
         <img
           alt="Place image"
           className="place-card__image"
-          height="200"
+          height={200}
           src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -562,6 +567,7 @@ exports[`Render App Render PlacesList PROPERTY 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
+          onClick={[Function]}
           type="button"
         >
           <svg

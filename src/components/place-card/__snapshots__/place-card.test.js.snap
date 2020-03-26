@@ -16,9 +16,9 @@ exports[`Render PlaceCard MAIN 1`] = `
       <img
         alt="Place image"
         className="place-card__image"
-        height="200"
+        height={200}
         src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
-        width="260"
+        width={260}
       />
     </a>
   </div>
@@ -45,6 +45,7 @@ exports[`Render PlaceCard MAIN 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button place-card__bookmark-button--active"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -110,7 +111,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
 >
   
   <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="near-places__image-wrapper place-card__image-wrapper"
   >
     <a
       href="#"
@@ -118,9 +119,9 @@ exports[`Render PlaceCard PROPERTY 1`] = `
       <img
         alt="Place image"
         className="place-card__image"
-        height="200"
+        height={200}
         src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
-        width="260"
+        width={260}
       />
     </a>
   </div>
@@ -147,6 +148,7 @@ exports[`Render PlaceCard PROPERTY 1`] = `
       </div>
       <button
         className="place-card__bookmark-button button place-card__bookmark-button--active"
+        onClick={[Function]}
         type="button"
       >
         <svg

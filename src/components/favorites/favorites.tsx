@@ -19,8 +19,8 @@ const Favorites = ({favorite, userInfo, userAuth}) => {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                {getCorrectFavorites(favorite).map((elem) => (
-                  <li className="favorites__locations-items" key={elem.length + elem[0].id}>
+                {getCorrectFavorites(favorite).map((elem, index) => (
+                  <li className="favorites__locations-items" key={index}>
                     <div className="favorites__locations locations locations--current">
                       <div className="locations__item">
                         <a className="locations__item-link" href="#">

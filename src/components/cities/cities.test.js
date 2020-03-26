@@ -115,6 +115,9 @@ const store = mockStore({
   CITIES: {
     activeSort,
   },
+  USER: {
+    authorizationStatus: `AUTH`,
+  },
 });
 
 it(`Render Cities`, () => {

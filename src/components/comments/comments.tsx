@@ -12,11 +12,11 @@ class Comments extends PureComponent {
     this.ratingContainer = createRef();
     this.submitBtn = createRef();
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCommentsSubmit = this.handleCommentsSubmit.bind(this);
     this._checkBtnStatus = this._checkBtnStatus.bind(this);
   }
 
-  handleSubmit(evt) {
+  handleCommentsSubmit(evt) {
     const {onSubmit, hotelId} = this.props;
 
     evt.preventDefault();
@@ -33,7 +33,7 @@ class Comments extends PureComponent {
       <form
         className="reviews__form form"
         action=""
-        onSubmit={this.handleSubmit}
+        onSubmit={this.handleCommentsSubmit}
         onChange={this._checkBtnStatus}
         ref={this.form}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
