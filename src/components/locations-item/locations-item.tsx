@@ -1,7 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const LocationsItem = ({city, isActive, onCityLinkClick}) => (
+type Props = {
+  city: string;
+  isActive: boolean;
+  onCityLinkClick: (city: string) => void;
+};
+
+const LocationsItem: React.FC<Props> = ({city, isActive, onCityLinkClick}) => (
   <li className="locations__item">
     <a
       className={isActive ?
@@ -14,11 +19,5 @@ const LocationsItem = ({city, isActive, onCityLinkClick}) => (
     </a>
   </li>
 );
-
-LocationsItem.propTypes = {
-  city: PropTypes.string.isRequired,
-  isActive: PropTypes.bool.isRequired,
-  onCityLinkClick: PropTypes.func.isRequired,
-};
 
 export default LocationsItem;

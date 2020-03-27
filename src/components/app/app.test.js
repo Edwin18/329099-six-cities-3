@@ -139,16 +139,18 @@ describe(`Render App`, () => {
 
   it(`Render Main`, () => {
     const tree = renderer
-      .create(<Router history={history}><Provider store={store}>
-        <App
-          activeCity={city}
-          currentOffers={offers}
-          currentOffer={null}
-          onPlaceCardHover={() => {}}
-          onSortItemClick={() => {}}
-          activeSort={activeSort}
-        />
-      </Provider></Router>, {
+      .create(<Router history={history}>
+        <Provider store={store}>
+          <App
+            activeCity={city}
+            currentOffers={offers}
+            currentOffer={null}
+            onPlaceCardHover={() => {}}
+            onSortItemClick={() => {}}
+            activeSort={activeSort}
+          />
+        </Provider>
+      </Router>, {
         createNodeMock: () => document.createElement(`div`)
       })
       .toJSON();
@@ -158,16 +160,18 @@ describe(`Render App`, () => {
 
   it(`Render Property`, () => {
     const tree = renderer
-      .create(<Router history={history}><Provider store={store}>
-        <App
-          activeCity={city}
-          currentOffers={offers}
-          currentOffer={offers[0]}
-          onPlaceCardHover={() => {}}
-          onSortItemClick={() => {}}
-          activeSort={activeSort}
-        />
-      </Provider></Router>, {
+      .create(<Router history={history}>
+        <Provider store={store}>
+          <App
+            activeCity={city}
+            currentOffers={offers}
+            currentOffer={offers[0]}
+            onPlaceCardHover={() => {}}
+            onSortItemClick={() => {}}
+            activeSort={activeSort}
+          />
+        </Provider>
+      </Router>, {
         createNodeMock: () => document.createElement(`div`)
       })
       .toJSON();

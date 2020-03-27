@@ -1,12 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
-import Header from '../header/header.jsx';
-import PlacesList from '../places-list/places-list.jsx';
-import {ParentNode} from '../../const.js';
-import {getCorrectFavorites} from '../../utils.js';
+import Header from '../header/header';
+import PlacesList from '../places-list/places-list';
+import {ParentNode} from '../../const';
+import {getCorrectFavorites} from '../../utils';
+import {Offer, User} from '../../types';
 
-const Favorites = ({favorite, userInfo, userAuth}) => {
+type Props = {
+  favorite: Array<Offer>;
+  userInfo: User;
+  userAuth: string;
+};
+
+const Favorites: React.FC<Props> = ({favorite, userInfo, userAuth}) => {
   return (
     <div className="page" >
       <Header
@@ -52,13 +58,6 @@ const Favorites = ({favorite, userInfo, userAuth}) => {
       </footer>
     </div>
   );
-};
-
-Favorites.propTypes = {
-  favorite: PropTypes.any,
-  userAuth: PropTypes.any,
-  userInfo: PropTypes.any,
-  loadFavorite: PropTypes.any,
 };
 
 export default Favorites;

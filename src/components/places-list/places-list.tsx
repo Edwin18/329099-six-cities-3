@@ -1,13 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
-import PlaceCard from '../place-card/place-card.jsx';
+import history from "../../history";
+import PlaceCard from '../place-card/place-card';
+import {Operation as DataOperation} from '../../reducer/data/data';
+import {getAuthorizationStatus} from '../../reducer/user/selector';
 import {ParentNode} from '../../const.js';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
-import {getAuthorizationStatus} from '../../reducer/user/selector.js';
-import history from "../../history.js";
+import {Offer} from '../../types';
 
-const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNode, onFavoriteBtnClick, userAuth, onNearbyFavoriteClickBtn}) => {
+type Props = {
+  offers: Array<Offer>;
+  parentNode: string;
+  userAuth: string;
+  onCardHeadingLinkClick: (offer: Offer) => void;
+  onNearbyFavoriteClickBtn: () => void;
+  onPlaceCardHover: (offer: Offer | string) => void;
+  onFavoriteBtnClick: (id: number, isFavorite: boolean) => void;
+};
+
+const PlacesList: React.FC<Props> = ({
+  offers,
+  parentNode,
+  userAuth,
+  onCardHeadingLinkClick,
+  onNearbyFavoriteClickBtn,
+  onPlaceCardHover,
+  onFavoriteBtnClick,
+}) => {
   let _parentNode;
 
   switch (parentNode) {
@@ -27,60 +45,17 @@ const PlacesList = ({offers, onCardHeadingLinkClick, onPlaceCardHover, parentNod
       {offers.map((offer) => (
         <PlaceCard
           offer={offer}
-          onCardHeadingLinkClick={onCardHeadingLinkClick}
-          onPlaceCardHover={onPlaceCardHover}
-          onFavoriteBtnClick={onFavoriteBtnClick}
-          onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
           parentNode={parentNode}
           userAuth={userAuth}
+          onCardHeadingLinkClick={onCardHeadingLinkClick}
+          onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
+          onPlaceCardHover={onPlaceCardHover}
+          onFavoriteBtnClick={onFavoriteBtnClick}
           key={offer.id}
         />
       ))}
     </div>
   );
-};
-
-PlacesList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.exact({
-    'city': PropTypes.exact({
-      'name': PropTypes.string,
-      'location': PropTypes.exact({
-        'latitude': PropTypes.number,
-        'longitude': PropTypes.number,
-        'zoom': PropTypes.number,
-      }),
-    }),
-    'preview_image': PropTypes.string,
-    'images': PropTypes.arrayOf(PropTypes.string),
-    'title': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'is_premium': PropTypes.bool,
-    'rating': PropTypes.number,
-    'type': PropTypes.string,
-    'bedrooms': PropTypes.number,
-    'max_adults': PropTypes.number,
-    'price': PropTypes.number,
-    'goods': PropTypes.arrayOf(PropTypes.string),
-    'host': PropTypes.exact({
-      'id': PropTypes.number,
-      'name': PropTypes.string,
-      'is_pro': PropTypes.bool,
-      'avatar_url': PropTypes.string,
-    }),
-    'description': PropTypes.string,
-    'location': PropTypes.exact({
-      'latitude': PropTypes.number,
-      'longitude': PropTypes.number,
-      'zoom': PropTypes.number,
-    }),
-    'id': PropTypes.number,
-  })),
-  onCardHeadingLinkClick: PropTypes.func,
-  onPlaceCardHover: PropTypes.func,
-  parentNode: PropTypes.string,
-  onFavoriteBtnClick: PropTypes.func,
-  userAuth: PropTypes.any,
-  onNearbyFavoriteClickBtn: PropTypes.any,
 };
 
 const mapStateToProps = (state) => ({

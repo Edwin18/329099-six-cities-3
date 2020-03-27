@@ -1,7 +1,11 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 
 const withStatus = (Component) => {
-  class WithStatus extends PureComponent {
+  type State = {
+    isOpened: boolean;
+  };
+
+  class WithStatus extends React.PureComponent<{}, State> {
     constructor(props) {
       super(props);
 

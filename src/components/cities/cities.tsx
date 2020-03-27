@@ -1,15 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import PlacesList from '../places-list/places-list.jsx';
-import Map from '../map/map.jsx';
-import Sort from '../sort/sort.jsx';
-import {getCoordinates} from '../../utils.js';
-import {ParentNode} from '../../const.js';
-import withStatus from '../../hocs/with-status/with-status.js';
+import * as React from 'react';
+
+import PlacesList from '../places-list/places-list';
+import Map from '../map/map';
+import Sort from '../sort/sort';
+import {getCoordinates} from '../../utils';
+import {ParentNode} from '../../const';
+import withStatus from '../../hocs/with-status/with-status';
+import {Offer} from '../../types';
+
+type Props = {
+  activeCity: string;
+  offers: Array<Offer>;
+  onPlaceCardHover: () => void;
+  hoveredOffer: Offer;
+};
 
 const SortWrapped = withStatus(Sort);
 
-const Cities = ({activeCity, offers, onPlaceCardHover, hoveredOffer}) => (
+const Cities: React.FC<Props> = ({activeCity, offers, onPlaceCardHover, hoveredOffer}) => (
   <div className="cities__places-container container">
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -32,45 +40,5 @@ const Cities = ({activeCity, offers, onPlaceCardHover, hoveredOffer}) => (
     </div>
   </div>
 );
-
-Cities.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.exact({
-    'city': PropTypes.exact({
-      'name': PropTypes.string,
-      'location': PropTypes.exact({
-        'latitude': PropTypes.number,
-        'longitude': PropTypes.number,
-        'zoom': PropTypes.number,
-      }),
-    }),
-    'preview_image': PropTypes.string,
-    'images': PropTypes.arrayOf(PropTypes.string),
-    'title': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'is_premium': PropTypes.bool,
-    'rating': PropTypes.number,
-    'type': PropTypes.string,
-    'bedrooms': PropTypes.number,
-    'max_adults': PropTypes.number,
-    'price': PropTypes.number,
-    'goods': PropTypes.arrayOf(PropTypes.string),
-    'host': PropTypes.exact({
-      'id': PropTypes.number,
-      'name': PropTypes.string,
-      'is_pro': PropTypes.bool,
-      'avatar_url': PropTypes.string,
-    }),
-    'description': PropTypes.string,
-    'location': PropTypes.exact({
-      'latitude': PropTypes.number,
-      'longitude': PropTypes.number,
-      'zoom': PropTypes.number,
-    }),
-    'id': PropTypes.number,
-  })).isRequired,
-  onPlaceCardHover: PropTypes.func.isRequired,
-  hoveredOffer: PropTypes.any,
-};
 
 export default Cities;

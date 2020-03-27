@@ -1,16 +1,28 @@
-import React, {createRef} from 'react';
-import PropTypes from 'prop-types';
-import leaflet from 'leaflet';
+import * as React from 'react';
+import * as leaflet from 'leaflet';
 import {DELETE_MARKER} from '../../const.js';
+import {Offer, Location} from '../../types';
 
-class Map extends React.PureComponent {
-  constructor(props) {
+type Props = {
+  city: Location;
+  coordinates: Array<Array<number>>;
+  current?: Array<number>;
+  hoveredOffer: Offer;
+};
+
+class Map extends React.PureComponent<Props, {}> {
+  _map: null | leaflet.Map;
+  _markers: Array<number>;
+  _hoveredMarker: null | number;
+  _mapContainer: React.RefObject<HTMLDivElement>;
+
+  constructor(props: Props) {
     super(props);
 
     this._map = null;
     this._markers = [];
     this._hoveredMarker = null;
-    this._mapContainer = createRef();
+    this._mapContainer = React.createRef();
   }
 
   componentDidMount() {
@@ -117,16 +129,5 @@ class Map extends React.PureComponent {
     });
   }
 }
-
-Map.propTypes = {
-  city: PropTypes.exact({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
-    zoom: PropTypes.number,
-  }).isRequired,
-  coordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
-  current: PropTypes.arrayOf(PropTypes.number),
-  hoveredOffer: PropTypes.any,
-};
 
 export default Map;

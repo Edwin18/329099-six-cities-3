@@ -1,9 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const.js';
+import {User} from '../../types';
 
-const Header = ({userAuth, userInfo}) => (
+type Props = {
+  userAuth: string;
+  userInfo: User;
+};
+
+const Header: React.FC<Props> = ({userAuth, userInfo}) => (
   <header className="header">
     <div className="container">
       <div className="header__wrapper">
@@ -33,10 +38,5 @@ const Header = ({userAuth, userInfo}) => (
     </div>
   </header>
 );
-
-Header.propTypes = {
-  userAuth: PropTypes.any,
-  userInfo: PropTypes.any,
-};
 
 export default Header;

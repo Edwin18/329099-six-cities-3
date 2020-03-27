@@ -36,6 +36,4 @@ describe(`Render <Header />`, () => {
 
     expect(tree).toMatchSnapshot();
   });
-
 });
-

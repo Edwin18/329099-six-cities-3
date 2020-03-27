@@ -1,23 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Main from '../main/main.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import Favorites from '../favorites/favorites.jsx';
-import Property from '../property/property.jsx';
-import NotExist from '../not-exist/not-exist.jsx';
-import {getActiveCity} from '../../reducer/cities/selector.js';
-import {getCurrentOffers, getFavorite} from '../../reducer/data/selector.js';
-import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector.js';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
-import {AuthorizationStatus} from '../../const.js';
-import history from "../../history.js";
 
-const App = ({currentOffers, activeCity, userAuth, login, userInfo, favorite}) => {
+import Main from '../main/main';
+import SignIn from '../sign-in/sign-in';
+import Favorites from '../favorites/favorites';
+import Property from '../property/property';
+import NotExist from '../not-exist/not-exist';
+
+import {Operation as UserOperation} from '../../reducer/user/user';
+import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector';
+import {getCurrentOffers, getFavorite} from '../../reducer/data/selector';
+import {getActiveCity} from '../../reducer/cities/selector';
+
+import {AuthorizationStatus} from '../../const';
+import history from '../../history';
+
+import {Offer, User, UserLogin} from '../../types';
+
+type Props = {
+  activeCity: string;
+  currentOffers: Array<Offer>;
+  userAuth: string;
+  userInfo: User;
+  login: (authData: UserLogin) => void;
+  favorite: Array<Offer>;
+};
+
+const App: React.FC<Props> = ({currentOffers, activeCity, userAuth, login, userInfo, favorite}) => {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path='/'>
         <Main
           offers={currentOffers}
           activeCity={activeCity}
@@ -25,101 +38,31 @@ const App = ({currentOffers, activeCity, userAuth, login, userInfo, favorite}) =
           userInfo={userInfo}
         />
       </Route>
-      <Route exact path="/login">
-        {userAuth === AuthorizationStatus.AUTH ? () => (history.push(`/`)) :
+      <Route exact path='/login'>
+        {userAuth === AuthorizationStatus.AUTH ? () => {
+          history.push(`/`);
+          return null;
+        } :
           <SignIn
             onSubmit={login}
           />}
       </Route>
-      <Route exact path="/offer/:id" component={Property} />
-      <Route exact path="/favorites">
+      <Route exact path='/offer/:id' component={Property} />
+      <Route exact path='/favorites'>
         {userAuth === AuthorizationStatus.AUTH ? <Favorites
           favorite={favorite}
           userInfo={userInfo}
           userAuth={userAuth}
-        /> : () => (history.push(`/login`))}
+        /> : () => {
+          history.push(`/login`);
+          return null;
+        }}
       </Route>
-      <Route exact path="/not-exist">
+      <Route exact path='/not-exist'>
         <NotExist />
       </Route>
     </Switch>
   );
-};
-
-App.propTypes = {
-  activeCity: PropTypes.string,
-  currentOffer: PropTypes.exact({
-    'city': PropTypes.exact({
-      'name': PropTypes.string,
-      'location': PropTypes.exact({
-        'latitude': PropTypes.number,
-        'longitude': PropTypes.number,
-        'zoom': PropTypes.number,
-      }),
-    }),
-    'preview_image': PropTypes.string,
-    'images': PropTypes.arrayOf(PropTypes.string),
-    'title': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'is_premium': PropTypes.bool,
-    'rating': PropTypes.number,
-    'type': PropTypes.string,
-    'bedrooms': PropTypes.number,
-    'max_adults': PropTypes.number,
-    'price': PropTypes.number,
-    'goods': PropTypes.arrayOf(PropTypes.string),
-    'host': PropTypes.exact({
-      'id': PropTypes.number,
-      'name': PropTypes.string,
-      'is_pro': PropTypes.bool,
-      'avatar_url': PropTypes.string,
-    }),
-    'description': PropTypes.string,
-    'location': PropTypes.exact({
-      'latitude': PropTypes.number,
-      'longitude': PropTypes.number,
-      'zoom': PropTypes.number,
-    }),
-    'id': PropTypes.number,
-  }),
-  currentOffers: PropTypes.arrayOf(PropTypes.exact({
-    'city': PropTypes.exact({
-      'name': PropTypes.string,
-      'location': PropTypes.exact({
-        'latitude': PropTypes.number,
-        'longitude': PropTypes.number,
-        'zoom': PropTypes.number,
-      }),
-    }),
-    'preview_image': PropTypes.string,
-    'images': PropTypes.arrayOf(PropTypes.string),
-    'title': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'is_premium': PropTypes.bool,
-    'rating': PropTypes.number,
-    'type': PropTypes.string,
-    'bedrooms': PropTypes.number,
-    'max_adults': PropTypes.number,
-    'price': PropTypes.number,
-    'goods': PropTypes.arrayOf(PropTypes.string),
-    'host': PropTypes.exact({
-      'id': PropTypes.number,
-      'name': PropTypes.string,
-      'is_pro': PropTypes.bool,
-      'avatar_url': PropTypes.string,
-    }),
-    'description': PropTypes.string,
-    'location': PropTypes.exact({
-      'latitude': PropTypes.number,
-      'longitude': PropTypes.number,
-      'zoom': PropTypes.number,
-    }),
-    'id': PropTypes.number,
-  })),
-  userAuth: PropTypes.any,
-  login: PropTypes.func,
-  userInfo: PropTypes.any,
-  favorite: PropTypes.any,
 };
 
 const mapStateToProps = (state) => ({
@@ -132,8 +75,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
-    dispatch(UserOperation.login(authData))
-      .then(() => history.goBack());
+    dispatch(UserOperation.login(authData));
   },
 });
 

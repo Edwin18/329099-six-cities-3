@@ -1,8 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ReviewsItem from '../reviews-item/reviews-item.jsx';
+import * as React from 'react';
+import ReviewsItem from '../reviews-item/reviews-item';
+import {Review} from '../../types';
 
-const ReviewsList = ({comments}) => (
+type Props = {
+  comments: Array<Review>;
+}
+
+const ReviewsList: React.FC<Props> = ({comments}) => (
   <ul className="reviews__list">
     {comments.map((comment) => (
       <ReviewsItem
@@ -12,20 +16,5 @@ const ReviewsList = ({comments}) => (
     ))}
   </ul>
 );
-
-ReviewsList.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.exact({
-    'id': PropTypes.number.isRequired,
-    'user': PropTypes.exact({
-      'id': PropTypes.number,
-      'is_pro': PropTypes.bool,
-      'name': PropTypes.string,
-      'avatar_url': PropTypes.string,
-    }),
-    'rating': PropTypes.number,
-    'comment': PropTypes.string,
-    'date': PropTypes.string,
-  })),
-};
 
 export default ReviewsList;

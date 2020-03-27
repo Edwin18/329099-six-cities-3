@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import {Link} from 'react-router-dom';
 
-const NotExist = () => (
+const NotExist: React.FC = () => (
   <div className="not-exist">
     <p>Current offer doesn&#39;t exist</p>
     <Link className="not-exist__link" to={`/`}>&gt;Go to main page&lt;</Link>

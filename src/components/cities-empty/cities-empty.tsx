@@ -1,7 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const CitiesEmpty = ({activeCity}) => (
+type Props = {
+  activeCity: string;
+};
+
+const CitiesEmpty: React.FC<Props> = ({activeCity}) => (
   <div className="cities__places-container cities__places-container--empty container">
     <section className="cities__no-places">
       <div className="cities__status-wrapper tabs__content">
@@ -12,9 +15,5 @@ const CitiesEmpty = ({activeCity}) => (
     <div className="cities__right-section"></div>
   </div>
 );
-
-CitiesEmpty.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-};
 
 export default CitiesEmpty;

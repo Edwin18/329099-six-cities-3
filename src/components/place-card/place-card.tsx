@@ -1,10 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {ParentNode, DELETE_MARKER, AuthorizationStatus} from '../../const.js';
 import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
 import history from "../../history.js";
+import {Offer} from '../../types';
 
-const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, onFavoriteBtnClick, parentNode, userAuth, onNearbyFavoriteClickBtn}) => {
+type Props = {
+  offer: Offer;
+  parentNode: string;
+  userAuth: string;
+  onCardHeadingLinkClick: (offer: Offer) => void;
+  onNearbyFavoriteClickBtn: () => void;
+  onPlaceCardHover: (offer: Offer | string) => void;
+  onFavoriteBtnClick: (id: number, isFavorite: boolean) => void;
+};
+
+const PlaceCard: React.FC<Props> = ({
+  offer,
+  parentNode,
+  userAuth,
+  onCardHeadingLinkClick,
+  onNearbyFavoriteClickBtn,
+  onPlaceCardHover,
+  onFavoriteBtnClick,
+}) => {
   let _parentNode;
   let _isMain;
 
@@ -99,49 +117,6 @@ const PlaceCard = ({offer, onCardHeadingLinkClick, onPlaceCardHover, onFavoriteB
       </div>
     </article>
   );
-};
-
-PlaceCard.propTypes = {
-  offer: PropTypes.exact({
-    'city': PropTypes.exact({
-      'name': PropTypes.string,
-      'location': PropTypes.exact({
-        'latitude': PropTypes.number,
-        'longitude': PropTypes.number,
-        'zoom': PropTypes.number,
-      }),
-    }),
-    'preview_image': PropTypes.string,
-    'images': PropTypes.arrayOf(PropTypes.string),
-    'title': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'is_premium': PropTypes.bool,
-    'rating': PropTypes.number,
-    'type': PropTypes.string,
-    'bedrooms': PropTypes.number,
-    'max_adults': PropTypes.number,
-    'price': PropTypes.number,
-    'goods': PropTypes.arrayOf(PropTypes.string),
-    'host': PropTypes.exact({
-      'id': PropTypes.number,
-      'name': PropTypes.string,
-      'is_pro': PropTypes.bool,
-      'avatar_url': PropTypes.string,
-    }),
-    'description': PropTypes.string,
-    'location': PropTypes.exact({
-      'latitude': PropTypes.number,
-      'longitude': PropTypes.number,
-      'zoom': PropTypes.number,
-    }),
-    'id': PropTypes.number,
-  }),
-  onCardHeadingLinkClick: PropTypes.func,
-  onPlaceCardHover: PropTypes.func,
-  onFavoriteBtnClick: PropTypes.func,
-  parentNode: PropTypes.string,
-  userAuth: PropTypes.any,
-  onNearbyFavoriteClickBtn: PropTypes.any,
 };
 
 export default PlaceCard;

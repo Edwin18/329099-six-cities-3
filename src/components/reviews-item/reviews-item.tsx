@@ -1,8 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {getCorrectRatingNumber, setDateTime, setDate} from '../../utils.js';
+import * as React from 'react';
+import {getCorrectRatingNumber, setDateTime, setDate} from '../../utils';
+import {Review} from '../../types';
 
-const ReviewsItem = ({review}) => (
+type Props = {
+  review: Review;
+}
+
+const ReviewsItem: React.FC<Props> = ({review}) => (
   <li className="reviews__item">
     <div className="reviews__user user">
       <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -26,20 +30,5 @@ const ReviewsItem = ({review}) => (
     </div>
   </li>
 );
-
-ReviewsItem.propTypes = {
-  review: PropTypes.exact({
-    'id': PropTypes.number.isRequired,
-    'user': PropTypes.exact({
-      'id': PropTypes.number,
-      'is_pro': PropTypes.bool,
-      'name': PropTypes.string,
-      'avatar_url': PropTypes.string,
-    }),
-    'rating': PropTypes.number,
-    'comment': PropTypes.string,
-    'date': PropTypes.string,
-  }),
-};
 
 export default ReviewsItem;

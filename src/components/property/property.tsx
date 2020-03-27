@@ -1,27 +1,44 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
-import {store} from '../../index.js';
-import Header from '../header/header.jsx';
-import ReviewsList from '../reviews-list/reviews-list.jsx';
-import Map from '../map/map.jsx';
-import PlacesList from '../places-list/places-list.jsx';
-import Comments from '../comments/comments.jsx';
-import {getCurrentOffer} from '../../reducer/cities/selector.js';
-import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector.js';
-import {Operation as DataOperation} from '../../reducer/data/data.js';
-import {Operation as CommentsOperation} from '../../reducer/comments/comments.js';
-import {Operation as NearbyOperation} from '../../reducer/nearby/nearby.js';
-import {getCurrentComments} from '../../reducer/comments/selector.js';
-import {getNearby} from '../../reducer/nearby/selector.js';
-import {getCoordinates, getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
-import {ParentNode, AuthorizationStatus, DELETE_MARKER} from '../../const.js';
-import history from "../../history.js";
+import {store} from '../../index';
+import Header from '../header/header';
+import ReviewsList from '../reviews-list/reviews-list';
+import Map from '../map/map';
+import PlacesList from '../places-list/places-list';
+import Comments from '../comments/comments';
+import {getCurrentOffer} from '../../reducer/cities/selector';
+import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector';
+import {Operation as DataOperation} from '../../reducer/data/data';
+import {Operation as CommentsOperation} from '../../reducer/comments/comments';
+import {Operation as NearbyOperation} from '../../reducer/nearby/nearby';
+import {getCurrentComments} from '../../reducer/comments/selector';
+import {getNearby} from '../../reducer/nearby/selector';
+import {getCoordinates, getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils';
+import {ParentNode, AuthorizationStatus, DELETE_MARKER} from '../../const';
+import history from "../../history";
+import {Offer, User, Review} from '../../types';
+
+type Props = {
+  offer: Offer;
+  userAuth: string;
+  userInfo: User;
+  comments: Array<Review>;
+  onSubmit: null;
+  nearby: Array<Offer>;
+  onFavoriteBtnClick: (id: number, isFavorite: boolean) => void;
+  match: {
+    params: {
+      id: string;
+    };
+  };
+};
 
 const MAX_IMG_COUNT = 6;
 
-class Property extends PureComponent {
-  constructor(props) {
+class Property extends React.PureComponent<Props, {}> {
+  id: number;
+
+  constructor(props: Props) {
     super(props);
 
     this.id = parseInt(props.match.params.id, 10);
@@ -111,7 +128,7 @@ class Property extends PureComponent {
                     {offer.bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max {offer.maxAdults} adults
+                    Max {offer.max_adults} adults
                   </li>
                 </ul>
                 <div className="property__price">
@@ -185,50 +202,6 @@ class Property extends PureComponent {
     );
   }
 }
-
-Property.propTypes = {
-  offer: PropTypes.exact({
-    'city': PropTypes.exact({
-      'name': PropTypes.string,
-      'location': PropTypes.exact({
-        'latitude': PropTypes.number,
-        'longitude': PropTypes.number,
-        'zoom': PropTypes.number,
-      }),
-    }),
-    'preview_image': PropTypes.string,
-    'images': PropTypes.arrayOf(PropTypes.string),
-    'title': PropTypes.string,
-    'is_favorite': PropTypes.bool,
-    'is_premium': PropTypes.bool,
-    'rating': PropTypes.number,
-    'type': PropTypes.string,
-    'bedrooms': PropTypes.number,
-    'max_adults': PropTypes.number,
-    'price': PropTypes.number,
-    'goods': PropTypes.arrayOf(PropTypes.string),
-    'host': PropTypes.exact({
-      'id': PropTypes.number,
-      'name': PropTypes.string,
-      'is_pro': PropTypes.bool,
-      'avatar_url': PropTypes.string,
-    }),
-    'description': PropTypes.string,
-    'location': PropTypes.exact({
-      'latitude': PropTypes.number,
-      'longitude': PropTypes.number,
-      'zoom': PropTypes.number,
-    }),
-    'id': PropTypes.number,
-  }),
-  onFavoriteBtnClick: PropTypes.any,
-  userAuth: PropTypes.any,
-  userInfo: PropTypes.any,
-  comments: PropTypes.any,
-  onSubmit: PropTypes.any,
-  nearby: PropTypes.any,
-  match: PropTypes.any,
-};
 
 const mapStateToProps = (state, ownProps) => ({
   offer: getCurrentOffer(state, ownProps),

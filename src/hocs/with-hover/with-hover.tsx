@@ -1,7 +1,17 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
+import {Offer} from '../../types';
 
 const withHover = (Component) => {
-  class WithHover extends PureComponent {
+  type Props = {
+    offers: Array<Offer>;
+    activeCity: string;
+  }
+
+  type State = {
+    hoveredOffer: null | Offer;
+  }
+
+  class WithHover extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 
