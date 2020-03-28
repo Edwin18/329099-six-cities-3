@@ -1,21 +1,17 @@
 import * as React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-
 import Main from '../main/main';
 import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import Property from '../property/property';
 import NotExist from '../not-exist/not-exist';
-
 import {Operation as UserOperation} from '../../reducer/user/user';
 import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector';
 import {getCurrentOffers, getFavorite} from '../../reducer/data/selector';
 import {getActiveCity} from '../../reducer/cities/selector';
-
 import {AuthorizationStatus} from '../../const';
 import history from '../../history';
-
 import {Offer, User, UserLogin} from '../../types';
 
 type Props = {

@@ -1,8 +1,8 @@
-import * as React from "react"
+import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import Cities from './cities.jsx';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
+import Cities from './cities';
 
 const activeSort = `popular`;
 const activeCity = `Paris`;
@@ -120,7 +120,7 @@ const store = mockStore({
   },
 });
 
-it(`Render Cities`, () => {
+it(`Render <Cities />`, () => {
   const tree = renderer
     .create(<Provider store={store}>
       <Cities

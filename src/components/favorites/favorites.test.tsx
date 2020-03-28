@@ -2,21 +2,11 @@ import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import App from './app';
+import Favorites from './favorites';
 import {Router} from 'react-router-dom';
 import history from '../../history';
 
-const city = `Amsterdam`;
-const activeSort = `popular`;
-const CITIES = [
-  `Paris`,
-  `Cologne`,
-  `Brussels`,
-  `Amsterdam`,
-  `Hamburg`,
-  `Dusseldorf`
-];
-const offers = [
+const favorite = [
   {
     'city': {
       'name': `Hamburg`,
@@ -118,64 +108,34 @@ const offers = [
     'id': 3
   },
 ];
+const userInfo = {
+  'avatar_url': `img/1.png`,
+  'email': `Oliver.conner@gmail.com`,
+  'id': 1,
+  'is_pro': false,
+  'name': `Oliver.conner`
+};
+const userAuth = `AUTH`;
 
 const mockStore = configureStore([]);
+const store = mockStore({
+  USER: {
+    authorizationStatus: `NO_AUTH`,
+  },
+});
 
-describe(`Render App`, () => {
-  const store = mockStore({
-    CITIES: {
-      cities: CITIES,
-      activeCity: city,
-      currentOffer: null,
-    },
-    DATA: {
-      offers,
-    },
-    USER: {
-      authorizationStatus: `NO_AUTH`,
-      authInfo: null,
-    },
-  });
+it(`Render <Favorites />`, () => {
+  const tree = renderer
+    .create(<Router history={history}>
+      <Provider store={store}>
+        <Favorites
+          favorite={favorite}
+          userInfo={userInfo}
+          userAuth={userAuth}
+        />
+      </Provider>
+    </Router>)
+    .toJSON();
 
-  it(`Render Main`, () => {
-    const tree = renderer
-      .create(<Router history={history}>
-        <Provider store={store}>
-          <App
-            activeCity={city}
-            currentOffers={offers}
-            currentOffer={null}
-            onPlaceCardHover={() => {}}
-            onSortItemClick={() => {}}
-            activeSort={activeSort}
-          />
-        </Provider>
-      </Router>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`Render Property`, () => {
-    const tree = renderer
-      .create(<Router history={history}>
-        <Provider store={store}>
-          <App
-            activeCity={city}
-            currentOffers={offers}
-            currentOffer={offers[0]}
-            onPlaceCardHover={() => {}}
-            onSortItemClick={() => {}}
-            activeSort={activeSort}
-          />
-        </Provider>
-      </Router>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
+  expect(tree).toMatchSnapshot();
 });

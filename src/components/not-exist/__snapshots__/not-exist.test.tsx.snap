@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render <NotExist /> 1`] = `
+<div
+  className="not-exist"
+>
+  <p>
+    Current offer doesn't exist
+  </p>
+  <a
+    className="not-exist__link"
+    href="/"
+    onClick={[Function]}
+  >
+    &gt;Go to main page&lt;
+  </a>
+</div>
+`;

@@ -2,20 +2,9 @@ import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import App from './app';
-import {Router} from 'react-router-dom';
-import history from '../../history';
+import {PlacesList} from './places-list';
+import {ParentNode} from '../../const';
 
-const city = `Amsterdam`;
-const activeSort = `popular`;
-const CITIES = [
-  `Paris`,
-  `Cologne`,
-  `Brussels`,
-  `Amsterdam`,
-  `Hamburg`,
-  `Dusseldorf`
-];
 const offers = [
   {
     'city': {
@@ -118,62 +107,60 @@ const offers = [
     'id': 3
   },
 ];
-
 const mockStore = configureStore([]);
 
-describe(`Render App`, () => {
-  const store = mockStore({
-    CITIES: {
-      cities: CITIES,
-      activeCity: city,
-      currentOffer: null,
-    },
-    DATA: {
-      offers,
-    },
-    USER: {
-      authorizationStatus: `NO_AUTH`,
-      authInfo: null,
-    },
-  });
+describe(`Render <PlacesList />`, () => {
+  const store = mockStore({});
 
-  it(`Render Main`, () => {
+  it(`Render MAIN`, () => {
     const tree = renderer
-      .create(<Router history={history}>
-        <Provider store={store}>
-          <App
-            activeCity={city}
-            currentOffers={offers}
-            currentOffer={null}
-            onPlaceCardHover={() => {}}
-            onSortItemClick={() => {}}
-            activeSort={activeSort}
-          />
-        </Provider>
-      </Router>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
+      .create(<Provider store={store}>
+        <PlacesList
+          offers={offers}
+          parentNode={ParentNode.MAIN}
+          userAuth={`AUTH`}
+          onCardHeadingLinkClick={() => {}}
+          onNearbyFavoriteClickBtn={() => {}}
+          onPlaceCardHover={() => {}}
+          onFavoriteBtnClick={() => {}}
+        />
+      </Provider>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render Property`, () => {
+  it(`Render PROPERTY`, () => {
     const tree = renderer
-      .create(<Router history={history}>
-        <Provider store={store}>
-          <App
-            activeCity={city}
-            currentOffers={offers}
-            currentOffer={offers[0]}
-            onPlaceCardHover={() => {}}
-            onSortItemClick={() => {}}
-            activeSort={activeSort}
-          />
-        </Provider>
-      </Router>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
+      .create(<Provider store={store}>
+        <PlacesList
+          offers={offers}
+          parentNode={ParentNode.PROPERTY}
+          userAuth={`AUTH`}
+          onCardHeadingLinkClick={() => {}}
+          onNearbyFavoriteClickBtn={() => {}}
+          onPlaceCardHover={() => {}}
+          onFavoriteBtnClick={() => {}}
+        />
+      </Provider>)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render FAVORITE`, () => {
+    const tree = renderer
+      .create(<Provider store={store}>
+        <PlacesList
+          offers={offers}
+          parentNode={ParentNode.FAVORITE}
+          userAuth={`AUTH`}
+          onCardHeadingLinkClick={() => {}}
+          onNearbyFavoriteClickBtn={() => {}}
+          onPlaceCardHover={() => {}}
+          onFavoriteBtnClick={() => {}}
+        />
+      </Provider>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

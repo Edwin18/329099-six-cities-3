@@ -23,7 +23,7 @@ type Props = {
   userAuth: string;
   userInfo: User;
   comments: Array<Review>;
-  onSubmit: null;
+  onSubmit: (hotelId: number, {}, form: HTMLFormElement, btn: HTMLButtonElement) => void;
   nearby: Array<Offer>;
   onFavoriteBtnClick: (id: number, isFavorite: boolean) => void;
   match: {

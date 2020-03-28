@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {ParentNode, DELETE_MARKER, AuthorizationStatus} from '../../const.js';
-import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils.js';
-import history from "../../history.js";
+import {ParentNode, DELETE_MARKER, AuthorizationStatus} from '../../const';
+import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils';
+import history from "../../history";
 import {Offer} from '../../types';
 
 type Props = {

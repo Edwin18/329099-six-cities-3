@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import PlacesList from '../places-list/places-list';
 import Map from '../map/map';
 import Sort from '../sort/sort';
