@@ -16,7 +16,7 @@ it(`Render <LocationsList />`, () => {
     .create(<LocationsList
       cities={CITIES}
       activeCity={CITIES[0]}
-      onCityLinkClick={() => {}}
+      onCityLinkClick={() => ({})}
     />)
     .toJSON();
 

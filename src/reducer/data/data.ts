@@ -1,6 +1,7 @@
-import {extend} from '../../utils.js';
+import {extend} from '../../utils';
+import {DataStore} from '../../types';
 
-const initialState = {
+const initialState: DataStore = {
   offers: [],
   favorite: [],
 };

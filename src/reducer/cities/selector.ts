@@ -1,5 +1,5 @@
-import NameSpace from "../name-space.js";
-import history from "../../history.js";
+import NameSpace from '../name-space';
+import history from '../../history';
 
 const NAME_SPACE = NameSpace.CITIES;
 

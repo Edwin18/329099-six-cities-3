@@ -9,7 +9,7 @@ it(`Render <LocationsItem />`, () => {
     .create(<LocationsItem
       city={city}
       isActive={true}
-      onCityLinkClick={() => {}}
+      onCityLinkClick={() => ({})}
     />)
     .toJSON();
 

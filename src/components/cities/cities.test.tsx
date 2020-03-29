@@ -126,7 +126,7 @@ it(`Render <Cities />`, () => {
       <Cities
         activeCity={activeCity}
         offers={offers}
-        onPlaceCardHover={() => {}}
+        onPlaceCardHover={() => ({})}
         hoveredOffer={offers[0]}
       />
     </Provider>, {

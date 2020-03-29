@@ -119,10 +119,10 @@ describe(`Render <PlacesList />`, () => {
           offers={offers}
           parentNode={ParentNode.MAIN}
           userAuth={`AUTH`}
-          onCardHeadingLinkClick={() => {}}
-          onNearbyFavoriteClickBtn={() => {}}
-          onPlaceCardHover={() => {}}
-          onFavoriteBtnClick={() => {}}
+          onCardHeadingLinkClick={() => ({})}
+          onNearbyFavoriteClickBtn={() => ({})}
+          onPlaceCardHover={() => ({})}
+          onFavoriteBtnClick={() => ({})}
         />
       </Provider>)
       .toJSON();
@@ -137,10 +137,10 @@ describe(`Render <PlacesList />`, () => {
           offers={offers}
           parentNode={ParentNode.PROPERTY}
           userAuth={`AUTH`}
-          onCardHeadingLinkClick={() => {}}
-          onNearbyFavoriteClickBtn={() => {}}
-          onPlaceCardHover={() => {}}
-          onFavoriteBtnClick={() => {}}
+          onCardHeadingLinkClick={() => ({})}
+          onNearbyFavoriteClickBtn={() => ({})}
+          onPlaceCardHover={() => ({})}
+          onFavoriteBtnClick={() => ({})}
         />
       </Provider>)
       .toJSON();
@@ -155,10 +155,10 @@ describe(`Render <PlacesList />`, () => {
           offers={offers}
           parentNode={ParentNode.FAVORITE}
           userAuth={`AUTH`}
-          onCardHeadingLinkClick={() => {}}
-          onNearbyFavoriteClickBtn={() => {}}
-          onPlaceCardHover={() => {}}
-          onFavoriteBtnClick={() => {}}
+          onCardHeadingLinkClick={() => ({})}
+          onNearbyFavoriteClickBtn={() => ({})}
+          onPlaceCardHover={() => ({})}
+          onFavoriteBtnClick={() => ({})}
         />
       </Provider>)
       .toJSON();

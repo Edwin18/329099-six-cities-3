@@ -1,10 +1,7 @@
 import * as React from 'react';
-import * as renderer from 'react-test-renderer';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {Property} from './property';
-import {Router} from 'react-router-dom';
-import history from '../../history';
 
 const offer = {
   'city': {
@@ -148,32 +145,32 @@ const userInfo = {
   'is_pro': false,
   'name': `Oliver.conner`
 };
-const mockStore = configureStore([]);
-const store = mockStore({
-  USER: {
-    authorizationStatus: `AUTH`,
-  },
+const userAuth = `AUTH`;
+
+Enzyme.configure({
+  adapter: new Adapter(),
 });
 
-it(`Render <Property />`, () => {
-  const tree = renderer
-    .create(<Router history={history}>
-      <Provider store={store}>
-        <Property
-          offer={offer}
-          userAuth={`AUTH`}
-          userInfo={userInfo}
-          comments={comments}
-          onSubmit={() => ({})}
-          nearby={nearby}
-          onFavoriteBtnClick={() => ({})}
-          match={match}
-        />
-      </Provider>
-    </Router>, {
-      createNodeMock: () => document.createElement(`div`)
-    })
-    .toJSON();
+it(`When user submit comment`, () => {
+  const onFavoriteBtnClick = jest.fn();
+  const onSubmit = jest.fn();
 
-  expect(tree).toMatchSnapshot();
+  const property = Enzyme.shallow(
+      <Property
+        offer={offer}
+        userAuth={userAuth}
+        userInfo={userInfo}
+        comments={comments}
+        onSubmit={onSubmit}
+        nearby={nearby}
+        onFavoriteBtnClick={onFavoriteBtnClick}
+        match={match}
+      />
+  );
+
+  const favoriteBtn = property.find(`.property__bookmark-button`);
+
+  favoriteBtn.simulate(`click`);
+
+  expect(onFavoriteBtnClick).toBeCalledWith(offer.id, offer.is_favorite);
 });

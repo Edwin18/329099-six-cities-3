@@ -1,6 +1,7 @@
-import {extend} from '../../utils.js';
+import {extend} from '../../utils';
+import {CommentsStore} from '../../types';
 
-const initialState = {
+const initialState: CommentsStore = {
   currentComments: [],
 };
 

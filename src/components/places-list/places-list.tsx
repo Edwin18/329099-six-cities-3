@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import history from "../../history";
+import history from '../../history';
 import PlaceCard from '../place-card/place-card';
 import {Operation as DataOperation} from '../../reducer/data/data';
 import {getAuthorizationStatus} from '../../reducer/user/selector';
-import {ParentNode} from '../../const.js';
+import {ParentNode} from '../../const';
 import {Offer} from '../../types';
 
 type Props = {

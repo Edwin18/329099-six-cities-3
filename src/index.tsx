@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Router} from "react-router-dom";
+import {Router} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import thunk from "redux-thunk";
-import {composeWithDevTools} from "redux-devtools-extension";
+import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 import App from './components/app/app';
 
@@ -14,7 +14,7 @@ import {Operation as UserOperation} from './reducer/user/user';
 
 import {createAPI} from './api';
 
-import history from "./history";
+import history from './history';
 
 const api = createAPI();
 export const store = createStore(

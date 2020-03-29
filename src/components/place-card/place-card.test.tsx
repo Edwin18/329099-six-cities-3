@@ -44,10 +44,10 @@ describe(`Render <PlaceCard />`, () => {
         offer={offer}
         parentNode={ParentNode.MAIN}
         userAuth={`AUTH`}
-        onCardHeadingLinkClick={() => {}}
-        onNearbyFavoriteClickBtn={() => {}}
-        onPlaceCardHover={() => {}}
-        onFavoriteBtnClick={() => {}}
+        onCardHeadingLinkClick={() => ({})}
+        onNearbyFavoriteClickBtn={() => ({})}
+        onPlaceCardHover={() => ({})}
+        onFavoriteBtnClick={() => ({})}
       />)
       .toJSON();
 
@@ -60,10 +60,10 @@ describe(`Render <PlaceCard />`, () => {
         offer={offer}
         parentNode={ParentNode.PROPERTY}
         userAuth={`AUTH`}
-        onCardHeadingLinkClick={() => {}}
-        onNearbyFavoriteClickBtn={() => {}}
-        onPlaceCardHover={() => {}}
-        onFavoriteBtnClick={() => {}}
+        onCardHeadingLinkClick={() => ({})}
+        onNearbyFavoriteClickBtn={() => ({})}
+        onPlaceCardHover={() => ({})}
+        onFavoriteBtnClick={() => ({})}
       />)
       .toJSON();
 
@@ -76,10 +76,10 @@ describe(`Render <PlaceCard />`, () => {
         offer={offer}
         parentNode={ParentNode.FAVORITE}
         userAuth={`AUTH`}
-        onCardHeadingLinkClick={() => {}}
-        onNearbyFavoriteClickBtn={() => {}}
-        onPlaceCardHover={() => {}}
-        onFavoriteBtnClick={() => {}}
+        onCardHeadingLinkClick={() => ({})}
+        onNearbyFavoriteClickBtn={() => ({})}
+        onPlaceCardHover={() => ({})}
+        onFavoriteBtnClick={() => ({})}
       />)
       .toJSON();
 

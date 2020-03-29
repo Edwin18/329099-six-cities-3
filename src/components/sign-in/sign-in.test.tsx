@@ -5,7 +5,7 @@ import SignIn from './sign-in';
 it(`Render <SignIn />`, () => {
   const tree = renderer
     .create(<SignIn
-      onSubmit={() => {}}
+      onSubmit={() => ({})}
     />)
     .toJSON();
 

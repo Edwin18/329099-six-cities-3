@@ -1,5 +1,5 @@
-import moment from 'moment';
-import {ApartamentType} from './const.js';
+import * as moment from 'moment';
+import {ApartamentType} from './const';
 
 const RATING_MULTIPLIER = 20;
 

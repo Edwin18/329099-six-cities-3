@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const.js';
+import {AuthorizationStatus} from '../../const';
 import {User} from '../../types';
 
 type Props = {

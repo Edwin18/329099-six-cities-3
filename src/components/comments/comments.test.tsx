@@ -7,7 +7,7 @@ const hotelId = 1;
 it(`Render <Comments />`, () => {
   const tree = renderer
     .create(<Comments
-      onSubmit={() => {}}
+      onSubmit={() => ({})}
       hotelId={hotelId}
     />)
     .toJSON();

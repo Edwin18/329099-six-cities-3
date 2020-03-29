@@ -48,3 +48,28 @@ export type Offer = {
   description: string;
   location: Location;
 }
+
+export type DataStore = {
+  offers: Array<Offer>;
+  favorite: Array<Offer>;
+}
+
+export type CitiesStore = {
+  cities: Array<string>,
+  activeCity: string,
+  activeSort: string,
+  currentOffer: Offer | null,
+}
+
+export type CommentsStore = {
+  currentComments: Array<Review>
+}
+
+export type NearbyStore = {
+  nearby: Array<Offer>
+}
+
+export type UserStore = {
+  authorizationStatus: string,
+  authInfo: User,
+}

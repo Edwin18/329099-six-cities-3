@@ -12,13 +12,13 @@ const store = mockStore({
   },
 });
 
-it(`Render Sort`, () => {
+it(`Render <Sort />`, () => {
   const tree = renderer
     .create(<Provider store={store}>
       <Sort
         activeSort={activeSort}
-        onSortItemClick={() => {}}
-        onSortClick={() => {}}
+        onSortItemClick={() => ({})}
+        onSortClick={() => ({})}
         isOpened={true}
       />
     </Provider>)

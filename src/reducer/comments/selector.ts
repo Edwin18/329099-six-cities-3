@@ -1,5 +1,5 @@
-import moment from 'moment';
-import NameSpace from "../name-space.js";
+import * as moment from 'moment';
+import NameSpace from '../name-space';
 
 const MAX_COMMENTS_COUNT = 10;
 

@@ -1,7 +1,8 @@
-import {extend} from '../../utils.js';
-import {AuthorizationStatus} from '../../const.js';
+import {extend} from '../../utils';
+import {AuthorizationStatus} from '../../const';
+import {UserStore} from '../../types';
 
-const initialState = {
+const initialState: UserStore = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   authInfo: null,
 };

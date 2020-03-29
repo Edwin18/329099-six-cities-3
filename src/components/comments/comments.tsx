@@ -40,36 +40,36 @@ class Comments extends React.PureComponent<Props, {}> {
         <div
           className="reviews__rating-form form__rating"
           ref={this.ratingContainer}>
-          <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-          <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
+          <input className="form__rating-input visually-hidden" name="rating" value="5" id="five-stars" type="radio" />
+          <label htmlFor="five-stars" className="reviews__rating-label form__rating-label" title="perfect">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star"></use>
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-          <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
+          <input className="form__rating-input visually-hidden" name="rating" value="4" id="four-stars" type="radio" />
+          <label htmlFor="four-stars" className="reviews__rating-label form__rating-label" title="good">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star"></use>
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-          <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
+          <input className="form__rating-input visually-hidden" name="rating" value="3" id="three-stars" type="radio" />
+          <label htmlFor="three-stars" className="reviews__rating-label form__rating-label" title="not bad">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star"></use>
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-          <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
+          <input className="form__rating-input visually-hidden" name="rating" value="2" id="two-stars" type="radio" />
+          <label htmlFor="two-stars" className="reviews__rating-label form__rating-label" title="badly">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star"></use>
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-          <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+          <input className="form__rating-input visually-hidden" name="rating" value="1" id="one-star" type="radio" />
+          <label htmlFor="one-star" className="reviews__rating-label form__rating-label" title="terribly">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star"></use>
             </svg>

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as leaflet from 'leaflet';
-import {DELETE_MARKER} from '../../const.js';
+import {DELETE_MARKER} from '../../const';
 import {Offer, Location} from '../../types';
 
 type Props = {
   city: Location;
   coordinates: Array<Array<number>>;
   current?: Array<number>;
-  hoveredOffer: Offer;
+  hoveredOffer?: Offer | any;
 };
 
 class Map extends React.PureComponent<Props, {}> {

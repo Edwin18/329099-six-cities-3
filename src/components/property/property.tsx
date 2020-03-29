@@ -15,7 +15,7 @@ import {getCurrentComments} from '../../reducer/comments/selector';
 import {getNearby} from '../../reducer/nearby/selector';
 import {getCoordinates, getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils';
 import {ParentNode, AuthorizationStatus, DELETE_MARKER} from '../../const';
-import history from "../../history";
+import history from '../../history';
 import {Offer, User, Review} from '../../types';
 
 type Props = {

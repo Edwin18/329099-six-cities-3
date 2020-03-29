@@ -1,6 +1,7 @@
-import {extend} from '../../utils.js';
+import {extend} from '../../utils';
+import {NearbyStore} from '../../types';
 
-const initialState = {
+const initialState: NearbyStore = {
   nearby: [],
 };
 

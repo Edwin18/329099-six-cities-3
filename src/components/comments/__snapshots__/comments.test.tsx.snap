@@ -18,14 +18,14 @@ exports[`Render <Comments /> 1`] = `
   >
     <input
       className="form__rating-input visually-hidden"
-      id="5-stars"
+      id="five-stars"
       name="rating"
       type="radio"
       value="5"
     />
     <label
       className="reviews__rating-label form__rating-label"
-      htmlFor="5-stars"
+      htmlFor="five-stars"
       title="perfect"
     >
       <svg
@@ -40,14 +40,14 @@ exports[`Render <Comments /> 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
-      id="4-stars"
+      id="four-stars"
       name="rating"
       type="radio"
       value="4"
     />
     <label
       className="reviews__rating-label form__rating-label"
-      htmlFor="4-stars"
+      htmlFor="four-stars"
       title="good"
     >
       <svg
@@ -62,14 +62,14 @@ exports[`Render <Comments /> 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
-      id="3-stars"
+      id="three-stars"
       name="rating"
       type="radio"
       value="3"
     />
     <label
       className="reviews__rating-label form__rating-label"
-      htmlFor="3-stars"
+      htmlFor="three-stars"
       title="not bad"
     >
       <svg
@@ -84,14 +84,14 @@ exports[`Render <Comments /> 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
-      id="2-stars"
+      id="two-stars"
       name="rating"
       type="radio"
       value="2"
     />
     <label
       className="reviews__rating-label form__rating-label"
-      htmlFor="2-stars"
+      htmlFor="two-stars"
       title="badly"
     >
       <svg
@@ -106,14 +106,14 @@ exports[`Render <Comments /> 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
-      id="1-star"
+      id="one-star"
       name="rating"
       type="radio"
       value="1"
     />
     <label
       className="reviews__rating-label form__rating-label"
-      htmlFor="1-star"
+      htmlFor="one-star"
       title="terribly"
     >
       <svg

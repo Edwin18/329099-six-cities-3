@@ -1,7 +1,8 @@
-import {extend} from '../../utils.js';
-import {CITIES, SortType} from '../../const.js';
+import {extend} from '../../utils';
+import {CITIES, SortType} from '../../const';
+import {CitiesStore} from '../../types';
 
-const initialState = {
+const initialState: CitiesStore = {
   cities: CITIES,
   activeCity: CITIES[0],
   activeSort: SortType.DEFAULT,

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {SORTS} from '../../const.js';
-import {ActionCreator} from '../../reducer/cities/cities.js';
-import {getActiveSort} from '../../reducer/cities/selector.js';
+import {SORTS} from '../../const';
+import {ActionCreator} from '../../reducer/cities/cities';
+import {getActiveSort} from '../../reducer/cities/selector';
 
 type Props = {
   activeSort: string;

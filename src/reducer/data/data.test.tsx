@@ -1,32 +1,316 @@
 import MockAdapter from 'axios-mock-adapter';
-import {createAPI} from '../../api.js';
-import {reducer, ActionCreator, ActionType, Operation} from './data.js';
+import {createAPI} from '../../api';
+import {reducer, ActionCreator, ActionType, Operation} from './data';
 
-const api = createAPI(() => {});
+const initialOffers = [
+  {
+    'city': {
+      'name': `Hamburg`,
+      'location': {
+        'latitude': 53.550341,
+        'longitude': 10.000654,
+        'zoom': 13
+      }
+    },
+    'preview_image': `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`,
+    'images': [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/18.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/15.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/17.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`],
+    'title': `The Joshua Tree House`,
+    'is_favorite': true,
+    'is_premium': false,
+    'rating': 2.2,
+    'type': `apartment`,
+    'bedrooms': 3,
+    'max_adults': 9,
+    'price': 290,
+    'goods': [`Laptop friendly workspace`, `Dishwasher`, `Towels`, `Washing machine`, `Fridge`, `Breakfast`, `Air conditioning`, `Coffee machine`, `Washer`, `Cable TV`, `Baby seat`],
+    'host': {
+      'id': 25,
+      'name': `Angelina`,
+      'is_pro': true,
+      'avatar_url': `img/avatar-angelina.jpg`
+    },
+    'description': `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
+    'location': {
+      'latitude': 53.573341000000006,
+      'longitude': 9.994654,
+      'zoom': 16
+    },
+    'id': 1
+  }, {
+    'city': {
+      'name': `Paris`,
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'preview_image': `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg`,
+    'images': [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/12.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/15.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/17.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg`],
+    'title': `The Pondhouse - A Magical Place`,
+    'is_favorite': false,
+    'is_premium': false,
+    'rating': 4.5,
+    'type': `room`,
+    'bedrooms': 1,
+    'max_adults': 3,
+    'price': 106,
+    'goods': [`Washer`, `Breakfast`, `Laptop friendly workspace`],
+    'host': {
+      'id': 25,
+      'name': `Angelina`,
+      'is_pro': true,
+      'avatar_url': `img/avatar-angelina.jpg`
+    },
+    'description': `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
+    'location': {
+      'latitude': 48.85761,
+      'longitude': 2.358499,
+      'zoom': 16
+    },
+    'id': 2
+  }, {
+    'city': {
+      'name': `Dusseldorf`,
+      'location': {
+        'latitude': 51.225402,
+        'longitude': 6.776314,
+        'zoom': 13
+      }
+    },
+    'preview_image': `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`,
+    'images': [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/18.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/12.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/3.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`],
+    'title': `Loft Studio in the Central Area`,
+    'is_favorite': false,
+    'is_premium': true,
+    'rating': 2.6,
+    'type': `room`,
+    'bedrooms': 1,
+    'max_adults': 1,
+    'price': 274,
+    'goods': [`Breakfast`, `Laptop friendly workspace`],
+    'host': {
+      'id': 25,
+      'name': `Angelina`,
+      'is_pro': true,
+      'avatar_url': `img/avatar-angelina.jpg`
+    },
+    'description': `A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.`,
+    'location': {
+      'latitude': 51.222402,
+      'longitude': 6.786314,
+      'zoom': 16
+    },
+    'id': 3
+  },
+];
+const payloadOffer = {
+  'city': {
+    'name': `Dusseldorf`,
+    'location': {
+      'latitude': 51.225402,
+      'longitude': 6.776314,
+      'zoom': 13
+    }
+  },
+  'preview_image': `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`,
+  'images': [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/18.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/12.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/3.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`],
+  'title': `Loft Studio in the Central Area`,
+  'is_favorite': true,
+  'is_premium': true,
+  'rating': 2.6,
+  'type': `room`,
+  'bedrooms': 1,
+  'max_adults': 1,
+  'price': 274,
+  'goods': [`Breakfast`, `Laptop friendly workspace`],
+  'host': {
+    'id': 25,
+    'name': `Angelina`,
+    'is_pro': true,
+    'avatar_url': `img/avatar-angelina.jpg`
+  },
+  'description': `A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.`,
+  'location': {
+    'latitude': 51.222402,
+    'longitude': 6.786314,
+    'zoom': 16
+  },
+  'id': 3
+};
+const expectedOffers = [
+  {
+    'city': {
+      'name': `Hamburg`,
+      'location': {
+        'latitude': 53.550341,
+        'longitude': 10.000654,
+        'zoom': 13
+      }
+    },
+    'preview_image': `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`,
+    'images': [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/18.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/15.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/17.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`],
+    'title': `The Joshua Tree House`,
+    'is_favorite': true,
+    'is_premium': false,
+    'rating': 2.2,
+    'type': `apartment`,
+    'bedrooms': 3,
+    'max_adults': 9,
+    'price': 290,
+    'goods': [`Laptop friendly workspace`, `Dishwasher`, `Towels`, `Washing machine`, `Fridge`, `Breakfast`, `Air conditioning`, `Coffee machine`, `Washer`, `Cable TV`, `Baby seat`],
+    'host': {
+      'id': 25,
+      'name': `Angelina`,
+      'is_pro': true,
+      'avatar_url': `img/avatar-angelina.jpg`
+    },
+    'description': `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
+    'location': {
+      'latitude': 53.573341000000006,
+      'longitude': 9.994654,
+      'zoom': 16
+    },
+    'id': 1
+  }, {
+    'city': {
+      'name': `Paris`,
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    'preview_image': `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg`,
+    'images': [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/12.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/15.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/7.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/14.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/17.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg`],
+    'title': `The Pondhouse - A Magical Place`,
+    'is_favorite': false,
+    'is_premium': false,
+    'rating': 4.5,
+    'type': `room`,
+    'bedrooms': 1,
+    'max_adults': 3,
+    'price': 106,
+    'goods': [`Washer`, `Breakfast`, `Laptop friendly workspace`],
+    'host': {
+      'id': 25,
+      'name': `Angelina`,
+      'is_pro': true,
+      'avatar_url': `img/avatar-angelina.jpg`
+    },
+    'description': `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
+    'location': {
+      'latitude': 48.85761,
+      'longitude': 2.358499,
+      'zoom': 16
+    },
+    'id': 2
+  }, {
+    'city': {
+      'name': `Dusseldorf`,
+      'location': {
+        'latitude': 51.225402,
+        'longitude': 6.776314,
+        'zoom': 13
+      }
+    },
+    'preview_image': `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`,
+    'images': [`https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/8.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/18.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/12.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/3.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/13.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg`, `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`],
+    'title': `Loft Studio in the Central Area`,
+    'is_favorite': true,
+    'is_premium': true,
+    'rating': 2.6,
+    'type': `room`,
+    'bedrooms': 1,
+    'max_adults': 1,
+    'price': 274,
+    'goods': [`Breakfast`, `Laptop friendly workspace`],
+    'host': {
+      'id': 25,
+      'name': `Angelina`,
+      'is_pro': true,
+      'avatar_url': `img/avatar-angelina.jpg`
+    },
+    'description': `A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.`,
+    'location': {
+      'latitude': 51.222402,
+      'longitude': 6.786314,
+      'zoom': 16
+    },
+    'id': 3
+  },
+];
+const hotelId = 1;
+const api = createAPI();
 
 const initialState = {
   offers: [],
+  favorite: [],
 };
 
-it(`Reducer without additional parameters should return initial state`, () => {
-  expect(reducer(initialState, {})).toEqual(initialState);
-});
+describe(`Reducer work correctly`, () => {
+  it(`Reducer without additional parameters should return initial state`, () => {
+    expect(reducer(initialState, {})).toEqual(initialState);
+  });
 
-it(`Reducer should change city`, () => {
-  expect(reducer({
-    offers: [],
-  }, {
-    type: ActionType.LOAD_OFFERS,
-    payload: [1, 2, 3],
-  })).toEqual({
-    offers: [1, 2, 3],
+  it(`Reducer should load offers`, () => {
+    expect(reducer({
+      offers: [],
+      favorite: [],
+    }, {
+      type: ActionType.LOAD_OFFERS,
+      payload: [1, 2, 3],
+    })).toEqual({
+      offers: [1, 2, 3],
+      favorite: [],
+    });
+  });
+
+  it(`Reducer should load favorite`, () => {
+    expect(reducer({
+      offers: [],
+      favorite: [],
+    }, {
+      type: ActionType.LOAD_FAVORITE,
+      payload: [1, 2, 3],
+    })).toEqual({
+      offers: [],
+      favorite: [1, 2, 3],
+    });
+  });
+
+  it(`Reducer should toggle favorite`, () => {
+    expect(reducer({
+      offers: initialOffers,
+      favorite: [],
+    }, {
+      type: ActionType.TOGGLE_FAVORITE,
+      payload: payloadOffer,
+    })).toEqual({
+      offers: expectedOffers,
+      favorite: [],
+    });
   });
 });
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for change city returns correct action`, () => {
+  it(`Action creator for load offers returns correct action`, () => {
     expect(ActionCreator.loadOffers(1)).toEqual({
       type: ActionType.LOAD_OFFERS,
+      payload: 1,
+    });
+  });
+
+  it(`Action creator for load favorite returns correct action`, () => {
+    expect(ActionCreator.loadFavorite(1)).toEqual({
+      type: ActionType.LOAD_FAVORITE,
+      payload: 1,
+    });
+  });
+
+  it(`Action creator for toggle city returns correct action`, () => {
+    expect(ActionCreator.toggleFavorite(1)).toEqual({
+      type: ActionType.TOGGLE_FAVORITE,
       payload: 1,
     });
   });
@@ -42,11 +326,49 @@ describe(`Operation work correctly`, () => {
       .onGet(`/hotels`)
       .reply(200, [{fake: true}]);
 
-    return offersLoader(dispatch, () => {}, api)
+    return offersLoader(dispatch, () => ({}), api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS,
+          payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteLoader = Operation.loadFavorite();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fake: true}]);
+
+    return favoriteLoader(dispatch, () => ({}), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITE,
+          payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite/${hotelId}/0`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteToggler = Operation.toggleFavorite(hotelId, true);
+
+    apiMock
+      .onPost(`/favorite/${hotelId}/0`)
+      .reply(200, [{fake: true}]);
+
+    return favoriteToggler(dispatch, () => ({}), api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.TOGGLE_FAVORITE,
           payload: [{fake: true}],
         });
       });
