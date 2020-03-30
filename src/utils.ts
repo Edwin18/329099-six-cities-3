@@ -1,9 +1,10 @@
 import * as moment from 'moment';
 import {ApartamentType} from './const';
+import {Offer} from './types';
 
-const RATING_MULTIPLIER = 20;
+const RATING_MULTIPLIER: number = 20;
 
-export const getCoordinates = (offersList) => (
+export const getCoordinates = (offersList: Array<Offer>): Array<Array<number>> => (
   offersList.map((elem) => (
     [
       elem.location.latitude,
@@ -11,14 +12,14 @@ export const getCoordinates = (offersList) => (
     ]
   ))
 );
-export const getCorrectRatingNumber = (rating) => (Math.round(rating) * RATING_MULTIPLIER);
-export const getCorrectTypeOfApartments = (type) => (ApartamentType[type]);
+export const getCorrectRatingNumber = (rating: number): number => (Math.round(rating) * RATING_MULTIPLIER);
+export const getCorrectTypeOfApartments = (type: string): string => (ApartamentType[type]);
 export const extend = (a, b) => (
   Object.assign({}, a, b)
 );
-export const setDateTime = (date) => (moment(date).format(`YYYY-MM-DD`));
-export const setDate = (date) => (moment(date).format(`MMMM YYYY`));
-export const getCorrectFavorites = (favorite) => {
+export const setDateTime = (date: string) => (moment(date).format(`YYYY-MM-DD`));
+export const setDate = (date: string) => (moment(date).format(`MMMM YYYY`));
+export const getCorrectFavorites = (favorite: Array<Offer>): Array<Array<Offer>> => {
   const sortedFavoritesByFilter = [];
   let preResult = [];
 

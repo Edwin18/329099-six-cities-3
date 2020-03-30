@@ -38,7 +38,9 @@ const offer = {
   },
   'id': 1
 };
+const DELETE_MARKER = `DELETE_MARKER`;
 const userAuth = `AUTH`;
+
 Enzyme.configure({
   adapter: new Adapter(),
 });
@@ -136,7 +138,7 @@ it(`When user hover out from card must be "DELETE_MARKER"`, () => {
 
   placeCard.find(`article`).simulate(`mouseleave`);
 
-  expect(onPlaceCardHover).toBeCalledWith(`DELETE_MARKER`);
+  expect(onPlaceCardHover).toBeCalledWith(DELETE_MARKER);
 });
 
 it(`Should be pressed click on favorite btn`, () => {
