@@ -11,7 +11,6 @@ import {getAuthorizationStatus, getUserInfo} from '../../reducer/user/selector';
 import {getCurrentOffers, getFavorite} from '../../reducer/data/selector';
 import {getActiveCity} from '../../reducer/cities/selector';
 import {AuthorizationStatus} from '../../const';
-import history from '../../history';
 import {Offer, User, UserLogin} from '../../types';
 
 type Props = {
