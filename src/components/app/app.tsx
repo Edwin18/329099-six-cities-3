@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main';
 import SignIn from '../sign-in/sign-in';
@@ -35,10 +35,7 @@ const App: React.FC<Props> = ({currentOffers, activeCity, userAuth, login, userI
         />
       </Route>
       <Route exact path='/login'>
-        {userAuth === AuthorizationStatus.AUTH ? () => {
-          history.push(`/`);
-          return null;
-        } :
+        {userAuth === AuthorizationStatus.AUTH ? <Redirect to="/" /> :
           <SignIn
             onSubmit={login}
           />}
@@ -49,10 +46,7 @@ const App: React.FC<Props> = ({currentOffers, activeCity, userAuth, login, userI
           favorite={favorite}
           userInfo={userInfo}
           userAuth={userAuth}
-        /> : () => {
-          history.push(`/login`);
-          return null;
-        }}
+        /> : <Redirect to="/login" />}
       </Route>
       <Route exact path='/not-exist'>
         <NotExist />
