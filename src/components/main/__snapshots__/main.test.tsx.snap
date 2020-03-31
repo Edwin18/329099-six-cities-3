@@ -327,7 +327,7 @@ exports[`Render <Main /> 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     The Joshua Tree House
@@ -427,7 +427,7 @@ exports[`Render <Main /> 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/2"
                     onClick={[Function]}
                   >
                     The Pondhouse - A Magical Place
@@ -533,7 +533,7 @@ exports[`Render <Main /> 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/offer/3"
                     onClick={[Function]}
                   >
                     Loft Studio in the Central Area

@@ -4,8 +4,8 @@ import {Offer} from './types';
 
 const RATING_MULTIPLIER: number = 20;
 
-export const getCoordinates = (offersList: Array<Offer>): Array<Array<number>> => (
-  offersList.map((elem) => (
+export const getCoordinates = (offers: Array<Offer>): Array<Array<number>> => (
+  offers.map((elem) => (
     [
       elem.location.latitude,
       elem.location.longitude,
@@ -13,19 +13,19 @@ export const getCoordinates = (offersList: Array<Offer>): Array<Array<number>> =
   ))
 );
 export const getCorrectRatingNumber = (rating: number): number => (Math.round(rating) * RATING_MULTIPLIER);
-export const getCorrectTypeOfApartments = (type: string): string => (ApartamentType[type]);
+export const getCorrectTypeOfApartment = (type: string): string => (ApartamentType[type]);
 export const extend = (a, b) => (
   Object.assign({}, a, b)
 );
 export const setDateTime = (date: string) => (moment(date).format(`YYYY-MM-DD`));
 export const setDate = (date: string) => (moment(date).format(`MMMM YYYY`));
-export const getCorrectFavorites = (favorite: Array<Offer>): Array<Array<Offer>> => {
+export const getCorrectFavorites = (favorites: Array<Offer>): Array<Array<Offer>> => {
   const sortedFavoritesByFilter = [];
   let preResult = [];
 
-  for (const point of favorite) {
+  for (const point of favorites) {
     const first = point;
-    const result = favorite.filter((elem) => (first.city.name === elem.city.name));
+    const result = favorites.filter((elem) => (first.city.name === elem.city.name));
 
     if (sortedFavoritesByFilter.length === 0) {
       sortedFavoritesByFilter.push(result);

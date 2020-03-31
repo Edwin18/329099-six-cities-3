@@ -4,6 +4,8 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {PlacesList} from './places-list';
 import {ParentNode} from '../../const';
+import {Router} from 'react-router-dom';
+import history from '../../history';
 
 const offers = [
   {
@@ -114,17 +116,18 @@ describe(`Render <PlacesList />`, () => {
 
   it(`Render MAIN`, () => {
     const tree = renderer
-      .create(<Provider store={store}>
-        <PlacesList
-          offers={offers}
-          parentNode={ParentNode.MAIN}
-          userAuth={`AUTH`}
-          onCardHeadingLinkClick={() => ({})}
-          onNearbyFavoriteClickBtn={() => ({})}
-          onPlaceCardHover={() => ({})}
-          onFavoriteBtnClick={() => ({})}
-        />
-      </Provider>)
+      .create(<Router history={history}>
+        <Provider store={store}>
+          <PlacesList
+            offers={offers}
+            parentNode={ParentNode.MAIN}
+            userAuth={`AUTH`}
+            onNearbyFavoriteClickBtn={() => ({})}
+            onPlaceCardHover={() => ({})}
+            onFavoriteBtnClick={() => ({})}
+          />
+        </Provider>
+      </Router>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -132,17 +135,18 @@ describe(`Render <PlacesList />`, () => {
 
   it(`Render PROPERTY`, () => {
     const tree = renderer
-      .create(<Provider store={store}>
-        <PlacesList
-          offers={offers}
-          parentNode={ParentNode.PROPERTY}
-          userAuth={`AUTH`}
-          onCardHeadingLinkClick={() => ({})}
-          onNearbyFavoriteClickBtn={() => ({})}
-          onPlaceCardHover={() => ({})}
-          onFavoriteBtnClick={() => ({})}
-        />
-      </Provider>)
+      .create(<Router history={history}>
+        <Provider store={store}>
+          <PlacesList
+            offers={offers}
+            parentNode={ParentNode.PROPERTY}
+            userAuth={`AUTH`}
+            onNearbyFavoriteClickBtn={() => ({})}
+            onPlaceCardHover={() => ({})}
+            onFavoriteBtnClick={() => ({})}
+          />
+        </Provider>
+      </Router>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -150,17 +154,18 @@ describe(`Render <PlacesList />`, () => {
 
   it(`Render FAVORITE`, () => {
     const tree = renderer
-      .create(<Provider store={store}>
-        <PlacesList
-          offers={offers}
-          parentNode={ParentNode.FAVORITE}
-          userAuth={`AUTH`}
-          onCardHeadingLinkClick={() => ({})}
-          onNearbyFavoriteClickBtn={() => ({})}
-          onPlaceCardHover={() => ({})}
-          onFavoriteBtnClick={() => ({})}
-        />
-      </Provider>)
+      .create(<Router history={history}>
+        <Provider store={store}>
+          <PlacesList
+            offers={offers}
+            parentNode={ParentNode.FAVORITE}
+            userAuth={`AUTH`}
+            onNearbyFavoriteClickBtn={() => ({})}
+            onPlaceCardHover={() => ({})}
+            onFavoriteBtnClick={() => ({})}
+          />
+        </Provider>
+      </Router>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

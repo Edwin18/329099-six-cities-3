@@ -1,6 +1,7 @@
 import * as React from 'react';
+import {Link} from 'react-router-dom';
 import {ParentNode, DELETE_MARKER, AuthorizationStatus} from '../../const';
-import {getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils';
+import {getCorrectRatingNumber, getCorrectTypeOfApartment} from '../../utils';
 import history from "../../history";
 import {Offer} from '../../types';
 
@@ -8,7 +9,6 @@ type Props = {
   offer: Offer;
   parentNode: string;
   userAuth: string;
-  onCardHeadingLinkClick: (offer: Offer) => void;
   onNearbyFavoriteClickBtn: () => void;
   onPlaceCardHover: (offer: Offer | string) => void;
   onFavoriteBtnClick: (id: number, isFavorite: boolean) => void;
@@ -18,17 +18,16 @@ const PlaceCard: React.FC<Props> = ({
   offer,
   parentNode,
   userAuth,
-  onCardHeadingLinkClick,
   onNearbyFavoriteClickBtn,
   onPlaceCardHover,
   onFavoriteBtnClick,
 }) => {
-  let _parentNode;
-  let _isMain;
+  let innerParentNode;
+  let isMain;
 
   switch (parentNode) {
     case ParentNode.MAIN:
-      _parentNode = {
+      innerParentNode = {
         article: `cities__place-card place-card`,
         div: `cities__image-wrapper place-card__image-wrapper`,
         image: {
@@ -36,10 +35,10 @@ const PlaceCard: React.FC<Props> = ({
           height: 200,
         },
       };
-      _isMain = true;
+      isMain = true;
       break;
     case ParentNode.PROPERTY:
-      _parentNode = {
+      innerParentNode = {
         article: `near-places__card place-card`,
         div: `near-places__image-wrapper place-card__image-wrapper`,
         image: {
@@ -47,10 +46,10 @@ const PlaceCard: React.FC<Props> = ({
           height: 200,
         },
       };
-      _isMain = false;
+      isMain = false;
       break;
     case ParentNode.FAVORITE:
-      _parentNode = {
+      innerParentNode = {
         article: `favorites__card place-card`,
         div: `favorites__image-wrapper place-card__image-wrapper`,
         image: {
@@ -58,22 +57,22 @@ const PlaceCard: React.FC<Props> = ({
           height: 110,
         },
       };
-      _isMain = false;
+      isMain = false;
       break;
   }
 
   return (
     <article
-      className={_parentNode.article}
-      onMouseEnter={_isMain ? () => (onPlaceCardHover(offer)) : null}
-      onMouseLeave={_isMain ? () => (onPlaceCardHover(DELETE_MARKER)) : null}>
+      className={innerParentNode.article}
+      onMouseEnter={isMain ? () => (onPlaceCardHover(offer)) : null}
+      onMouseLeave={isMain ? () => (onPlaceCardHover(DELETE_MARKER)) : null}>
       {offer.is_premium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ``}
-      <div className={_parentNode.div}>
+      <div className={innerParentNode.div}>
         <a href="#">
-          <img className="place-card__image" src={offer.preview_image} width={_parentNode.image.width} height={_parentNode.image.height} alt="Place image" />
+          <img className="place-card__image" src={offer.preview_image} width={innerParentNode.image.width} height={innerParentNode.image.height} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -108,12 +107,9 @@ const PlaceCard: React.FC<Props> = ({
           </div>
         </div>
         <h2 className="place-card__name">
-          <a
-            href="#"
-            onClick={() => (onCardHeadingLinkClick(offer))}
-          >{offer.title}</a>
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{getCorrectTypeOfApartments(offer.type)}</p>
+        <p className="place-card__type">{getCorrectTypeOfApartment(offer.type)}</p>
       </div>
     </article>
   );

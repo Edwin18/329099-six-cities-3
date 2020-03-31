@@ -3,6 +3,8 @@ import * as renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import Cities from './cities';
+import {Router} from 'react-router-dom';
+import history from '../../history';
 
 const activeSort = `popular`;
 const activeCity = `Paris`;
@@ -122,14 +124,16 @@ const store = mockStore({
 
 it(`Render <Cities />`, () => {
   const tree = renderer
-    .create(<Provider store={store}>
-      <Cities
-        activeCity={activeCity}
-        offers={offers}
-        onPlaceCardHover={() => ({})}
-        hoveredOffer={offers[0]}
-      />
-    </Provider>, {
+    .create(<Router history={history}>
+      <Provider store={store}>
+        <Cities
+          activeCity={activeCity}
+          offers={offers}
+          onPlaceCardHover={() => ({})}
+          hoveredOffer={offers[0]}
+        />
+      </Provider>
+    </Router>, {
       createNodeMock: () => document.createElement(`div`)
     })
     .toJSON();

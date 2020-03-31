@@ -746,7 +746,7 @@ exports[`Render <Property /> 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="#"
+                  href="/offer/1"
                   onClick={[Function]}
                 >
                   The Joshua Tree House
@@ -846,7 +846,7 @@ exports[`Render <Property /> 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="#"
+                  href="/offer/10"
                   onClick={[Function]}
                 >
                   The Joshua Tree House

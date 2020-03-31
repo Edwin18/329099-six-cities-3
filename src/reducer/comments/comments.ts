@@ -36,7 +36,7 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.postComment(response.data));
         form.reset();
-        btn.disabled = ``;
+        btn.disabled = `disabled`;
       })
       .catch(() => {
         form.classList.add(`error`);

@@ -28,6 +28,37 @@ class Comments extends React.PureComponent<Props, {}> {
     this._checkBtnStatus = this._checkBtnStatus.bind(this);
   }
 
+  _handleCommentsSubmit(evt: React.SyntheticEvent): void {
+    const {onSubmit, hotelId} = this.props;
+
+    evt.preventDefault();
+    this.submitBtn.current.disabled = true;
+
+    onSubmit(hotelId, {
+      comment: this.commentRef.current.value,
+      rating: this._getRating(),
+    }, this.form.current, this.submitBtn.current);
+  }
+
+  _checkBtnStatus(): void {
+    if (this._getRating() && this.commentRef.current.value.length >= COMMENTS_LENGTH.MIN) {
+      this.submitBtn.current.disabled = false;
+    }
+  }
+
+  _getRating(): number {
+    let rating: string;
+    const allInputs: Array<HTMLInputElement> = Array.from(this.ratingContainer.current.querySelectorAll(`.form__rating-input`));
+
+    allInputs.forEach((elem) => {
+      if (elem.checked) {
+        rating = elem.value;
+      }
+    });
+
+    return parseInt(rating, 10);
+  }
+
   render() {
     return (
       <form
@@ -86,37 +117,6 @@ class Comments extends React.PureComponent<Props, {}> {
         </div>
       </form>
     );
-  }
-
-  _handleCommentsSubmit(evt: React.SyntheticEvent): void {
-    const {onSubmit, hotelId} = this.props;
-
-    evt.preventDefault();
-    this.submitBtn.current.disabled = true;
-
-    onSubmit(hotelId, {
-      comment: this.commentRef.current.value,
-      rating: this._getRating(),
-    }, this.form.current, this.submitBtn.current);
-  }
-
-  _checkBtnStatus(): void {
-    if (this._getRating() && this.commentRef.current.value.length >= COMMENTS_LENGTH.MIN) {
-      this.submitBtn.current.disabled = false;
-    }
-  }
-
-  _getRating(): number {
-    let rating: string;
-    const allInputs: Array<HTMLInputElement> = Array.from(this.ratingContainer.current.querySelectorAll(`.form__rating-input`));
-
-    allInputs.forEach((elem) => {
-      if (elem.checked) {
-        rating = elem.value;
-      }
-    });
-
-    return parseInt(rating, 10);
   }
 }
 

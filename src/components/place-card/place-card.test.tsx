@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 import PlaceCard from './place-card';
 import {ParentNode} from '../../const';
+import {Router} from 'react-router-dom';
+import history from '../../history';
 
 const offer = {
   'city': {
@@ -40,15 +42,16 @@ const offer = {
 describe(`Render <PlaceCard />`, () => {
   it(`Render MAIN`, () => {
     const tree = renderer
-      .create(<PlaceCard
-        offer={offer}
-        parentNode={ParentNode.MAIN}
-        userAuth={`AUTH`}
-        onCardHeadingLinkClick={() => ({})}
-        onNearbyFavoriteClickBtn={() => ({})}
-        onPlaceCardHover={() => ({})}
-        onFavoriteBtnClick={() => ({})}
-      />)
+      .create(<Router history={history}>
+        <PlaceCard
+          offer={offer}
+          parentNode={ParentNode.MAIN}
+          userAuth={`AUTH`}
+          onNearbyFavoriteClickBtn={() => ({})}
+          onPlaceCardHover={() => ({})}
+          onFavoriteBtnClick={() => ({})}
+        />
+      </Router>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -56,15 +59,16 @@ describe(`Render <PlaceCard />`, () => {
 
   it(`Render PROPERTY`, () => {
     const tree = renderer
-      .create(<PlaceCard
-        offer={offer}
-        parentNode={ParentNode.PROPERTY}
-        userAuth={`AUTH`}
-        onCardHeadingLinkClick={() => ({})}
-        onNearbyFavoriteClickBtn={() => ({})}
-        onPlaceCardHover={() => ({})}
-        onFavoriteBtnClick={() => ({})}
-      />)
+      .create(<Router history={history}>
+        <PlaceCard
+          offer={offer}
+          parentNode={ParentNode.PROPERTY}
+          userAuth={`AUTH`}
+          onNearbyFavoriteClickBtn={() => ({})}
+          onPlaceCardHover={() => ({})}
+          onFavoriteBtnClick={() => ({})}
+        />
+      </Router>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -72,15 +76,16 @@ describe(`Render <PlaceCard />`, () => {
 
   it(`Render FAVORITE`, () => {
     const tree = renderer
-      .create(<PlaceCard
-        offer={offer}
-        parentNode={ParentNode.FAVORITE}
-        userAuth={`AUTH`}
-        onCardHeadingLinkClick={() => ({})}
-        onNearbyFavoriteClickBtn={() => ({})}
-        onPlaceCardHover={() => ({})}
-        onFavoriteBtnClick={() => ({})}
-      />)
+      .create(<Router history={history}>
+        <PlaceCard
+          offer={offer}
+          parentNode={ParentNode.FAVORITE}
+          userAuth={`AUTH`}
+          onNearbyFavoriteClickBtn={() => ({})}
+          onPlaceCardHover={() => ({})}
+          onFavoriteBtnClick={() => ({})}
+        />
+      </Router>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -45,33 +45,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should be pressed click on heading`, () => {
-  const onCardHeadingLinkClick = jest.fn();
-  const onNearbyFavoriteClickBtn = jest.fn();
-  const onPlaceCardHover = jest.fn();
-  const onFavoriteBtnClick = jest.fn();
-
-  const placeCard = Enzyme.shallow(
-      <PlaceCard
-        offer={offer}
-        parentNode={ParentNode.MAIN}
-        userAuth={userAuth}
-        onCardHeadingLinkClick={onCardHeadingLinkClick}
-        onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
-        onPlaceCardHover={onPlaceCardHover}
-        onFavoriteBtnClick={onFavoriteBtnClick}
-      />
-  );
-
-  const headingLink = placeCard.find(`h2.place-card__name a`);
-
-  headingLink.simulate(`click`);
-
-  expect(onCardHeadingLinkClick.mock.calls.length).toBe(1);
-});
-
 it(`Should be pressed click on nearby favorite btn`, () => {
-  const onCardHeadingLinkClick = jest.fn();
   const onNearbyFavoriteClickBtn = jest.fn();
   const onPlaceCardHover = jest.fn();
   const onFavoriteBtnClick = jest.fn();
@@ -81,7 +55,6 @@ it(`Should be pressed click on nearby favorite btn`, () => {
         offer={offer}
         parentNode={ParentNode.PROPERTY}
         userAuth={userAuth}
-        onCardHeadingLinkClick={onCardHeadingLinkClick}
         onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
         onPlaceCardHover={onPlaceCardHover}
         onFavoriteBtnClick={onFavoriteBtnClick}
@@ -96,7 +69,6 @@ it(`Should be pressed click on nearby favorite btn`, () => {
 });
 
 it(`When user hover on card must be card "object"`, () => {
-  const onCardHeadingLinkClick = jest.fn();
   const onNearbyFavoriteClickBtn = jest.fn();
   const onPlaceCardHover = jest.fn();
   const onFavoriteBtnClick = jest.fn();
@@ -106,7 +78,6 @@ it(`When user hover on card must be card "object"`, () => {
         offer={offer}
         parentNode={ParentNode.MAIN}
         userAuth={userAuth}
-        onCardHeadingLinkClick={onCardHeadingLinkClick}
         onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
         onPlaceCardHover={onPlaceCardHover}
         onFavoriteBtnClick={onFavoriteBtnClick}
@@ -119,7 +90,6 @@ it(`When user hover on card must be card "object"`, () => {
 });
 
 it(`When user hover out from card must be "DELETE_MARKER"`, () => {
-  const onCardHeadingLinkClick = jest.fn();
   const onNearbyFavoriteClickBtn = jest.fn();
   const onPlaceCardHover = jest.fn();
   const onFavoriteBtnClick = jest.fn();
@@ -129,7 +99,6 @@ it(`When user hover out from card must be "DELETE_MARKER"`, () => {
         offer={offer}
         parentNode={ParentNode.MAIN}
         userAuth={userAuth}
-        onCardHeadingLinkClick={onCardHeadingLinkClick}
         onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
         onPlaceCardHover={onPlaceCardHover}
         onFavoriteBtnClick={onFavoriteBtnClick}
@@ -142,7 +111,6 @@ it(`When user hover out from card must be "DELETE_MARKER"`, () => {
 });
 
 it(`Should be pressed click on favorite btn`, () => {
-  const onCardHeadingLinkClick = jest.fn();
   const onNearbyFavoriteClickBtn = jest.fn();
   const onPlaceCardHover = jest.fn();
   const onFavoriteBtnClick = jest.fn();
@@ -152,7 +120,6 @@ it(`Should be pressed click on favorite btn`, () => {
         offer={offer}
         parentNode={ParentNode.MAIN}
         userAuth={userAuth}
-        onCardHeadingLinkClick={onCardHeadingLinkClick}
         onNearbyFavoriteClickBtn={onNearbyFavoriteClickBtn}
         onPlaceCardHover={onPlaceCardHover}
         onFavoriteBtnClick={onFavoriteBtnClick}

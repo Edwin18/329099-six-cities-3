@@ -13,7 +13,7 @@ import {Operation as CommentsOperation} from '../../reducer/comments/comments';
 import {Operation as NearbyOperation} from '../../reducer/nearby/nearby';
 import {getCurrentComments} from '../../reducer/comments/selector';
 import {getNearby} from '../../reducer/nearby/selector';
-import {getCoordinates, getCorrectRatingNumber, getCorrectTypeOfApartments} from '../../utils';
+import {getCoordinates, getCorrectRatingNumber, getCorrectTypeOfApartment} from '../../utils';
 import {ParentNode, AuthorizationStatus, DELETE_MARKER} from '../../const';
 import history from '../../history';
 import {Offer, User, Review} from '../../types';
@@ -122,7 +122,7 @@ class Property extends React.PureComponent<Props, {}> {
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    {getCorrectTypeOfApartments(offer.type)}
+                    {getCorrectTypeOfApartment(offer.type)}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
                     {offer.bedrooms} Bedrooms
