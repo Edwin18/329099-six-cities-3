@@ -23,12 +23,9 @@ class Comments extends React.PureComponent<Props, {}> {
     this.form = React.createRef();
     this.ratingContainer = React.createRef();
     this.submitBtn = React.createRef();
-
-    this._handleCommentsSubmit = this._handleCommentsSubmit.bind(this);
-    this._checkBtnStatus = this._checkBtnStatus.bind(this);
   }
 
-  _handleCommentsSubmit(evt: React.SyntheticEvent): void {
+  _handleCommentsSubmit = (evt: React.SyntheticEvent): void => {
     const {onSubmit, hotelId} = this.props;
 
     evt.preventDefault();
@@ -40,9 +37,11 @@ class Comments extends React.PureComponent<Props, {}> {
     }, this.form.current, this.submitBtn.current);
   }
 
-  _checkBtnStatus(): void {
+  _checkBtnStatus = (): void => {
     if (this._getRating() && this.commentRef.current.value.length >= COMMENTS_LENGTH.MIN) {
       this.submitBtn.current.disabled = false;
+    } else if(this.commentRef.current.value.length < COMMENTS_LENGTH.MIN) {
+      this.submitBtn.current.disabled = true;
     }
   }
 

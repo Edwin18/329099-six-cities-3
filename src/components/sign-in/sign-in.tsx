@@ -14,11 +14,9 @@ class SignIn extends React.PureComponent<Props, {}> {
 
     this.loginRef = React.createRef();
     this.passwordRef = React.createRef();
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(evt: React.SyntheticEvent) {
+  handleSubmit = (evt: React.SyntheticEvent) => {
     const {onSubmit} = this.props;
 
     evt.preventDefault();

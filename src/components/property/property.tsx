@@ -49,11 +49,9 @@ class Property extends React.PureComponent<Props, {}> {
 
     store.dispatch(CommentsOperation.loadComments(this.id));
     store.dispatch(NearbyOperation.loadNearby(this.id));
-
-    this.nearbyFavoriteBtnClickHandler = this.nearbyFavoriteBtnClickHandler.bind(this);
   }
 
-  nearbyFavoriteBtnClickHandler() {
+  nearbyFavoriteBtnClickHandler = (): void => {
     store.dispatch(NearbyOperation.loadNearby(this.id));
   }
 
